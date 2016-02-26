@@ -1,87 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="dashboard" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://portal-cs5610online.rhcloud.com/favicon.ico">
-
-    <title>Dashboard Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
+    <title>Index page of forms</title>
     <link href="dashboard.css" rel="stylesheet">
-
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 </head>
-
 <body>
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="../index.html">Homepage</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="register.html">Register</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="admin.html">Username</a></li>
-                <li><a href="form.html">Logout</a></li>
-            </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
-        </div>
-    </div>
-</nav>
-
+<div ng-include = "'view/header/header.view.html'"></div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2 col-md-2 sidebar">
-            <ul class="nav nav-sidebar">
-                <li class="active"><a href="">Welcome <span class="sr-only">(current)</span></a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="admin.html">Admin</a></li>
-                <li><a href="form.html">Forms</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Welcome!</h1>
-        </div>
+        <div ng-include = "'view/sidebar/sidebar.view.html'"></div>
     </div>
-</div>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Nulla quam velit, vulputate eu pharetra nec, mattis ac neque.
-        Duis vulputate commodo lectus, ac blandit elit tincidunt id.
-        Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit,
-        et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna.
-        Aenean velit odio, elementum in tempus ut, vehicula eu diam.
-        Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit.
-        Vivamus varius pretium ligula, a aliquam odio euismod sit amet.
-        Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. P
-        ellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.
-        </p>
+    <div ng-view></div>
+
     </div>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-1.12.0.min.js"><\/script>')</script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.min.js"></script>
+<script src="app.js"></script>
+<script src="config.js"></script>
 </body>
 </html>
