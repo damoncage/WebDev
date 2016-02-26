@@ -1,26 +1,32 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="dashboard" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<html lang="en" ng-app="FormBuilderApp">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Index page of forms</title>
-    <link href="dashboard.css" rel="stylesheet">
+    <link href="./dashboard.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body ng-controller = "MainController">
 <div ng-include = "'view/header/header.view.html'"></div>
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2 col-md-2 sidebar">
             <div ng-include = "'view/sidebar/sidebar.view.html'"></div>
-    <div ng-view></div>
+            </div>
+        </div>
 
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view></div>
+    <h1> {{$location.url()}}</h1>
     </div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
 <script src="app.js"></script>
 <script src="config.js"></script>
+<script src="view/main/MainController.js"></script>
 </body>
 </html>
