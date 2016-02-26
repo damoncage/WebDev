@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="FormBuilderApp">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://portal-cs5610online.rhcloud.com/favicon.ico">
+
     <title>Index page of forms</title>
-    <link href="./dashboard.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="dashboard.css" rel="stylesheet">
 </head>
 <body ng-controller = "MainController">
     <div ng-include = "'view/header/header.view.html'"></div>
-    <div ng-include = "'view/sidebar/sidebar.view.html'"></div>
-    <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-2 main" ng-view></div>
-    </div>
+        <div ng-include = "'view/sidebar/sidebar.view.html'"></div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 " ng-view></div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

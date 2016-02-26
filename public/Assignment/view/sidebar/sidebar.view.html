@@ -1,14 +1,15 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="sidebar ">
-    <ul class="nav nav-sidebar">
-    <li ng-class="{'active' : $location.url().indexOf('home') != -1}"><a href="#/home">Welcome</a></li>
-    <li ng-class="{'active' : $location.url().indexOf('profile') != -1}"><a  href="#/profile">Profile</a></li>
-    <li ng-class="{'active' : $location.url() == '/admin'}"><a  href="#/admin">Admin</a></li>
-    <li ng-class="{'active' : $location.url() == '/forms'}"><a  href="#/forms">Forms</a></li>
-    </ul>
-            </div>
+        <div class="col-sm-2 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li ng-class="{'active' : $location.url().indexOf('home') != -1}"><a href="#/home">Welcome</a></li>
+                <li ng-class="{'active' : $location.url().indexOf('profile') != -1}"><a  href="#/profile">Profile</a></li>
+                <li ng-class="{'active' : $location.url() == '/admin'}"><a  href="#/admin">Admin</a></li>
+                <li ng-class="{'active' : $location.url() == '/forms'}"><a  href="#/forms">Forms</a></li>
+            </ul>
         </div>
     </div>
+</div>
+
 
 
