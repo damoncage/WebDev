@@ -15,19 +15,23 @@
                     templateUrl:"view/admin/admin.view.html"
                 })
                 .when("/forms",{
-                    templateUrl:"view/forms/forms.view.html"
+                    templateUrl:"view/forms/forms.view.html",
+                    controller:"FormController"
                 })
                 .when("/fields",{
                     templateUrl:"view/forms/fields.view.html"
                 })
                 .when("/login",{
-                    templateUrl:"view/users/login.view.html"
+                    templateUrl:"view/users/login.view.html",
+                    controller: "LoginController"
                 })
                 .when("/profile",{
                     templateUrl:"view/users/profile.view.html"
+                    controller: "ProfileController"
                 })
                 .when("/register",{
-                    templateUrl:"view/users/register.view.html"
+                    templateUrl:"view/users/register.view.html",
+                    controller: "RegisterController"
                 })
                 .otherwise({
                     redirectTo: "/home"
