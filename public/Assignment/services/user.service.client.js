@@ -39,9 +39,9 @@
         }
 
         function findUserByCredentials(username, password){
-            for(user in model.Users){
-                if(user.username == username && user.password == password)
-                return user;
+            for(var u in model.Users){
+                if(model.Users[u].username === username && model.Users[u].password === password)
+                return model.Users[u];
             }
             return null;
         }
@@ -61,13 +61,13 @@
         }
 
         function deleteUserById(id){
-            for(user in model.Users){
-                if(id == user._id)
+            for(var u in model.Users){
+                if(id == model.Users[u]._id)
                 {
                     var index = model.Users.indexOf(user);
                     model.Users.splice(index, 1)};
             }
-            return model.Users
+            return model.Users[u];
         }
 
         function updateUser(userId,user){
