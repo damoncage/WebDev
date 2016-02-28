@@ -35,7 +35,9 @@
         }
 
         function getCurrentUser(){
+            if($rootScope.currentUser)
             return $rootScope.currentUser;
+            return null;
         }
 
         function findUserByCredentials(username, password){

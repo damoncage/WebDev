@@ -10,11 +10,14 @@
         $scope.updateUser = updateuser;
         $scope.error = null;
         $scope.message = null;
-
         $scope.currentUser = UserService.getCurrentUser();
-        console.log($scope.currentUser);
-        if(!$scope.currentUser)
-        $location.url("/home");
+        console.log("currentUsercheck" + $scope.currentUser);
+        if(!$scope.currentUser) {
+            $location.url("/home");
+        }
+        else{
+           $scope.uSer = $scope.currentUser;
+        }
 
         function updateuser(user){
             $scope.error = null;

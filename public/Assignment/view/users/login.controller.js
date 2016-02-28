@@ -17,7 +17,7 @@
             }
             var validation = UserService.findUserByCredentials(user.username,user.password);
             if(validation){
-                UserService.setCurrentUser(user);
+                UserService.setCurrentUser(validation);
                 $location.url("/home");
             }
             $scope.message = "Invalid Username or Password!";
