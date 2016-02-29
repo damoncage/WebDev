@@ -12,37 +12,23 @@
                         <th class="col-sm-4">Action</th>
                     </tr>
                     <tr>
-                        <td><input class="form-control" type="text" name="FormName" placeholder="Form Name"/></td>
+                        <td><input ng-model="form.title" class="form-control" type="text" name="FormName" placeholder="Form Name"/></td>
                         <td style="white-space: nowrap">
-                            <a href="" class="btn btn-primary">
+                            <a ng-click="addForm(form)" href="" class="btn btn-primary">
                                 <scan class="glyphicon glyphicon-plus"></scan>
                             </a>
-                            <a href="" class="btn btn-success">
+                            <a ng-click="updateForm(form)" href="" class="btn btn-success">
                                 <scan class="glyphicon glyphicon-ok"></scan>
                             </a>
                         </td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Registration Form</td>
+                    <tr ng-repeat="Form in Forms">
+                        <td>{{Form.title}}</td>
                         <td>
-                            <a herf="" class="btn btn-danger glyphicon glyphicon-remove"></a>
-                            <a herf="" class="btn btn-warning glyphicon glyphicon-pencil"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Contact List</td>
-                        <td>
-                            <a herf="" class="btn btn-danger glyphicon glyphicon-remove"></a>
-                            <a herf="" class="btn btn-warning glyphicon glyphicon-pencil"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>To Do List</td>
-                        <td>
-                            <a herf="" class="btn btn-danger glyphicon glyphicon-remove"></a>
-                            <a herf="" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+                            <a herf="" ng-click="deleteForm($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+                            <a herf="" ng-click="selectForm($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
                         </td>
                     </tr>
                     </tbody>

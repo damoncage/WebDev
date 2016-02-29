@@ -20,6 +20,9 @@
             {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
                 "username":"ed",     "password":"ed",      "roles": ["student"]		}
             ],
+
+            //declare all functions
+
             findUserByCredentials: findUserByCredentials,
             findAllUsers: findAllUsers,
             createUser: createUser,
@@ -29,6 +32,8 @@
             getCurrentUser: getCurrentUser
         };
         return model;
+
+        //function implementations
 
         function setCurrentUser(user){
             $rootScope.currentUser = user;
@@ -77,10 +82,14 @@
             {
                 if(model.Users[u]._id == userId)
                 {
-                    model.Users[u] = user;
+                    model.Users[u].firstName = user.firstName;
+                    model.Users[u].lastName = user.lastName;
+                    model.Users[u].username = user.username;
+                    model.Users[u].password = user.password;
+                    }
+                    return  model.Users[u];
                 }
-                return  model.Users[u];
+                return null;
             }
         }
-    }
 })();

@@ -6,7 +6,15 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController(){
-        console.log("header.controller")
+    function HeaderController($location, $scope, UserService){
+        console.log("headeruser \n" + $scope.currentUser);
+        /*$scope.currentUser = UserService.getCurrentUser();*/
+        $scope.logout = logout;
+
+        function logout(){
+            /*$scope.currentUser = null;*/
+            UserService.setCurrentUser(null);
+            $location.url("/home");
+        }
     }
 })();

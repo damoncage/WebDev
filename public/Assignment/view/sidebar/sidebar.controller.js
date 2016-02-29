@@ -6,7 +6,6 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController(){
-    console.log("sidebar")
+    function SidebarController(FormService,$rootScope){
     }
 })();
