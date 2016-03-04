@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "EverFitApp">
+<head>
+    <meta charset="UTF-8">
+    <title>EverFit Index Page</title>
+<!-- Bootstrap core CSS -->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<link href="cagefit.css" rel="stylesheet"/>
+</head>
+
+<body ng-controller = "MainController">
+<div  ng-include="'views/header/header.view.html'"></div>
+<div class="container">
+    <div ng-view></div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+<script src="app.js"></script>
+<script src="config.js"></script>
+<script src="MainController.js"></script>
+</body>
+</html>
