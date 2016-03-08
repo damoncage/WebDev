@@ -12,7 +12,12 @@
                 templateUrl: "views/home/home.view.html"
             })
             .when("/login",{
-                templateUrl: "views/Login/login.view.html"
+                templateUrl: "views/Login/login.view.html",
+                controller: "loginController",
+                controllerAs: "cm"
+            })
+            .when("/register",{
+                templateUrl: "views/register/register.view.html"
             })
             .otherwise({
                 redirectTo: "/home"
