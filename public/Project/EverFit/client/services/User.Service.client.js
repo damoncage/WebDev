@@ -25,11 +25,11 @@
         }
 
         function logout(){
-            return $http.post("api/project/EverFit/logout");
+            return $http.post("/api/project/EverFit/logout");
         }
 
         function getCurrentUser(){
-            return $http.get("api/project/EverFit/loggedin");
+            return $http.get("/api/project/EverFit/loggedin");
         }
 
         function setCurrentUser(user){
@@ -37,7 +37,7 @@
         }
 
         function login(user){
-            return $http.post("api/project/EverFit/login",user);
+            return $http.post("/api/project/EverFit/login",user);
         }
     }
 })();
