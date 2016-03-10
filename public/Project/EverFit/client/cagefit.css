@@ -3,3 +3,7 @@ body{
     padding-top: 50px;
 }
 
+#map{
+    height: 300px;
+    width: auto;
+}

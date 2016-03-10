@@ -37,7 +37,8 @@
         }
 
         function login(user){
-            return $http.post("/api/project/EverFit/login",user);
+            console.log("login client service " + user.username + user.password);
+            return $http.post("/api/project/EverFit/login", user);
         }
     }
 })();

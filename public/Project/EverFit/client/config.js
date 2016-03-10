@@ -19,6 +19,14 @@
             .when("/register",{
                 templateUrl: "views/register/register.view.html"
             })
+            .when("/fitplans",{
+                templateUrl:"views/FitPlans/fitplans.view.html"
+            })
+            .when("/friends",{
+                templateUrl:"views/location/location.view.html",
+                controller:"locationController",
+                controllerAs:"mm"
+            })
             .otherwise({
                 redirectTo: "/home"
             });

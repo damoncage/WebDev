@@ -7,12 +7,38 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="cagefit.css" rel="stylesheet"/>
 </head>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1689076538009226',
+            xfbml      : true,
+            version    : 'v2.5'
+        });
 
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                console.log('Logged in.');
+            }
+            else {
+                FB.login();
+            }
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 <body ng-controller = "MainController">
 <div  ng-include="'views/header/header.view.html'"></div>
 <div class="container">
     <div ng-view></div>
 </div>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -23,6 +49,7 @@
 <script src="config.js"></script>
 <script src="MainController.js"></script>
 <script src="views/Login/login.controller.js"></script>
+<script src="views/location/location.controller.js"></script>
 <script src="services/User.Service.client.js"></script>
 </body>
 </html>

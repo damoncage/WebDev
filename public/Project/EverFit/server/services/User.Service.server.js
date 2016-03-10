@@ -9,6 +9,7 @@ module.exports = function(app, planModel, userModel){
     app.get("/api/project/EverFit/profile/:userId", profile);
 
     function login(req,res){
+        console.log("login server service " + req.body);
         var credentials = req.body;
         var user = userModel.findUserByCredentials(credentials);
         req.session.currentUser = user;

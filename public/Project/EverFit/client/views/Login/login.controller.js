@@ -6,10 +6,10 @@
         .module("EverFitApp")
         .controller("loginController",loginController)
 
-    function loginController(UserService, $location){
-        var cm = this;
-        cm.login = login;
-        cm.message = null;
+    function loginController(UserService, $location, $scope){
+        var um = this;
+        um.login = login;
+        um.message = null;
 
 
         function init(){
@@ -18,15 +18,14 @@
         init();
 
         function login(user){
-            console.log("login");
+            console.log(user.username,user.password);
             if(!user || !user.username || !user.password){
-                console.log("Invalid");
-                cm.message = "Invalid Username / Password!";
+                um.message = "Invalid Username / Password!";
             }
             UserService
                 .login({
-              username: user.username,
-                    password:user.password
+                    username: user.username,
+                    password: user.password
             })
                 .then(function(response){
                   if(response.data){
@@ -35,6 +34,5 @@
                   }
                 });
         }
-
     }
 })();
