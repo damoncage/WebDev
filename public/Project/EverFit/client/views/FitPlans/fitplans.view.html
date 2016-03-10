@@ -5,15 +5,22 @@
     <title>Title</title>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1689076538009226";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="container">
-
     <div class="blog-header">
         <h1 class="blog-title">Beginner's Bodybuilding</h1>
         <p class="lead blog-description">The official guide for beginners.</p>
+        <div class="fb-like" data-href="http://webdev2016-yuanfangzheng.rhcloud.com/Project/EverFit/client/#/fitplans" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
     </div>
-
-    <div class="row">
+        <div class="row">
 
         <div class="col-sm-8 blog-main">
 
@@ -49,7 +56,5 @@
             </div><!-- /.blog-post --></div>
         </div>
     </div>
-<div class="fb-like" data-href="http://webdev2016-yuanfangzheng.rhcloud.com/Project/EverFit/client/#/fitplans" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
-
 </body>
 </html>

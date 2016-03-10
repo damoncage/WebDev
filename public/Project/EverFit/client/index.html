@@ -7,6 +7,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <link href="cagefit.css" rel="stylesheet"/>
 </head>
+<body ng-controller = "MainController">
+<div id="fb-root"></div>
 <script>
     window.fbAsyncInit = function() {
         FB.init({
@@ -14,32 +16,20 @@
             xfbml      : true,
             version    : 'v2.5'
         });
-
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                console.log('Logged in.');
-            }
-            else {
-                FB.login();
-            }
-        });
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+        };
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 </script>
-<body ng-controller = "MainController">
 <div  ng-include="'views/header/header.view.html'"></div>
 <div class="container">
     <div ng-view></div>
+
 </div>
-
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
