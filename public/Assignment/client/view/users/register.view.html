@@ -3,31 +3,31 @@
     <div class="form-group">
         <label for="inputusername" class="col-sm-4 col-lg-2 control-label">Username</label>
         <div class="col-sm-8 col-lg-10">
-            <input ng-model="user.username" type="text" class="form-control" id="inputusername" placeholder="your username">
+            <input ng-model="rm.user.username" type="text" class="form-control" id="inputusername" placeholder="your username">
         </div>
     </div>
     <div class="form-group">
         <label for="inputPassword" class="col-sm-4 col-lg-2 control-label">Password</label>
         <div class="col-sm-8 col-lg-10">
-            <input ng-model="user.password" type="password" class="form-control" id="inputPassword" placeholder="Password">
+            <input ng-model="rm.user.password" type="password" class="form-control" id="inputPassword" placeholder="Password">
         </div>
     </div>
     <div class="form-group">
         <label for="varifyPassword" class="col-sm-4 col-lg-2 control-label">Varify Password</label>
         <div class="col-sm-8 col-lg-10">
-            <input ng-model="user.password2" type="password" class="form-control" id="varifyPassword" placeholder="Input your password again">
+            <input ng-model="rm.user.password2" type="password" class="form-control" id="varifyPassword" placeholder="Input your password again">
         </div>
     </div>
     <div class="form-group">
         <label for="inputemail" class="col-sm-4 col-lg-2 control-label">Email</label>
         <div class="col-sm-8 col-lg-10">
-            <input ng-model="user.email" type="email" class="form-control" id="inputemail" placeholder="Email">
+            <input ng-model="rm.user.email" type="email" class="form-control" id="inputemail" placeholder="Email">
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8 col-lg-offset-2 col-lg-10 ">
-            <button ng-click="register(user)" type="submit" class="btn btn-primary btn-block">Register</button>
+            <button ng-click="rm.register(rm.user)" type="submit" class="btn btn-primary btn-block">Register</button>
         </div>
     </div>
-    <div ng-show="message" class=" col-sm-offset-2 text-center alert alert-danger" role="alert">{{message}}</div>
+    <div ng-show="message" class=" col-sm-offset-2 text-center alert alert-danger" role="alert">{{cm.message}}</div>
 </form>

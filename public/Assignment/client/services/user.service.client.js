@@ -6,21 +6,8 @@
         .module("FormBuilderApp")
         .factory("UserService",UserService);
 
-    function UserService ($rootScope){
+    function UserService ($rootScope,$http){
         var model = {
-         Users: [
-            {	"_id":123, "firstName":"Alice",            "lastName":"Wonderland",
-                "username":"alice",  "password":"alice",   "roles": ["student"]		},
-            {	"_id":234, "firstName":"Bob",              "lastName":"Hope",
-                "username":"bob",    "password":"bob",     "roles": ["admin"]		},
-            {	"_id":345, "firstName":"Charlie",          "lastName":"Brown",
-                "username":"charlie","password":"charlie", "roles": ["faculty"]		},
-            {	"_id":456, "firstName":"Dan",              "lastName":"Craig",
-                "username":"dan",    "password":"dan",     "roles": ["faculty", "admin"]},
-            {	"_id":567, "firstName":"Edward",           "lastName":"Norton",
-                "username":"ed",     "password":"ed",      "roles": ["student"]		}
-            ],
-
             //declare all functions
 
             findUserByCredentials: findUserByCredentials,
@@ -40,17 +27,16 @@
         }
 
         function getCurrentUser(){
-            if($rootScope.currentUser)
-            return $rootScope.currentUser;
-            return null;
+            return $http.get("/api/assignment/loggedin");
         }
 
-        function findUserByCredentials(username, password){
-            for(var u in model.Users){
-                if(model.Users[u].username === username && model.Users[u].password === password)
-                return model.Users[u];
+        function findUserByCredentials(username, password) {
+            var user = {
+                username: username,
+                password: password
             }
-            return null;
+            console.log(user,"findBy");
+            return $http.post("/api/assignment/user",user);
         }
 
         function findAllUsers(){
@@ -58,13 +44,8 @@
         }
 
         function createUser(user){
-            var newuser = {
-                username: user.username,
-                password: user.password,
-                _id: (new Date).getTime(),
-            };
-            model.Users.push(newuser);
-            return newuser;
+            console.log("user.service.client", user);
+          return $http.post("/api/assignment/register",user);
         }
 
         function deleteUserById(id){

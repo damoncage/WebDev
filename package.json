@@ -24,10 +24,11 @@
   },
   "dependencies": {
     "express": "~3.4.4",
-    "cookie-parser": "",
-    "express-session": "",
+    "cookie-parser": "~1.4.1",
+    "express-session": "~1.13.0",
     "body-parser": "~1.15.0",
-    "q": "~1.4.1"
+    "q": "~1.4.1",
+    "multer": "~1.1.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],
