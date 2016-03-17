@@ -8,6 +8,7 @@ app.get('/hello', function(req, res){
   res.send('hello world');
 });
 require("./public/Project/EverFit/server/app.js")(app);
+require("./public/Assignment/server/app.js")(app);
 app.use(express.static(__dirname + '/public'));
 app.listen(port, ipaddress);
 /*
