@@ -3,12 +3,16 @@
  */
 module.exports = function(app,userModel){
  //   app.post("/api/assignment/login",login);
-    app.post("/api/assignment/register", register);
-    app.post("/api/assignment/user",findUserBycredentials);
-    app.get("/api/assignment/alluser", findAllUsers);
-
+    app.post("/api/assignment/user", register);
+    app.get("/api/assignment/user", findAllUsers);
+    app.get("/api/assignment/user:id",findUserById);
+    app.get("/api/assignment/user?username=username", findUserByName);
+    app.post("/api/assignment/user?username=username&password=password", findUserByCredential);
+ /*   app.put("/api/assignment/user/:id", updateUser);
+    app.delete("/api/assignment/user/:id", deleteUser);*/
 
     function register(req,res){
+        console.log("register server invoked");
         var user = req.body;
         console.log(req.body);
         user = userModel.createUser(user);
@@ -16,15 +20,36 @@ module.exports = function(app,userModel){
         res.json(user);
     }
 
-    function findUserBycredentials(req,res){
+
+    function findAllUsers(req,res){
+        var user = userModel.findAllUser();
+        res.json(user);
+    }
+
+    function findUserById(req,res){
+        var userid = req.params.id;
+        var user = null;
+        user = userModel.findUserById(userid);
+        console.log(user,userid);
+        res.json(user);
+    }
+
+    function findUserByName(req,res){
+        var username = req.params.username;
+        console.log(req.params);
+        var user = null;
+        user = userModel.findUserByUsername(username);
+        console.log(user,username);
+        res.json(user);
+    }
+
+    function findUserByCredential(req,res){
         console.log("invoked");
         var credentials = req.body;
         console.log(credentials);
-        res.send(200);
-    }
-
-    function findAllUsers(req,res){
-        var user = userModel.findAllUser;
+        var user = userModel.findUserByCredentials(credentials);
         res.json(user);
     }
+
+
 }

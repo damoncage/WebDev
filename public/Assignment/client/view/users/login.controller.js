@@ -15,7 +15,7 @@
             $scope.message = "Input information in required fields.";
             return;
             }
-            var validation = UserService.findUserByCredentials(user.username,user.password);
+            var validation = UserService.findUserByCredentials(user);
             if(validation){
                 UserService.setCurrentUser(validation);
                 $location.url("/home");

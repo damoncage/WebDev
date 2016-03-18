@@ -31,14 +31,15 @@
                 rm.message = "Passwords must match";
                 return;
             }
-            var checkuser = UserService.findUserByCredentials(user.username,user.password);
+            var checkuser = UserService.findUserByCredentials(user);
             if (checkuser != null) {
                 rm.message = "User already exists";
                 return;
             }
+
             UserService
                 .createUser(user)
-            .then(function(response){
+                .then(function(response){
                 if(response.data != null){
                 UserService.setCurrentUser(response.data);
                 $location.url("/profile")

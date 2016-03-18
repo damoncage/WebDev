@@ -30,13 +30,9 @@
             return $http.get("/api/assignment/loggedin");
         }
 
-        function findUserByCredentials(username, password) {
-            var user = {
-                username: username,
-                password: password
-            }
-            console.log(user,"findBy");
-            return $http.post("/api/assignment/user",user);
+        function findUserByCredentials(user) {
+            console.log(user,"login");
+            return $http.post("/api/assignment/user?username=username&password=password",user);
         }
 
         function findAllUsers(){
@@ -44,8 +40,9 @@
         }
 
         function createUser(user){
-            console.log("user.service.client", user);
-          return $http.post("/api/assignment/register",user);
+            US = JSON.stringify(user);
+            console.log("user.service.client", US);
+            return $http.post("/api/assignment/user", US);
         }
 
         function deleteUserById(id){

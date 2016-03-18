@@ -15,6 +15,7 @@ module.exports = function(app){
     }
     return api;
 
+
     function findUserByUsername(username){
         for(var i in mock){
             if(mock[i].username){
@@ -46,7 +47,7 @@ module.exports = function(app){
 
     function findUserById(userId){
         for (var i in mock) {
-            if (mock[i]._id === userId)
+            if (mock[i]._id == userId)
                 return mock[i];
         }
         return null;
@@ -58,7 +59,6 @@ module.exports = function(app){
                 mock[i] = update;
                 return mock[i];
             }
-
         }
         return null;
     }
@@ -67,10 +67,9 @@ module.exports = function(app){
     for(var u in mock){
         if(userId == mock[u]._id)
         {
-            var index = model.Users.indexOf(mock[u]);
-            model.Users.splice(index, 1);
+            var index = mock.indexOf(mock[u]);
+            mock.splice(index, 1);
         }
     }
-    return model.Users[u];
     }
 }
