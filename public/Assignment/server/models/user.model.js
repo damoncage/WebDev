@@ -11,7 +11,7 @@ module.exports = function(app){
         findAllUser: findAllUser,
         findUserById: findUserById,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
     }
     return api;
 
@@ -54,9 +54,9 @@ module.exports = function(app){
         return null;
     }
 
-    function updateUser(user,update){
+    function updateUser(userId,update){
         for (var i in mock) {
-            if (mock[i]._id === user._id) {
+            if (mock[i]._id === userId) {
                 mock[i] = update;
                 return mock[i];
             }

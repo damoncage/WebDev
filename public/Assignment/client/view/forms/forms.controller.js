@@ -24,10 +24,11 @@
             var newform = {
                 title: form.title
             }
+            console.log(user._id,newform);
             FormService
                 .createFormForUser(user._id,newform)
                 .then(function(response){
-                    console(response.data);
+                    console.log(response);
                 $scope.Forms = FormService.findAllFormsForUser(user._id);
                 $scope.form = null;
             });

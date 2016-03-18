@@ -10,7 +10,7 @@ module.exports = function(app, userModel, formModel){
 
     function findFormByUserId(req,res){
         var userId = req.params.userId;
-        res.json(userModel.findFormByUserId(userId));
+        res.json(formModel.findFormByUserId(userId));
     }
 
     function findFormById(req,res){
@@ -28,15 +28,15 @@ module.exports = function(app, userModel, formModel){
         var id = req.params.userId;
         var form = req.body;
         form.userId = id;
+        formModel.createForm(form);
         console.log("server",form);
-        userModel.createForm(form);
-        res.send(form);
+        res.json(form);
     }
 
     function updateForm(req,res){
         var id = req.params.formId;
         var form = req.body;
-        var newform = userModel.updateForm(form,id);
+        var newform = formModel.updateForm(form,id);
         res.send(newform);
     }
 

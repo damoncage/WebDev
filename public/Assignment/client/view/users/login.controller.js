@@ -18,10 +18,12 @@
             UserService
                 .findUserByCredentials(user)
                 .then(function(response){
-                    UserService.setCurrentUser(response.data);
-                    $location.url("/home");
+                    if(response.data){
+                        UserService.setCurrentUser(response.data);
+                        console.log(response);
+                        $location.url("/home");}
+                    $scope.message = "Invalid Username or Password!";
                 });
-            $scope.message = "Invalid Username or Password!";
         }
     }
 })();

@@ -27,7 +27,8 @@
         }
 
         function getCurrentUser(){
-            return $http.get("/api/assignment/loggedin");
+            return $rootScope.currentUser;
+        //    return $http.get("/api/assignment/loggedin");
         }
 
         function findUserByCredentials(user) {
@@ -36,13 +37,12 @@
         }
 
         function findAllUsers(){
-            return model.Users;
+            return $http.get("/api/assignment/user");
         }
 
         function createUser(user){
-            US = JSON.stringify(user);
-            console.log("user.service.client", US);
-            return $http.post("/api/assignment/user", US);
+            console.log("user.service.client", user);
+            return $http.post("/api/assignment/user", user);
         }
 
         function deleteUserById(id){

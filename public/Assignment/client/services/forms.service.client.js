@@ -6,7 +6,7 @@
         .module("FormBuilderApp")
         .factory("FormService",FormService);
 
-    function  FormService(){
+    function  FormService($http){
         var api = {
             forms: [
                 {"_id": "000", "title": "Contacts", "userId": 123},
@@ -26,8 +26,8 @@
         //function implementations
 
         function createFormForUser(userId,form){
-            console.log("createForm",userId);
-            return $http.post("/api/assignment/user/"+userId+"/form",form);
+            console.log();
+            return $http.post("/api/assignment/user/" + userId + "/form",form);
         }
 
         function finAllFormsForUser(userId){
