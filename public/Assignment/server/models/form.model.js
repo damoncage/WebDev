@@ -5,6 +5,7 @@ var mock = require("./form.mock.json");
 module.exports = function(app){
     api = {
         findFormByTitle: findFormByTitle,
+        findFormByUserId: findFormByUserId,
         createForm: createForm,
         findallForm: findAllForms,
         findFormById: findFormById,
@@ -22,8 +23,18 @@ module.exports = function(app){
         return null;
     }
 
+    function findFormByUserId(userId){
+        var form = [];
+        for(var i in mock){
+            if(mock[i].userId == userId){
+                form.push(mock[i]);
+            }
+        }
+        return form;
+    }
+
     function createForm(form){
-        form._id = "ID_" + (new Date()).getTime();
+        form._id = uuid.v4();
         mock.push(form);
         return form;
     }

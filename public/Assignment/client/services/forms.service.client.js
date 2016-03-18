@@ -26,11 +26,8 @@
         //function implementations
 
         function createFormForUser(userId,form){
-            form._id = (new Date).getTime();
-            form.userId = userId;
-            api.forms.push(form);
-            var index = api.forms.indexOf(form);
-            return api.forms[index];
+            console.log("createForm",userId);
+            return $http.post("/api/assignment/user/"+userId+"/form",form);
         }
 
         function finAllFormsForUser(userId){

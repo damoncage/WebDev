@@ -26,6 +26,7 @@ module.exports = function(app){
     }
 
     function findUserByCredentials(credentials) {
+        console.log("usermodel");
         for (var i in mock) {
             if (mock[i].username === credentials.username &&
                 mock[i].password === credentials.password) {

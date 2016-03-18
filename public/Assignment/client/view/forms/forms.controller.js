@@ -24,9 +24,14 @@
             var newform = {
                 title: form.title
             }
-            FormService.createFormForUser(user._id,newform);
-            $scope.Forms = FormService.findAllFormsForUser(user._id);
-            $scope.form = null;
+            FormService
+                .createFormForUser(user._id,newform)
+                .then(function(response){
+                    console(response.data);
+                $scope.Forms = FormService.findAllFormsForUser(user._id);
+                $scope.form = null;
+            });
+
         }
 
         function updateForm(newform){

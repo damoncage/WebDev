@@ -32,7 +32,7 @@
 
         function findUserByCredentials(user) {
             console.log(user,"login");
-            return $http.post("/api/assignment/user?username=username&password=password",user);
+            return $http.post("/api/assignment/login",user);
         }
 
         function findAllUsers(){

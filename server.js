@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var uuid = require('node-uuid');
 var multer        = require('multer');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');

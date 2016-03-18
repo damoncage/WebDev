@@ -15,11 +15,12 @@
             $scope.message = "Input information in required fields.";
             return;
             }
-            var validation = UserService.findUserByCredentials(user);
-            if(validation){
-                UserService.setCurrentUser(validation);
-                $location.url("/home");
-            }
+            UserService
+                .findUserByCredentials(user)
+                .then(function(response){
+                    UserService.setCurrentUser(response.data);
+                    $location.url("/home");
+                });
             $scope.message = "Invalid Username or Password!";
         }
     }

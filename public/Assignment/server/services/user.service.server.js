@@ -2,7 +2,8 @@
  * Created by cage on 3/17/16.
  */
 module.exports = function(app,userModel){
- //   app.post("/api/assignment/login",login);
+    app.post("/api/assignment/login",login);
+    app.get("/api/assignment/loggedin",loggedin);
     app.post("/api/assignment/user", register);
     app.get("/api/assignment/user", findAllUsers);
     app.get("/api/assignment/user:id",findUserById);
@@ -10,6 +11,18 @@ module.exports = function(app,userModel){
     app.post("/api/assignment/user?username=username&password=password", findUserByCredential);
  /*   app.put("/api/assignment/user/:id", updateUser);
     app.delete("/api/assignment/user/:id", deleteUser);*/
+
+    function login(req,res){
+        var user = req.body;
+        console.log("login",user);
+        user = userModel.findUserByCredentials(user);
+        req.session.currentUser = user;
+        res.json(user);
+    }
+
+    function loggedin(req,res){
+        res.json(req.session.currentUser);
+    }
 
     function register(req,res){
         console.log("register server invoked");
@@ -23,11 +36,13 @@ module.exports = function(app,userModel){
 
     function findAllUsers(req,res){
         var user = userModel.findAllUser();
+        console.log("alluser");
         res.json(user);
     }
 
     function findUserById(req,res){
         var userid = req.params.id;
+        console.log(userid);
         var user = null;
         user = userModel.findUserById(userid);
         console.log(user,userid);
@@ -35,8 +50,8 @@ module.exports = function(app,userModel){
     }
 
     function findUserByName(req,res){
-        var username = req.params.username;
-        console.log(req.params);
+        var username = req.querySelector(username);
+        console.log(username);
         var user = null;
         user = userModel.findUserByUsername(username);
         console.log(user,username);
