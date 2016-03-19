@@ -1,147 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://portal-cs5610online.rhcloud.com/favicon.ico">
-
-    <title>Dashboard Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../dashboard.css" rel="stylesheet">
-
-</head>
-
-<body>
-<div class="container-fluid">
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Dashboard</h1>
-    <h2 class="sub-header">Forms</h2>
-    <ul class="nav nav-tabs">
-        <li role="presentation"><a href="form.html">Forms</a></li>
-        <li role="presentation" class="active"><a href="">Fields</a></li>
-    </ul>
-    <br/>
-    <label for="FirstName">First Name:</label>
-<form class="form-inline">
-    <div class="form-group">
-             <input id="FirstName" type="text" class="form-control" placeholder="First Name"/>
-    </div>
-    <a href="" class="btn glyphicon glyphicon-menu-hamburger pull-right"></a>
-    <a href="" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
-    <a href="" class="btn btn-success glyphicon glyphicon-plus pull-right"></a>
-    <a href="" class="btn btn-warning glyphicon glyphicon-pencil pull-right"></a>
- </form>
-    <br/>
-    <label for="LastName">Last Name:</label>
-    <form class="form-inline">
-        <div class="form-group">
-        <input id="LastName" type="text" class="form-control" placeholder="LastName"/>
-        </div>
-        <a href="" class="btn glyphicon glyphicon-menu-hamburger pull-right"></a>
-        <a href="" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
-        <a href="" class="btn btn-success glyphicon glyphicon-plus pull-right"></a>
-        <a href="" class="btn btn-warning glyphicon glyphicon-pencil pull-right"></a>
-    </form>
-    <br/>
-    <label for="DOB">Date of Birth:</label>
-    <form class="form-inline">
-    <div class="form-group">
-        <input id="DOB" type="date" class="form-control" placeholder="Date of Birth"/>
-    </div>
-        <a href="" class="btn glyphicon glyphicon-menu-hamburger pull-right"></a>
-        <a href="" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
-        <a href="" class="btn btn-success glyphicon glyphicon-plus pull-right"></a>
-        <a href="" class="btn btn-warning glyphicon glyphicon-pencil pull-right"></a>
-    </form>
-    <br/>
-        <label for="Gender">Gender:</label>
-    <form class="form-inline">
-        <div class="form-group">
-            <select id="Gender" class="form-control" type="text" name="Gender">
-                <option value="Male" >Male</option>
-                <option value="Female">Female</option>
-            </select>
-        </div>
-        <a href="" class="btn glyphicon glyphicon-menu-hamburger pull-right"></a>
-        <a href="" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
-        <a href="" class="btn btn-success glyphicon glyphicon-plus pull-right"></a>
-        <a href="" class="btn btn-warning glyphicon glyphicon-pencil pull-right"></a>
-    </form>
-<br/>
-    <form class="form-inline">
-        <div class="form-group">
-        <label>Roles:</label>
-        </div>
-        <a href="" class="btn glyphicon glyphicon-menu-hamburger pull-right"></a>
-        <a href="" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
-        <a href="" class="btn btn-success glyphicon glyphicon-plus pull-right"></a>
-        <a href="" class="btn btn-warning glyphicon glyphicon-pencil pull-right"></a>
-    </form>
-        <div class="checkbox">
-            <label><input type="checkbox">Admin</label>
-            </div>
-        <div class="checkbox">
-            <label><input type="checkbox">Student</label></div>
-            <div class="checkbox">
-            <label><input type="checkbox">User</label></div>
-    <br/>
-    <form class="form-inline">
-        <label>Licence Agreement:</label>
-        <a href="" class="btn glyphicon glyphicon-menu-hamburger pull-right"></a>
-        <a href="" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
-        <a href="" class="btn btn-success glyphicon glyphicon-plus pull-right"></a>
-        <a href="" class="btn btn-warning glyphicon glyphicon-pencil pull-right"></a>
-        </form>
-    <div class="radio">
-        <div class="radio">
-            <label>
-                <input type="radio" name="Agreement">Yes
-            </label>
-            </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="Agreement">No
-            </label>
-        </div>
-    </div>
-    <br/>
-    <hr/>
-    <form class="form-inline">
-        <label for="NewField">Add new field:</label>
-        <a href="" class="btn btn-success glyphicon glyphicon-plus pull-right"></a>
-    </form>
-<br>
-    <div class="form-group">
-        <select id="NewField" class="form-control">
-            <option>Single line text field</option>
-            <option>Date field</option>
-            <option>Dropdown field</option>
-            <option>Check Boxes field</option>
-            <option>Radio button field</option>
-        </select>
-    </div>
-
+<h1 class="page-header">Forms</h1>
+<h2 class="sub-header">Fields</h2>
+<ul class="nav nav-tabs">
+    <li role="presentation" ><a href="#forms">Forms</a></li>
+    <li role="presentation" class="active"><a href="form_field.html">Fields</a></li>
+</ul>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th class="col-sm-8">Form Name</th>
+            <th class="col-sm-4">Action</th>
+        </tr>
+        <tr>
+            <td><input ng-model="form.title" class="form-control" type="text" name="FormName" placeholder="Form Name"/></td>
+            <td style="white-space: nowrap">
+                <a ng-click="addForm(form)" href="" class="btn btn-primary">
+                    <scan class="glyphicon glyphicon-plus"></scan>
+                </a>
+                <a ng-click="updateForm(form)" href="" class="btn btn-success">
+                    <scan class="glyphicon glyphicon-ok"></scan>
+                </a>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="form in Forms">
+            <td>{{form.title}}</td>
+            <td>
+                <a herf="" ng-click="deleteForm($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+                <a herf="" ng-click="selectForm($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </div>
 </div>
-
-
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="https://code.jquery.com/jquery-1.12.0.min.js"><\/script>')</script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+</div>

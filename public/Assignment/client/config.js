@@ -34,6 +34,11 @@
                     controller: "RegisterController",
                     controllerAs:"rm"
                 })
+                .when("/field",{
+                    templateUrl:"view/forms/fields.view.html",
+                    controller:"FieldController",
+                    controllerAs:"FM"
+                })
                 .otherwise({
                     redirectTo: "/home"
                 });
