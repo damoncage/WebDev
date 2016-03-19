@@ -1,39 +1,13 @@
-<h1 class="page-header">Forms</h1>
-<h2 class="sub-header">Fields</h2>
+<h1 class="page-header">Forms:{{form.title}}</h1>
 <ul class="nav nav-tabs">
     <li role="presentation" ><a href="#forms">Forms</a></li>
     <li role="presentation" class="active"><a href="form_field.html">Fields</a></li>
 </ul>
-<div class="table-responsive">
-    <table class="table table-striped table-hover">
-        <thead>
-        <tr>
-            <th class="col-sm-8">Form Name</th>
-            <th class="col-sm-4">Action</th>
-        </tr>
-        <tr>
-            <td><input ng-model="form.title" class="form-control" type="text" name="FormName" placeholder="Form Name"/></td>
-            <td style="white-space: nowrap">
-                <a ng-click="addForm(form)" href="" class="btn btn-primary">
-                    <scan class="glyphicon glyphicon-plus"></scan>
-                </a>
-                <a ng-click="updateForm(form)" href="" class="btn btn-success">
-                    <scan class="glyphicon glyphicon-ok"></scan>
-                </a>
-            </td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="form in Forms">
-            <td>{{form.title}}</td>
-            <td>
-                <a herf="" ng-click="deleteForm($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
-                <a herf="" ng-click="selectForm($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-</div>
-</div>
-</div>
+<form>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="FirstName">First Name</label>
+            <input type="email" ng-model="form.firstName" class="form-control" id="FirstName" placeholder="First Name">
+        </div>
+    </form>
+</form>

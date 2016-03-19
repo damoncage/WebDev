@@ -4,36 +4,36 @@
         <li role="presentation" class="active"><a href="">Forms</a></li>
         <li role="presentation"><a href="#field">Fields</a></li>
     </ul>
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th class="col-sm-8">Form Name</th>
-                        <th class="col-sm-4">Action</th>
-                    </tr>
-                    <tr>
-                        <td><input ng-model="form.title" class="form-control" type="text" name="FormName" placeholder="Form Name"/></td>
-                        <td style="white-space: nowrap">
-                            <a ng-click="addForm(form)" href="" class="btn btn-primary">
-                                <scan class="glyphicon glyphicon-plus"></scan>
-                            </a>
-                            <a ng-click="updateForm(form)" href="" class="btn btn-success">
-                                <scan class="glyphicon glyphicon-ok"></scan>
-                            </a>
-                        </td>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="form in Forms">
-                        <td>{{form.title}}</td>
-                        <td>
-                            <a herf="" ng-click="deleteForm($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
-                            <a herf="" ng-click="selectForm($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="col-sm-8">Form Name</th>
+                    <th class="col-sm-4">Action</th>
+                </tr>
+                <tr>
+                    <td><input ng-model="form.title" class="form-control" type="text" name="FormName" placeholder="Form Name"/></td>
+                    <td style="white-space: nowrap">
+                        <a ng-click="addForm(form)" href="" class="btn btn-primary">
+                            <scan class="glyphicon glyphicon-plus"></scan>
+                        </a>
+                        <a ng-click="updateForm(form)" href="" class="btn btn-success">
+                            <scan class="glyphicon glyphicon-ok"></scan>
+                        </a>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="form in Forms">
+                    <td>{{form.title}}</td>
+                    <td>
+                        <a herf="" ng-click="deleteForm($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+                        <a herf="" ng-click="selectForm($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         </div>
     </div>
 </div>

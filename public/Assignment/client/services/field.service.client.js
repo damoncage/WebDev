@@ -13,6 +13,7 @@ function FieldService($http){
         deleteFieldFromForm: deleteFieldFromForm,
         updateField:updateField
     }
+    return api;
 
     function createFieldForForm(formId, field){
         return $http.post("/api/assignment/form/"+formId+"/field",field);
