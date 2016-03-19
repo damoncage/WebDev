@@ -46,7 +46,7 @@
                             console.log(response);
                             $scope.Forms = response.data;
                             $scope.form = null;
-                })
+                });
 
             });
 
