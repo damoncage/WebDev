@@ -1,10 +1,10 @@
 <h1 class="page-header">{{FM.message}}</h1>
 <ul class="nav nav-tabs">
     <li role="presentation" ><a href="#forms">Forms</a></li>
-    <li role="presentation" class="active"><a href="form_field.html">Fields</a></li>
+    <li role="presentation" class="active"><a href="">Fields</a></li>
 </ul>
 <br>
-<div ui-sortable ng-model="FM.fields">
+<div ui-sortable="FM.sortableOptions" ng-model="FM.fields" class="list">
 <div ng-repeat="field in FM.fields" ng-switch on = "field.type">
         <label for="{{field._id}}">{{field.label}}</label>
     <div class = "row">
@@ -34,11 +34,30 @@
                 <input type="date" class="form-control"/>
             </div>
         </div>
+
+        <div class="col-sm-6" ng-switch-when="CHECKBOXES">
+            <div class="form-group" ng-repeat="option in field.options">
+                <div>
+                    <input type="checkbox" id="{{option.label}}" value="{{option.value}}" class=""/>
+                    <label for="{{option.label}}">{{option.label}}</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-6" ng-switch-when="RADIOS">
+            <div class="form-group" ng-repeat="option in field.options">
+                <div>
+                <input type="radio" id="{{option.label}}" name="{{field._id}}" value="{{option.value}}"/>
+                <label for="{{option.label}}">{{option.label}}</label>
+                </div>
+            </div>
+        </div>
+
         <div class="col-sm-6 col-sm-push-2">
-            <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+            <a herf="" ng-click="FM.modifyField(field)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
             <a herf="" ng-click="FM.removeField(field)" class="btn btn-danger glyphicon glyphicon-remove"></a>
             <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
-            <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+            <a herf="" ng-click="modifyField($index)" class="myHandle btn btn-default glyphicon glyphicon-menu-hamburger"></a>
         </div>
     </div>
     <br>
@@ -49,19 +68,28 @@
 <div class="row">
     <div class="col-sm-6">
         <div class="dropdown">
-            <select class="form-control" id="newField" type="text">
-                <option ng-model="FM.fieldType" value="Single" >Single Line Text</option>
-                <option ng-model="FM.fieldType" value="Date">Date</option>
-                <option ng-model="FM.fieldType" value="Dropdown" >Dropdown</option>
-                <option ng-model="FM.fieldType" value="Check" >CheckBoxes</option>
-                <option ng-model="FM.fieldType" value="Radio" >Radio Buttons</option>
+            <select class="form-control" ng-model="FM.fieldType" name="Type" id="newField" type="text">
+                <option value="TEXT" >Single Line Text</option>
+                <option value="TEXTAREA">Multi Line Text</option>
+                <option value="DATE">Date</option>
+                <option value="OPTIONS" >Dropdown</option>
+                <option value="CHECKBOXES" >CheckBoxes</option>
+                <option value="RADIOS" >Radio Buttons</option>
             </select>
         </div>
     </div>
     <div class="col-sm-6 col-sm-push-2">
-        <a herf="" ng-click="addField(FM.fieldType)" class="btn btn-success glyphicon glyphicon-plus"></a>
+        <a herf="" ng-click="FM.addField(FM.fieldType)" class="btn btn-success glyphicon glyphicon-plus"></a>
     </div>
 </div>
+
+
+<script type="text/ng-template" id="tpl">
+    <h1>Template heading</h1>
+    <p>Content goes here</p>
+</script>
+
+
 
 <!--<label for="FirstName">First Name:</label>
 <div class="row">
