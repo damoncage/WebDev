@@ -3,11 +3,111 @@
     <li role="presentation" ><a href="#forms">Forms</a></li>
     <li role="presentation" class="active"><a href="form_field.html">Fields</a></li>
 </ul>
-<form>
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label for="FirstName">First Name</label>
-            <input type="email" ng-model="form.firstName" class="form-control" id="FirstName" placeholder="First Name">
+<br>
+<label for="FirstName">First Name:</label>
+<div class="row">
+    <div class="col-sm-6">
+        <input type="text" ng-model="form.firstname" class="form-control" id="FirstName" placeholder="First Name">
+    </div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+    </div>
+</div>
+<label for="LastName">Last Name</label>
+<div class="row">
+    <div class="col-sm-6">
+        <input type="text" ng-model="form.lastname" class="form-control" id="LastName" placeholder="Last Name">
+    </div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+    </div>
+</div>
+<label for="DOB">Date of birth</label>
+<div class="row">
+    <div class="col-sm-6"><input type="date" ng-model="form.dob" id="DOB" class="form-control"/></div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+    </div>
+</div>
+<label for="gender">Gender</label>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="dropdown">
+            <select class="form-control" id="gender" type="text">
+                <option value="Male" >Male</option>
+                <option value="Female">Female</option>
+            </select>
         </div>
+    </div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+    </div>
+</div>
+<label>Roles:</label>
+<div class="row">
+    <div class="col-sm-6">
+        <form class="form-inline">
+            <input type="checkbox" id="admin" class="form-control"/>
+            <label for="admin">Admin</label>
+        </form>
+    </div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+    </div>
+</div>
+<form class="form-inline">
+    <input type="checkbox" id="student" class="form-control"/>
+    <label for="student">Student</label>
     </form>
+<form class="form-inline">
+    <input type="checkbox" id="user" class="form-control"/>
+    <label for="user">User</label>
+    </form>
+<label>License Agreement:</label>
+<div class="row">
+    <div class="col-sm-6"><form class="form-inline">
+        <input type="radio" id="yes" name="agree"/><label for="yes">Yes</label>
+        <input type="radio" id="no" name="agree"/><label for="no">No</label></div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+        <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+    </div>
 </form>
+</div>
+<hr>
+<label for="newField">Add New Field:</label>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="dropdown">
+            <select class="form-control" id="newField" type="text">
+                <option value="Single" >Single Line Text</option>
+                <option value="Date">Date</option>
+                <option value="Dropdown" >Dropdown</option>
+                <option value="Check" >CheckBoxes</option>
+                <option value="Radio" >Radio Buttons</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+    </div>
+</div>
+
+
