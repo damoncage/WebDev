@@ -4,10 +4,9 @@
     <li role="presentation" class="active"><a href="form_field.html">Fields</a></li>
 </ul>
 <br>
+<div ui-sortable ng-model="FM.fields">
 <div ng-repeat="field in FM.fields" ng-switch on = "field.type">
-    <div>
         <label for="{{field._id}}">{{field.label}}</label>
-    </div>
     <div class = "row">
         <div ng-switch-when="TEXT" class="col-sm-6">
       <input type="text" id="{{field._id}}" placeholder="{{field.placeholder}}" class="form-control">
@@ -43,6 +42,7 @@
         </div>
     </div>
     <br>
+</div>
 </div>
 <hr>
 <label for="newField">Add New Field:</label>
