@@ -40,16 +40,14 @@
             FormService
                 .createFormForUser(user._id,form)
                 .then(function(response){
-                    FormService
+                    return FormService
                         .findAllFormsForUser(user._id)
-                        .then(function(response){
-                            console.log(response);
-                            $scope.Forms = response.data;
-                            $scope.form = null;
+                })
+                .then(function(response) {
+                    console.log(response);
+                    $scope.Forms = response.data;
+                    $scope.form = null;
                 });
-
-            });
-
         }
 
         function updateForm(newform){
