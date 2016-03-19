@@ -29,7 +29,8 @@
     "q": "~1.4.1",
     "multer": "~1.1.0",
     "body-parser": "~1.15.0",
-    "node-uuid": "~1.4.7"
+    "node-uuid": "~1.4.7",
+    "angular-ui-sortable": "~0.13.4"
   },
   "devDependencies": {},
   "bundleDependencies": [],

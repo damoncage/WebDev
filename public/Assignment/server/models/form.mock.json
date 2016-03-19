@@ -11,7 +11,6 @@
         {"_id": "555", "label": "ZIP", "type": "TEXT", "placeholder": "ZIP"},
         {"_id": "666", "label": "Email", "type": "EMAIL", "placeholder": "Email"}
       ]
-
       },
       {"_id": "010", "title": "ToDo", "userId": 234,
         "fields": [

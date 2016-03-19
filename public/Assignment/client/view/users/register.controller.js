@@ -31,21 +31,24 @@
                 rm.message = "Passwords must match";
                 return;
             }
-            var checkuser = UserService.findUserByCredentials(user);
-            if (checkuser != null) {
-                rm.message = "User already exists";
-                return;
-            }
-
             UserService
-                .createUser(user)
+                .findUserByCredentials(user)
                 .then(function(response){
-                if(response.data != null){
-                UserService.setCurrentUser(response.data);
-                $location.url("/profile")
-                }
-            });
-
-        }
+                    var checkuser = response.data;
+                    if (checkuser) {
+                        rm.message = "User already exists";
+                        return;
+                    }else{
+                        UserService
+                            .createUser(user)
+                            .then(function(response){
+                                if(response.data != null){
+                                    UserService.setCurrentUser(response.data);
+                                    $location.url("/profile")
+                                }
+                            });
+                    }
+                });
+             }
     }
 })();

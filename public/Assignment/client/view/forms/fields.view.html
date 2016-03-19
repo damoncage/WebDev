@@ -1,10 +1,69 @@
-<h1 class="page-header">Forms:{{form.title}}</h1>
+<h1 class="page-header">{{FM.message}}</h1>
 <ul class="nav nav-tabs">
     <li role="presentation" ><a href="#forms">Forms</a></li>
     <li role="presentation" class="active"><a href="form_field.html">Fields</a></li>
 </ul>
 <br>
-<label for="FirstName">First Name:</label>
+<div ng-repeat="field in FM.fields" ng-switch on = "field.type">
+    <div>
+        <label for="{{field._id}}">{{field.label}}</label>
+    </div>
+    <div class = "row">
+        <div ng-switch-when="TEXT" class="col-sm-6">
+      <input type="text" id="{{field._id}}" placeholder="{{field.placeholder}}" class="form-control">
+      </div>
+
+        <div ng-switch-when="EMAIL" class="col-sm-6">
+            <input type="text" id="{{field._id}}" placeholder="{{field.placeholder}}" class="form-control">
+        </div>
+        <div class="col-sm-6" ng-switch-when="OPTIONS" id="{{field._id}}">
+            <div class="dropdown">
+                <select class="form-control">
+                    <option class="col-sm-6" ng-repeat="option in field.options" value="{{option.value}}">{{option.label}}</option>
+                </select>
+                </div>
+        </div>
+
+        <div class="col-sm-6" ng-switch-when="TEXTAREA" id="{{field._id}}">
+            <div class="form-group">
+                <textarea type="text" class="form-control" rows="2" placeholder="{{field.placeholder}}"></textarea>
+            </div>
+        </div>
+
+        <div class="col-sm-6" ng-switch-when="DATE" id="{{field._id}}">
+            <div class="form-group">
+                <input type="date" class="form-control"/>
+            </div>
+        </div>
+        <div class="col-sm-6 col-sm-push-2">
+            <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+            <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
+            <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
+            <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
+        </div>
+    </div>
+    <br>
+</div>
+<hr>
+<label for="newField">Add New Field:</label>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="dropdown">
+            <select class="form-control" id="newField" type="text">
+                <option ng-model="FM.fieldType" value="Single" >Single Line Text</option>
+                <option ng-model="FM.fieldType" value="Date">Date</option>
+                <option ng-model="FM.fieldType" value="Dropdown" >Dropdown</option>
+                <option ng-model="FM.fieldType" value="Check" >CheckBoxes</option>
+                <option ng-model="FM.fieldType" value="Radio" >Radio Buttons</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6 col-sm-push-2">
+        <a herf="" ng-click="addField(FM.fieldType)" class="btn btn-success glyphicon glyphicon-plus"></a>
+    </div>
+</div>
+
+<!--<label for="FirstName">First Name:</label>
 <div class="row">
     <div class="col-sm-6">
         <input type="text" ng-model="form.firstname" class="form-control" id="FirstName" placeholder="First Name">
@@ -80,9 +139,12 @@
     </form>
 <label>License Agreement:</label>
 <div class="row">
-    <div class="col-sm-6"><form class="form-inline">
+    <div class="col-sm-6">
+        <form class="form-inline">
         <input type="radio" id="yes" name="agree"/><label for="yes">Yes</label>
-        <input type="radio" id="no" name="agree"/><label for="no">No</label></div>
+        <input type="radio" id="no" name="agree"/><label for="no">No</label>
+            </form>
+    </div>
     <div class="col-sm-6 col-sm-push-2">
         <a herf="" ng-click="modifyField($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
         <a herf="" ng-click="modifyField($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
@@ -90,24 +152,4 @@
         <a herf="" ng-click="modifyField($index)" class="btn btn-default glyphicon glyphicon-menu-hamburger"></a>
     </div>
 </form>
-</div>
-<hr>
-<label for="newField">Add New Field:</label>
-<div class="row">
-    <div class="col-sm-6">
-        <div class="dropdown">
-            <select class="form-control" id="newField" type="text">
-                <option value="Single" >Single Line Text</option>
-                <option value="Date">Date</option>
-                <option value="Dropdown" >Dropdown</option>
-                <option value="Check" >CheckBoxes</option>
-                <option value="Radio" >Radio Buttons</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-sm-6 col-sm-push-2">
-        <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
-    </div>
-</div>
-
-
+</div>-->
