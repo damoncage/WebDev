@@ -6,8 +6,8 @@ module.exports = function(app,userModel){
     app.get("/api/assignment/loggedin",loggedin);
     app.post("/api/assignment/user", register);
     app.get("/api/assignment/user", findAllUsers);
-    app.get("/api/assignment/user:id",findUserById);
-    app.get("/api/assignment/username:username", findUserByName);
+    app.get("/api/assignment/user/:id",findUserById);
+    app.get("/api/assignment/username/:username", findUserByName);
 //    app.post("/api/assignment/user?username=username&password=password", findUserByCredential);
     //I used login instead
     app.put("/api/assignment/user/:id", updateUser);
@@ -51,7 +51,7 @@ module.exports = function(app,userModel){
     }
 
     function findUserByName(req,res){
-        var username = req.querySelector(username);
+        var username = req.params.username;
         console.log(username);
         var user = null;
         user = userModel.findUserByUsername(username);
@@ -70,11 +70,10 @@ module.exports = function(app,userModel){
     function updateUser(req,res){
         var userid = req.params.id;
         var user = req.body;
-        userModel
-            .updateUser(userid,user)
-            .then(function(response){
-                res.json(response.data);
-            });
+        user = userModel.updateUser(userid,user);
+        console.log("server send",user);
+        res.json(user);
+
     }
 
     function deleteUser(req,res){

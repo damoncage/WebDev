@@ -22,6 +22,7 @@
         function updateuser(user){
             $scope.error = null;
             $scope.message = null;
+            user._id = $scope.currentUser._id;
             if(!user.firstName)
                 user.firstName = $scope.currentUser.firstName;
             if(!user.lastName)
@@ -32,16 +33,15 @@
                 user.password = $scope.currentUser.password;
 
             console.log(user,$scope.currentUser);
-            if(UserService.updateUser($scope.currentUser._id,user))
-            {
-                $scope.message = "User updated successfully";
-                UserService.setCurrentUser($scope.currentUser);
-                console.log($scope.currentUser);
-            }
-            else{
-                $scope.message = "Unable to update the user";
-            }
-            $scope.uSer = $scope.currentUser;
+            UserService
+                .updateUser($scope.currentUser._id,user)
+                .then(function (response){
+                    if(response.data){$scope.message = "User updated successfully";
+                        UserService.setCurrentUser(response.data);
+                        console.log($scope.currentUser);}
+                    else{
+                        $scope.error = "Unable to update the user";}
+                });
         }
     }
 })();

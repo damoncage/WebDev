@@ -10,17 +10,20 @@ module.exports = function(app, userModel, formModel){
 
     function findFormByUserId(req,res){
         var userId = req.params.userId;
-        res.json(formModel.findFormByUserId(userId));
+        console.log(userId);
+        res.send(formModel.findFormByUserId(userId));
     }
 
     function findFormById(req,res){
         var id = req.params.formId;
-        res.json(userModel.findFormById(id));
+        res.json(formModel.findFormById(id));
     }
 
     function removeForm(req,res) {
+
         var id = req.params.formId;
-        userModel.deleteForm(id);
+        console.log("server form remover",id);
+        formModel.deleteForm(id);
         res.send(200);
     }
 
@@ -37,6 +40,7 @@ module.exports = function(app, userModel, formModel){
         var id = req.params.formId;
         var form = req.body;
         var newform = formModel.updateForm(form,id);
+        console.log("server\n",id,form);
         res.send(newform);
     }
 

@@ -11,6 +11,7 @@
             //declare all functions
 
             findUserByCredentials: findUserByCredentials,
+            findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
             deleteUserById: deleteUserById,
@@ -36,6 +37,10 @@
             return $http.post("/api/assignment/login",user);
         }
 
+        function findUserByUsername(username){
+            return $http.get("/api/assignment/username/"+username);
+        }
+
         function findAllUsers(){
             return $http.get("/api/assignment/user");
         }
@@ -46,17 +51,13 @@
         }
 
         function deleteUserById(id){
-            for(var u in model.Users){
-                if(id == model.Users[u]._id)
-                {
-                    var index = model.Users.indexOf(user);
-                    model.Users.splice(index, 1)};
-            }
-            return model.Users[u];
+           return $http.delete("/api/assignment/user/"+id);
         }
 
         function updateUser(userId,user){
-            for(var u in model.Users)
+            console.log("update",user);
+            return $http.put("/api/assignment/user/"+userId,user);
+            /*for(var u in model.Users)
             {
                 if(model.Users[u]._id == userId)
                 {
@@ -67,7 +68,7 @@
                     }
                     return  model.Users[u];
                 }
-                return null;
+                return null;*/
             }
         }
 })();

@@ -8,16 +8,9 @@
 
     function  FormService($http){
         var api = {
-            forms: [
-                {"_id": "000", "title": "Contacts", "userId": 123},
-                {"_id": "010", "title": "ToDo",     "userId": 123},
-                {"_id": "020", "title": "CDs",      "userId": 234},
-            ],
-
             //declare all functions
-
             createFormForUser: createFormForUser,
-            findAllFormsForUser: finAllFormsForUser,
+            findAllFormsForUser: findAllFormsForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
             };
@@ -30,35 +23,17 @@
             return $http.post("/api/assignment/user/" + userId + "/form",form);
         }
 
-        function finAllFormsForUser(userId){
-            var tempform = [];
-            for(var i in api.forms)
-            {
-                if(userId == api.forms[i].userId)
-                tempform.push(api.forms[i]);
-            }
-            return tempform;
+        function findAllFormsForUser(userId){
+            return $http.get("/api/assignment/user/"+userId+"/form");
         }
 
         function deleteFormById(formId){
-            for(var i in api.forms)
-            {
-                if(formId == api.forms[i]._id)
-                api.forms.splice(i,1);
-            }
-            return api.forms;
+            console.log("clientservice");
+            return $http.delete("/api/assignment/form/"+formId);
         }
 
         function updateFormById(formId,newForm){
-            for(var i in api.forms)
-            {
-                if(formId == api.forms[i]._id) {
-                    console.log("api \n", i, api.forms[i], newForm);
-                    api.forms[i] = newForm;
-                    return api.forms[i];
-                }
-            }
-            return null;
+            return $http.put("/api/assignment/form/"+formId, newForm);
         }
     }
 })();

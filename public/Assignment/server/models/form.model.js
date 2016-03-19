@@ -4,7 +4,7 @@
 var mock = require("./form.mock.json");
 var uuid = require("node-uuid");
 module.exports = function(app){
-    api = {
+    var api = {
         findFormByTitle: findFormByTitle,
         findFormByUserId: findFormByUserId,
         createForm: createForm,
@@ -31,6 +31,7 @@ module.exports = function(app){
                 form.push(mock[i]);
             }
         }
+        console.log(form);
         return form;
     }
 
@@ -45,6 +46,7 @@ module.exports = function(app){
     }
 
     function findFormById(formId){
+        console.log("findFormById",formId);
         for(var i in mock){
             if(mock[i]._id == formId){
                 return mock[i];
@@ -55,17 +57,19 @@ module.exports = function(app){
 
     function updateForm(form,formId){
         var oForm = findFormById(formId);
+        console.log("updateForm",form);
         if (oForm){
-            oForm = form;
-            return form;
+            oForm.title = form.title;
+            return oForm;
         }
         return null;
     }
 
     function deleteForm(formId){
         var form = findFormById(formId);
-        if(!form)
-        return null;
+        console.log("deleteform \n",form);
+        if(!form){return null;}
+        console.log("deleteform",form);
         var index = mock.indexOf(form);
         mock.splice(index, 1);
     }

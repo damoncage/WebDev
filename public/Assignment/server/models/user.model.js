@@ -15,10 +15,9 @@ module.exports = function(app){
     }
     return api;
 
-
     function findUserByUsername(username){
         for(var i in mock){
-            if(mock[i].username){
+            if(mock[i].username == username){
                 return mock[i];
             }
         }
@@ -55,8 +54,9 @@ module.exports = function(app){
     }
 
     function updateUser(userId,update){
+        console.log("model",userId,update);
         for (var i in mock) {
-            if (mock[i]._id === userId) {
+            if (mock[i]._id == userId) {
                 mock[i] = update;
                 return mock[i];
             }
