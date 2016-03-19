@@ -34,7 +34,6 @@
                 <input type="date" class="form-control"/>
             </div>
         </div>
-
         <div class="col-sm-6" ng-switch-when="CHECKBOXES">
             <div class="form-group" ng-repeat="option in field.options">
                 <div>
@@ -52,7 +51,6 @@
                 </div>
             </div>
         </div>
-
         <div class="col-sm-6 col-sm-push-2">
             <a herf="" ng-click="FM.modifyField(field)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
             <a herf="" ng-click="FM.removeField(field)" class="btn btn-danger glyphicon glyphicon-remove"></a>
@@ -84,9 +82,98 @@
 </div>
 
 
-<script type="text/ng-template" id="tpl">
-    <h1>Template heading</h1>
-    <p>Content goes here</p>
+<script type="text/ng-template" id="TEXT">
+    <p>Single Line Field</p>
+    <label for="Label">Label:</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+        </div>
+    </div>
+    <label for="PlaceHolder">PlaceHolder</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.placeholder" class="form-control" id="PlaceHolder" placeholder="">
+        </div>
+    </div>
+    <div class="container-fluid">
+    <button class="btn btn-default pull-right">Cancel</button>
+    <button class="btn btn-primary pull-right" type="submit">OK</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="TEXTAREA">
+    <p>Multiple Lines Field</p>
+    <label for="Label">Label:</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+        </div>
+    </div>
+    <label for="FreeText">Placeholder:</label>
+    <textarea  type="text" id="FreeText" cols="50" rows="2" placeholder=""></textarea>
+    <div class="container-fluid">
+        <button class="btn btn-default pull-right">Cancel</button>
+        <button class="btn btn-primary pull-right" type="submit">OK</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="DATE">
+    <h3>Date Field </h3>
+    <label for="Label">Label:</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="OPTIONS">
+    <p>Dropdown Field</p>
+        <label for="Label">Label:</label>
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+            </div>
+        </div>
+        <label for="Options">Options</label>
+        <textarea id="Options" type="text" class="form-control" rows="2" placeholder=""></textarea>
+        <div class="container-fluid">
+        <button class="btn btn-default pull-right">Cancel</button>
+        <button class="btn btn-primary pull-right" type="submit">OK</button>
+            </div>
+</script>
+
+<script type="text/ng-template" id="CHECKBOXES">
+    <p>Checkbox Field</p>
+    <label for="Label">Label:</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+        </div>
+    </div>
+    <label for="Options">Options</label>
+    <textarea id="Options" type="text" class="form-control" rows="2" placeholder=""></textarea>
+    <div class="container-fluid">
+        <button class="btn btn-default pull-right">Cancel</button>
+        <button class="btn btn-primary pull-right" type="submit">OK</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="RADIOS">
+    <p>Radio Buttion Field</p>
+    <label for="Label">Label:</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+        </div>
+    </div>
+    <label for="Options">Options</label>
+    <textarea id="Options" type="text" class="form-control" rows="2" placeholder=""></textarea>
+    <div class="container-fluid">
+        <button class="btn btn-default pull-right">Cancel</button>
+        <button class="btn btn-primary pull-right" type="submit">OK</button>
+    </div>
 </script>
 
 

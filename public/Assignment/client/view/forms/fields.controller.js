@@ -91,7 +91,7 @@
 
         function modifyField(field){
             console.log("template");
-            ngDialog.open({ template: 'tpl', className: 'ngdialog-theme-default' });
+            ngDialog.open({ template: field.type, className: 'ngdialog-theme-default' });
         }
     }
 
