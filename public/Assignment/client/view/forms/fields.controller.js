@@ -36,6 +36,7 @@
             FM.removeField = removeField;
             FM.addField = addField;
             FM.modifyField = modifyField;
+            FM.sortupdate = sortupdate;
 
             /*FM.sortableOptions = {
                 handle: '> .myHandle',
@@ -92,6 +93,16 @@
         function modifyField(field){
             console.log("template");
             ngDialog.open({ template: field.type, className: 'ngdialog-theme-default' });
+        }
+
+        function sortupdate(field){
+            console.log(FM.fields,"\n",field);
+            FieldService
+                .sortField(formId,field)
+                .then(function(response){
+                    console.log(response.data);
+                    FM.fields = response.data;
+                })
         }
     }
 

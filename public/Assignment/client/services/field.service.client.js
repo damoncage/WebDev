@@ -11,7 +11,8 @@ function FieldService($http){
         getFieldsForForm: getFieldsForForm,
         getFieldForForm: getFieldForForm,
         deleteFieldFromForm: deleteFieldFromForm,
-        updateField:updateField
+        updateField:updateField,
+        sortField:sortField
     }
     return api;
 
@@ -34,5 +35,9 @@ function FieldService($http){
     function updateField(formId, fieldId, field){
         return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId,field)
     }
+
+    function sortField(formId,fields){
+        return $http.put("/api/assignment/form/"+formId+"/sort",fields)
+    };
     }
 })();
