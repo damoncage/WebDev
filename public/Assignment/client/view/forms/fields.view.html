@@ -4,7 +4,7 @@
     <li role="presentation" class="active"><a href="">Fields</a></li>
 </ul>
 <br>
-<div ui-sortable="FM.sortableOptions" ng-model="FM.fields" class="list">
+<div ui-sortable="FM.sortableOptions" ng-model="FM.fields" class="">
 <div ng-repeat="field in FM.fields" ng-switch on = "field.type">
         <label for="{{field._id}}">{{field.label}}</label>
     <div class = "row">
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 col-sm-push-2">
+        <div class="col-sm-5 col-sm-push-1">
             <a herf="" ng-click="FM.modifyField(field)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
             <a herf="" ng-click="FM.removeField(field)" class="btn btn-danger glyphicon glyphicon-remove"></a>
             <a herf="" ng-click="modifyField($index)" class="btn btn-success glyphicon glyphicon-plus"></a>
@@ -76,7 +76,7 @@
             </select>
         </div>
     </div>
-    <div class="col-sm-6 col-sm-push-2">
+    <div class="col-sm-5 col-sm-push-1">
         <a herf="" ng-click="FM.addField(FM.fieldType)" class="btn btn-success glyphicon glyphicon-plus"></a>
     </div>
 </div>
