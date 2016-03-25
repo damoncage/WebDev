@@ -5,6 +5,7 @@
     <title>Title</title>
 </head>
 <body>
+
 <h1 class="page-header">Login</h1>
 <div>
     <form class="form-horizontal">
@@ -39,16 +40,11 @@
                 <a href="#register" class="btn btn-default btn-block">Register</a></div>
             </div>
     </form>
-    <script>
-        FB.getLoginStatus(function(response) {
-        if (response.status === 'connected') {
-            console.log('Logged in.');
-        }
-        else {
-            FB.login();
-        }
-    });</script>
+
     <div ng-show="cm.message" class="col-sm-offset-2 alert alert-danger" role="alert">{{cm.message}}</div>
 </div>
+<script>
+
+</script>
 </body>
 </html>

@@ -25,6 +25,7 @@
         }
 
         function logout(){
+            console.log("userservice");
             return $http.post("/api/project/EverFit/logout");
         }
 

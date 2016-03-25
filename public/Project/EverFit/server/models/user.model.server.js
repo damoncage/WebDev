@@ -1,40 +1,15 @@
 /**
  * Created by cage on 3/8/16.
  */
-//var mock = require("./user.mock.json");
-module.exports = function(){
-    var mock = [
-        {
-            "_id": "123qwe",
-            "username": "alice",
-            "password": "alice",
-            "firstName": "Alice",
-            "lastName": "Wonderland",
-            "email": "alice@alice.com"
-        },
-        {
-            "_id": "234wer",
-            "username": "bob",
-            "password": "bob",
-            "firstName": "Bob",
-            "lastName": "Marley",
-            "email": "bob@marley.com"
-        },
-        {
-            "_id": "345ert",
-            "username": "charlie",
-            "password": "charlie",
-            "firstName": "Charlie",
-            "lastName": "Brown",
-            "email": "charlie@brown.com"
-        }
-    ];
+var mock = require("./user.mock.json");
 
+module.exports = function(app){
     var api = {
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,
         findUserById: findUserById,
-        findUsersByIds: findUsersByIds
+        findUsersByIds: findUsersByIds,
+        findAllUsers: findAllUsers
     };
     return api;
 
@@ -66,6 +41,7 @@ module.exports = function(){
         return null;
         user._id = "ID_" + (new Date()).getTime();
         mock.push(user);
+        console.log(user+"\t created",mock);
         return user;
     }
 
@@ -77,6 +53,10 @@ module.exports = function(){
             return mock[u];
         }
         return null;
+    }
+
+    function findAllUsers(){
+        return mock;
     }
 
 }

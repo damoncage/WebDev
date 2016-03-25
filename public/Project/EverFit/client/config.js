@@ -17,7 +17,9 @@
                 controllerAs: "cm"
             })
             .when("/register",{
-                templateUrl: "views/register/register.view.html"
+                templateUrl: "views/register/register.view.html",
+                controller:"registerController",
+                controllerAs:"model"
             })
             .when("/fitplans",{
                 templateUrl:"views/FitPlans/fitplans.view.html"

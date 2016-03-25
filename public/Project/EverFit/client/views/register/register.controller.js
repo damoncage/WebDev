@@ -4,7 +4,7 @@
 (function (){
     angular
         .module("EverFitApp")
-        .controller("registerController",registerController)
+        .controller("registerController",registerController);
 
     function registerController(UserService,$location){
         var vm = this;

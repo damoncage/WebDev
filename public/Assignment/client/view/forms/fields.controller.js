@@ -38,21 +38,21 @@
             FM.modifyField = modifyField;
             FM.sortupdate = sortupdate;
 
-            /*FM.sortableOptions = {
-                handle: '> .myHandle',
+            FM.sortableOptions = {
                 update: function (e, ui) {
                     var logEntry = FM.fields.map(function (i) {
                         return i.value;
                     }).join(', ');
-                    $scope.sortingLog.push('Update: ' + logEntry);
                 },
+                axis:'y',
                 stop: function (e, ui) {
+    //                sortupdate(FM.field);
                     // this callback has the changed model
                     var logEntry = FM.fields.map(function (i) {
                         return i.value;
                     }).join(', ');
                 }
-            };*/
+            };
 
             FieldService
                 .getFieldsForForm(formId)

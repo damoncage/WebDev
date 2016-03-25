@@ -1,8 +1,9 @@
 /**
  * Created by cage on 3/8/16.
  */
+var FitPlans = require("./fitplan.mock.json")
 module.exports = function(){
-    var FitPlans = [
+    /*var FitPlans = [
         {
             _id: "123",
             planName: "Beginner's Bodybuilding",
@@ -19,7 +20,7 @@ module.exports = function(){
             "thoughts on motivation, and more. This is your map to success. " +
             "Learn from the best bodybuilder of all time and build your own legacy."
         }
-    ]
+    ]*/
 
     var api = {
         findPlanByID: findPlanByID,

@@ -6,7 +6,15 @@
         .module("EverFitApp")
         .controller("loginController",loginController)
 
-    function loginController(UserService, $location, $scope){
+    function loginController(UserService, $location){
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                console.log('Logged in.');
+            }
+            else {
+                FB.login();
+            }
+        });
         var um = this;
         um.login = login;
         um.message = null;
@@ -31,6 +39,9 @@
                   if(response.data){
                       UserService.setCurrentUser(response.data);
                       $location.url("/profile");
+                  }
+                    else{
+                      um.message = "Invalid UserName or PassWord!";
                   }
                 });
         }

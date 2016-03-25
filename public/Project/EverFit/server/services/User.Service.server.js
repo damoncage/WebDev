@@ -7,6 +7,7 @@ module.exports = function(app, planModel, userModel){
     app.post("/api/project/EverFit/logout", logout);
     app.post("/api/project/EverFit/register", register);
     app.get("/api/project/EverFit/profile/:userId", profile);
+    app.get("/admin/project/EverFit/Users",adminFindAll);
 
     function login(req,res){
         console.log("login server service " + req.body);
@@ -28,6 +29,7 @@ module.exports = function(app, planModel, userModel){
 
     function register(req,res){
         var user = req.body;
+        console.log("user \n",user);
         user = userModel.createUser(user);
         req.session.currentUser = user;
         res.json(user);
@@ -37,6 +39,10 @@ module.exports = function(app, planModel, userModel){
         var userId = req.params.userId;
         var user = userModel.findUserById(userId);
         res.json(user);
+    }
+
+    function adminFindAll(req,res){
+        res.json(userModel.findAllUsers());
     }
 
 }
