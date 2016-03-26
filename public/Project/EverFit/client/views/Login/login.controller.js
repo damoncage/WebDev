@@ -7,15 +7,7 @@
         .controller("loginController",loginController)
 
     function loginController(UserService, $location){
-        FB.getLoginStatus(function(response) {
-            if (response.status === 'connected') {
-                console.log('Logged in.');
-            }
-            else {
-                FB.login();
-            }
-        });
-        var um = this;
+                var um = this;
         um.login = login;
         um.message = null;
 
@@ -38,6 +30,14 @@
             })
                 .then(function(response){
                   if(response.data){
+                     /* FB.getLoginStatus(function(response) {
+                          if (response.status === 'connected') {
+                              console.log('Logged in.');
+                          }
+                          else {
+                              FB.login();
+                          }
+                      });*/
                       UserService.setCurrentUser(response.data);
                       $location.url("/profile");
                   }

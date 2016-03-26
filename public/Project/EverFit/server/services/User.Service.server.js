@@ -13,7 +13,7 @@ module.exports = function(app, planModel, userModel){
         console.log("login server service " + req.body);
         var credentials = req.body;
         var user = userModel.findUserByCredentials(credentials);
-        console.log("server side"+user.username);
+//        console.log("server side"+user.username);
         req.session.currentUser = user;
         res.json(user);
     }
