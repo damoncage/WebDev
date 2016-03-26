@@ -9,7 +9,9 @@ module.exports = function(app){
         createUser: createUser,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
-        findAllUsers: findAllUsers
+        findAllUsers: findAllUsers,
+        updateUser: updateUser,
+        deleteUser: deleteUser
     };
     return api;
 
@@ -57,6 +59,27 @@ module.exports = function(app){
 
     function findAllUsers(){
         return mock;
+    }
+
+    function updateUser(userId,update){
+        console.log("model",userId,update);
+        for (var i in mock) {
+            if (mock[i]._id == userId) {
+                mock[i] = update;
+                return mock[i];
+            }
+        }
+        return null;
+    }
+
+    function deleteUser(userId){
+        for(var u in mock){
+            if(userId == mock[u]._id)
+            {
+                var index = mock.indexOf(mock[u]);
+                mock.splice(index, 1);
+            }
+        }
     }
 
 }

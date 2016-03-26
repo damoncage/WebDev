@@ -42,9 +42,10 @@
 
         function init(){
             console.log("login");
-            if(um.currentUser)
-            console.log(um.currentUser);
+            if(um.currentUser){
+                console.log(um.currentUser);
                 $location.url("/profile");
+            }
         }
         init();
 

@@ -8,6 +8,8 @@ module.exports = function(app, planModel, userModel){
     app.post("/api/project/EverFit/register", register);
     app.post("/api/project/EverFit/profile", getUserProfile);
     app.get("/admin/project/EverFit/Users",adminFindAll);
+    app.put("/api/project/EverFit/profile/:userId", updateUser);
+    app.delete("/api/project/EverFit/profile/:userId", deleteUser);
 
     function login(req,res){
         console.log("login server service " + req.body);
@@ -47,4 +49,18 @@ module.exports = function(app, planModel, userModel){
         res.json(userModel.findAllUsers());
     }
 
+    function updateUser(req,res){
+        var userid = req.params.userId;
+        var user = req.body;
+        user = userModel.updateUser(userid,user);
+        console.log("server send",user);
+        res.json(user);
+
+    }
+
+    function deleteUser(req,res){
+        var userId = req.params.userId;
+        userModel.deleteUser(userId);
+        res.send(200);
+    }
 }

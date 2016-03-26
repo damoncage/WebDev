@@ -10,6 +10,8 @@
         $routeProvider
             .when("/home", {
                 templateUrl: "views/home/home.view.html",
+                controller: "homeController",
+                controllerAs:"model",
                 resolve:{
                     getLoggedIn:getLoggedIn
                 }
@@ -24,8 +26,10 @@
                 controller:"registerController",
                 controllerAs:"model"
             })
-            .when("/fitplans",{
+            .when("/fitplans/:PlanName",{
                 templateUrl:"views/FitPlans/fitplans.view.html",
+                controller:"fitPlanController",
+                controllerAs:"model",
                 resolve:{
                     getLoggedIn:getLoggedIn
                 }
@@ -34,6 +38,14 @@
                 templateUrl:"views/location/location.view.html",
                 controller:"locationController",
                 controllerAs:"mm",
+                resolve:{
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
+
+            .when("/profile",{
+                templateUrl:"views/profile/profile.view.html",
+                controller:"ProfileController",
                 resolve:{
                     checkLoggedIn: checkLoggedIn
                 }

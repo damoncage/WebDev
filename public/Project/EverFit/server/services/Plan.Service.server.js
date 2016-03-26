@@ -3,6 +3,9 @@
  */
 module.exports = function(app, planModel, userModel){
     app.post("/api/project/user/plan",userLikesPlan);
+    app.post("/api/project/plans",findPlanByIds);
+    app.get("/api/project/plan/detail/:planId", findPlanById);
+    app.get("/api/project/plan/:planName",findPlanByName);
 
     function userLikesPlan(req, res){
         var planId = req.body.planId;
@@ -20,5 +23,23 @@ module.exports = function(app, planModel, userModel){
         console.log(user);
         console.log(movie);
         res.send(200);
+    }
+
+    function findPlanById(req,res){
+        var planId = req.params.planId;
+        var plan = planModel.findPlanByID(planId);
+        res.json = plan;
+    }
+
+    function findPlanByIds(req,res){
+        var planIds = req.body;
+        var plans = planModel.findPlanByIds(planIds);
+        res.json(plans);
+    }
+
+    function findPlanByName(req,res){
+        var planName = req.params.planName;
+        var plans = planModel.findPlanByName(planName);
+        res.json(plans);
     }
 }

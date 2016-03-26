@@ -12,7 +12,9 @@
             getCurrentUser: getCurrentUser,
             register: register,
             logout: logout,
-            getUserProfile: getUserProfile
+            getUserProfile: getUserProfile,
+            updateUser:updateUser,
+            deleteUserById: deleteUserById
         };
         return api;
 
@@ -41,6 +43,15 @@
         function login(user){
         //    console.log("login client service " + user.username + user.password);
             return $http.post("/api/project/EverFit/login", user);
+        }
+
+        function updateUser(userId,user){
+            console.log("update"+user);
+            return $http.put("/api/project/EverFit/profile/"+userId, user);
+        }
+
+        function deleteUserById(id){
+            return $http.delete("/api/assignment/user/"+id);
         }
     }
 })();

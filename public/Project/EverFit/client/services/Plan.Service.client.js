@@ -4,12 +4,26 @@
 (function (){
     angular
         .module("EverFitApp")
-        .factory("planService",planService);
+        .factory("PlanService",PlanService);
 
-    function planService($http){
+    function PlanService($http){
         var api = {
-            findAllPlans:findAllPlans,
-            findPlanById:findPlanById
+            findPlanByIds:findPlanByIds,
+            findPlanById:findPlanById,
+            findPlanByName:findPlanByName,
+        }
+        return api;
+
+        function findPlanByIds(PlanIDs){
+            return $http.post("/api/project/plans",PlanIDs);
+        }
+
+        function findPlanById(planId){
+            return $http.get("/api/project/plan/detail/" + planId);
+        }
+
+        function findPlanByName(planName){
+            return $http.get("/api/project/plan/"+planName);
         }
     }
-});
+})();

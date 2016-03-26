@@ -19,7 +19,25 @@
         Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. P
         ellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.
     </p>
-    <a ng-if="!currentUser" href="#login" class="btn btn-primary btn-block col-sm-5">Login</a>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div id="imaginary_container">
+                <div class="input-group stylish-input-group">
+                    <input type="text" ng-model="model.plan.name" class="form-control"  placeholder="Search Plans" >
+                    <span class="input-group-addon">
+                        <button ng-click="model.searchPlanByName(model.plan.name)" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <a ng-if="!currentUser" href="#login" class="btn btn-primary btn-block">Login</a>
+        </div>
+    </div>
 </div>
 
 </body>

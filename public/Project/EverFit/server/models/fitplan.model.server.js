@@ -3,28 +3,10 @@
  */
 var FitPlans = require("./fitplan.mock.json")
 module.exports = function(){
-    /*var FitPlans = [
-        {
-            _id: "123",
-            planName: "Beginner's Bodybuilding",
-            Trainer: "Jeff Seid",
-            Description:"DUMBBELL BENCH PRESS \n LAT PULLDOWN \n OVERHEAD DUMBBELL PRESS \n LEG PRESS \n LYING LEG CURL"
-        },
-        {
-            _id: "233",
-            planName: "Arnold Schwarzenegger's blueprint",
-            Trainer: "Jhon Reese",
-            Description:"There's a legend behind every legacy. " +
-            "There's a blueprint behind every legend. This is Arnold Schwarzenegger's " +
-            "blueprint—his workout program, nutrition plan, training philosophy, history, knowledge, " +
-            "thoughts on motivation, and more. This is your map to success. " +
-            "Learn from the best bodybuilder of all time and build your own legacy."
-        }
-    ]*/
-
     var api = {
         findPlanByID: findPlanByID,
         findPlanByIds: findPlanByIds,
+        findPlanByName:findPlanByName,
         createPlan: createPlan
     };
     return api;
@@ -39,17 +21,20 @@ module.exports = function(){
 
         function findPlanByIds(planIds){
             var plans = [];
+            if (!planIds){
+                return FitPlans;
+            }
             for(var p in planIds)
             {
-                plans = findPlanByID(planIds[p]);
-                if(plans){
-                    plans.push(
-                        {
+                var plan = findPlanByID(planIds[p]);
+                if(plan){
+                    plans.push(plan);
+                        /*{
                             _id: plans._id,
                             planName: plans.planName,
                             Trainer: plans.Trainer,
                             Description: plans.Description
-                        });
+                        }*/
                 }
             }
             return plans;
@@ -65,4 +50,14 @@ module.exports = function(){
                 FitPlans.push(plan);
                 return plan;
             }
+
+    function findPlanByName(planName){
+        var plans = [];
+        for(var u in FitPlans){
+            if(FitPlans[u].planName.indexOf(planName) > -1){
+                plans.push(FitPlans[u]);
+            }
+        }
+        return plans;
+    }
 }
