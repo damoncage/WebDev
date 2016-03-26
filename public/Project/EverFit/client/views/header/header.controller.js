@@ -7,13 +7,22 @@
         .controller("HeaderController", HeaderController);
 
     function HeaderController($location, $scope, UserService){
-        console.log("headeruser \n" + $scope.currentUser);
-        /*$scope.currentUser = UserService.getCurrentUser();*/
+        function init(){
+            UserService.getCurrentUser()
+                .then(function(response) {
+                    UserService.setCurrentUser(response.data);
+                });
+        }    init();
+    //    console.log("headeruser \n" + $scope.currentUser);
         $scope.logout = logout;
 
         function logout(){
-            UserService.setCurrentUser(null);
-            $location.url("/home");
+            UserService.logout()
+            .then(function(response){
+                console.log("logout");
+                UserService.setCurrentUser(null);
+                $location.url("/home");
+            });
         }
     }
 })();

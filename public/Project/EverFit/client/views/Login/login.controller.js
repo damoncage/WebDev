@@ -26,9 +26,10 @@
         init();
 
         function login(user){
-            console.log(user.username,user.password);
+           // console.log(user.username,user.password);
             if(!user || !user.username || !user.password){
-                um.message = "Invalid Username / Password!";
+                um.message = "Input your Username & Password!";
+                return;
             }
             UserService
                 .login({

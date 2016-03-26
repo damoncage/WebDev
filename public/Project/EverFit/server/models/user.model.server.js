@@ -46,11 +46,11 @@ module.exports = function(app){
     }
 
     function findUserByCredentials(credentials){
-        console.log("findUser");
         for(var u in mock){
-            if(mock [u].username === credentials.username
-            && mock[u].password === credentials.password)
+            if(mock [u].username == credentials.username
+            && mock[u].password == credentials.password){
             return mock[u];
+           console.log("model finds \t",mock[u].username);}
         }
         return null;
     }

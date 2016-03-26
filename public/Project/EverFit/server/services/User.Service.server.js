@@ -6,13 +6,14 @@ module.exports = function(app, planModel, userModel){
     app.get("/api/project/EverFit/loggedin", loggedin);
     app.post("/api/project/EverFit/logout", logout);
     app.post("/api/project/EverFit/register", register);
-    app.get("/api/project/EverFit/profile/:userId", profile);
+    app.post("/api/project/EverFit/profile", getUserProfile);
     app.get("/admin/project/EverFit/Users",adminFindAll);
 
     function login(req,res){
         console.log("login server service " + req.body);
         var credentials = req.body;
         var user = userModel.findUserByCredentials(credentials);
+        console.log("server side"+user.username);
         req.session.currentUser = user;
         res.json(user);
     }
@@ -35,10 +36,11 @@ module.exports = function(app, planModel, userModel){
         res.json(user);
     }
 
-    function profile(req,res){
-        var userId = req.params.userId;
-        var user = userModel.findUserById(userId);
-        res.json(user);
+    function getUserProfile(req,res){
+        var user = req.body;
+        var result = userModel.findUserByCredentials(user);
+        console.log("server side"+ user.username,req.body.username);
+        res.json(result);
     }
 
     function adminFindAll(req,res){

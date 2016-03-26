@@ -12,12 +12,12 @@
             getCurrentUser: getCurrentUser,
             register: register,
             logout: logout,
-            getProfile: getProfile
+            getUserProfile: getUserProfile
         };
         return api;
 
-        function getProfile(){
-            return $http.get("/api/project/EverFit/profile/" + $rootScope.currentUser._id);
+        function getUserProfile(user){
+            return $http.post("/api/project/EverFit/profile",user);
         }
 
         function register(user){
@@ -25,7 +25,7 @@
         }
 
         function logout(){
-            console.log("userservice");
+       //     console.log("userservice");
             return $http.post("/api/project/EverFit/logout");
         }
 
@@ -35,10 +35,11 @@
 
         function setCurrentUser(user){
             $rootScope.currentUser = user;
+
         }
 
         function login(user){
-            console.log("login client service " + user.username + user.password);
+        //    console.log("login client service " + user.username + user.password);
             return $http.post("/api/project/EverFit/login", user);
         }
     }

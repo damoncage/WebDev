@@ -31,7 +31,12 @@
                placeholder="verify password"
                class="form-control"/></div>
     </div>
+    <div class="form-group ">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button ng-click="model.register(model.user)" type="submit" class="btn btn-block btn-primary">Register</button>
+        </div>
+    </div>
 </form>
-<button ng-click="model.register(model.user)" class="col-sm-offset-2 col-sm-10 btn btn-primary">Register</button>
+<div ng-show="model.message" class="col-sm-offset-2  text-center alert alert-danger" role="alert">{{model.message}}</div>
 </body>
 </html>
