@@ -8,6 +8,9 @@
 
     function fitPlanController($location,$routeParams,PlanService,UserService){
         var planName = $routeParams.PlanName;
+        if(!planName)
+        planName = -1;
+        console.log("well"+planName);
         PlanService
             .findPlanByName(planName)
             .then(function(response){

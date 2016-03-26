@@ -52,7 +52,11 @@ module.exports = function(){
             }
 
     function findPlanByName(planName){
+        console.log("findname",planName);
         var plans = [];
+        if(planName == -1){
+            console.log("return all")
+            return FitPlans;}
         for(var u in FitPlans){
             if(FitPlans[u].planName.indexOf(planName) > -1){
                 plans.push(FitPlans[u]);

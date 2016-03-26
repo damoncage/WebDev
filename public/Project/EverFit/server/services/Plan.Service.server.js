@@ -39,6 +39,7 @@ module.exports = function(app, planModel, userModel){
 
     function findPlanByName(req,res){
         var planName = req.params.planName;
+        console.log(planName);
         var plans = planModel.findPlanByName(planName);
         res.json(plans);
     }

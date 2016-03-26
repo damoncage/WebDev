@@ -26,6 +26,14 @@
                 controller:"registerController",
                 controllerAs:"model"
             })
+            .when("/fitplans",{
+                templateUrl:"views/FitPlans/fitplans.view.html",
+                controller:"fitPlanController",
+                controllerAs:"model",
+                resolve:{
+                    getLoggedIn:getLoggedIn
+                }
+            })
             .when("/fitplans/:PlanName",{
                 templateUrl:"views/FitPlans/fitplans.view.html",
                 controller:"fitPlanController",
