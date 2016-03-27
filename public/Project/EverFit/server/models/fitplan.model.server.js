@@ -7,14 +7,17 @@ module.exports = function(){
         findPlanByID: findPlanByID,
         findPlanByIds: findPlanByIds,
         findPlanByName:findPlanByName,
-        createPlan: createPlan
+        createPlan: createPlan,
+        userLikesPlan:userLikesPlan
     };
     return api;
 
         function findPlanByID(planID){
             for (var p in FitPlans){
-                if(FitPlans[p]._id == planID)
-                return FitPlans[p];
+                if(FitPlans[p]._id == planID){
+                    console.log(FitPlans[p]);
+                    return FitPlans[p];
+                }
             }
         return null;
         }
@@ -55,7 +58,7 @@ module.exports = function(){
         console.log("findname",planName);
         var plans = [];
         if(planName == -1){
-            console.log("return all")
+//            console.log("return all")
             return FitPlans;}
         for(var u in FitPlans){
             if(FitPlans[u].planName.indexOf(planName) > -1){
@@ -64,4 +67,30 @@ module.exports = function(){
         }
         return plans;
     }
+
+    function userLikesPlan(user,planId){
+        var FitPlan = findPlanByID(planId);
+        if(!FitPlan || !user)
+           return error;
+        if(!FitPlan.like){
+            FitPlan.like = [];
+        }
+        for(var u in FitPlan.like){
+            if (FitPlan.like[u] == user._id)
+                return ;
+        }
+        FitPlan.like.push(user._id);
+        if(!user.like){
+            user.like = [];
+        }
+        for(var u in user.like){
+            if (user.like[u] == planId)
+            return ;
+        }
+        user.like.push(planId);
+        console.log(user);
+        console.log(FitPlan,"\n plan");
+        return user;
+    }
+
 }

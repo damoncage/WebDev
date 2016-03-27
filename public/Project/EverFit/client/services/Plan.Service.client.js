@@ -11,6 +11,7 @@
             findPlanByIds:findPlanByIds,
             findPlanById:findPlanById,
             findPlanByName:findPlanByName,
+            userLikesPlan:userLikesPlan
         }
         return api;
 
@@ -24,6 +25,11 @@
 
         function findPlanByName(planName){
             return $http.get("/api/project/plan/"+planName);
+        }
+
+        function userLikesPlan(user,planId){
+    //        console.log("service",user,planId);
+            return $http.post("/api/project/user/plan/"+planId, user);
         }
     }
 })();

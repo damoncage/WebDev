@@ -50,10 +50,12 @@ module.exports = function(app, planModel, userModel){
     }
 
     function updateUser(req,res){
+//        console.log("server send");
         var userid = req.params.userId;
         var user = req.body;
         user = userModel.updateUser(userid,user);
-        console.log("server send",user);
+        req.session.currentUser = user;
+        console.log(user);
         res.json(user);
 
     }

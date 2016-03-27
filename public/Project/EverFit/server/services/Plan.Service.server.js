@@ -2,33 +2,27 @@
  * Created by cage on 3/8/16.
  */
 module.exports = function(app, planModel, userModel){
-    app.post("/api/project/user/plan",userLikesPlan);
     app.post("/api/project/plans",findPlanByIds);
-    app.get("/api/project/plan/detail/:planId", findPlanById);
+    app.get("/api/project/plan/detail/:planId",findPlanById);
     app.get("/api/project/plan/:planName",findPlanByName);
+    app.post("/api/project/user/plan/:planId",userLikesPlan);
 
-    function userLikesPlan(req, res){
-        var planId = req.body.planId;
-        var userId = req.body.userId;
-        var FitPlan = planModel.findPlanById(planId);
-        if(!FitPlan.like){
-            FitPlan.like = [];
-        }
-        FitPlan.like.push(userId);
-        var user = userModel.findUserById(userId);
-        if(!user.like){
-            user.like = [];
-        }
-        user.like.push(planId);
+    function userLikesPlan(req,res){
+        var planId = req.params.planId;
+        var user = req.body;
+        user = planModel.userLikesPlan(user,planId);
         console.log(user);
-        console.log(movie);
-        res.send(200);
+        if(user)
+        userModel.updateUser(user._id,user);
+        req.session.currentUser = user;
+        res.send(user);
     }
 
     function findPlanById(req,res){
         var planId = req.params.planId;
+        console.log(planId);
         var plan = planModel.findPlanByID(planId);
-        res.json = plan;
+        res.json(plan);
     }
 
     function findPlanByIds(req,res){
@@ -39,7 +33,7 @@ module.exports = function(app, planModel, userModel){
 
     function findPlanByName(req,res){
         var planName = req.params.planName;
-        console.log(planName);
+ //       console.log(planName);
         var plans = planModel.findPlanByName(planName);
         res.json(plans);
     }
