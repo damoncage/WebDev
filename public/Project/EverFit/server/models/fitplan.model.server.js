@@ -69,6 +69,7 @@ module.exports = function(){
     }
 
     function userLikesPlan(user,planId){
+        var tmp = null;
         var FitPlan = findPlanByID(planId);
         if(!FitPlan || !user)
            return error;
@@ -76,19 +77,30 @@ module.exports = function(){
             FitPlan.like = [];
         }
         for(var u in FitPlan.like){
-            if (FitPlan.like[u] == user._id)
-                return ;
+            if (FitPlan.like[u] == user._id){
+            console.log("delete ",u,user._id);
+                 tmp = u;}
         }
-        FitPlan.like.push(user._id);
+        if(!tmp){
+            FitPlan.like.push(user._id);
+        }else{
+            FitPlan.like.splice(tmp,1);
+        }
+        tmp = null;
         if(!user.like){
             user.like = [];
         }
         for(var u in user.like){
-            if (user.like[u] == planId)
-            return ;
+            if (user.like[u] == planId){
+                tmp = u;
+            }
         }
-        user.like.push(planId);
-        console.log(user);
+        if(tmp){
+            user.like.splice(tmp,1);
+        }else {
+            user.like.push(planId);
+        }
+        console.log("Returns: ",user);
         console.log(FitPlan,"\n plan");
         return user;
     }

@@ -17,7 +17,7 @@
                     <tr ng-repeat = "plan in model.plans">
                         <td><a href="#/fitplans/details/{{plan._id}}">{{plan.planName}}</a></td>
                         <td><a href="#/profile/{{plan.Trainer._id}}">{{plan.Trainer}}</a></td>
-                        <td><a href="" ng-click="model.userLikesPlan(plan._id)" class="btn btn-sm btn-warning {'active': model.user.plan.indexOf(plan._id)} ">
+                        <td><a href="" ng-click="model.userLikesPlan(plan._id)" class="btn btn-sm btn-warning" ng-class= "{'active': model.user.like.indexOf(plan._id) > -1}">
                             <span class="glyphicon glyphicon-star"></span> Favorite</a></a> </td>
                     </tr>
                 </tbody>
