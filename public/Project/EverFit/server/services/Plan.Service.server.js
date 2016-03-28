@@ -12,9 +12,9 @@ module.exports = function(app, planModel, userModel){
         var user = req.body;
         user = planModel.userLikesPlan(user,planId);
         console.log(user);
-        if(user)
+        if(user){
         userModel.updateUser(user._id,user);
-        req.session.currentUser = user;
+        req.session.currentUser = user;}
         res.send(user);
     }
 
