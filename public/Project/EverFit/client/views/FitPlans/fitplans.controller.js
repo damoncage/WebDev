@@ -25,8 +25,7 @@
                     console.log(response.data);
                     fm.plans = response.data;
                 });
-            init();
-        }
+        } init();
 
      function userLikesPlan(planId){
   //       console.log("plan",fm.user,planId);
