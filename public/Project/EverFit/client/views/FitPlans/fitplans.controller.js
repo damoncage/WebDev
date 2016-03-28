@@ -24,8 +24,8 @@
                 .then(function(response){
                     console.log(response.data);
                     fm.plans = response.data;
-                    init();
                 });
+            init();
         }
 
      function userLikesPlan(planId){
@@ -38,8 +38,9 @@
              .userLikesPlan(fm.user,planId)
              .then(function(response){
                 console.log("Favorite\n",response.data);
+                 init();
              });
-         init();
+
      }
     }
 })();
