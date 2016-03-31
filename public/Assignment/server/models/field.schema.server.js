@@ -1,7 +1,8 @@
 /**
  * Created by cage on 3/31/16.
  */
-var mongoose = require('mongoose');
+/*var mongoose = require('mongoose');
+var Schema = mongoose.Schema;*/
 module.exports = function(mongoose){
     var FieldSchema = mongoose.Schema({
         label: String,

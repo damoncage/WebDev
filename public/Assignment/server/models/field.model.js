@@ -7,12 +7,12 @@ module.exports = function(db,mongoose){
     var fieldSchema = require("./field.schema.server.js")(mongoose);
     var fieldModel = mongoose.model('field',fieldSchema);
     var api = {
-        findFormFields:findFormFields,
+/*        findFormFields:findFormFields,
         findOneFormFields:findOneFormFields,
         deleteFormFieldById:deleteFormFieldById,
         createField:createField,
         updateFormFieldById:updateFormFieldById,
-        sortFormFields:sortFormFields
+        sortFormFields:sortFormFields*/
     }
     return api;
 };
