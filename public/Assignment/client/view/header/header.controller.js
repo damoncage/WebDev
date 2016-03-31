@@ -10,7 +10,7 @@
         console.log("headeruser \n" + $scope.currentUser);
         /*$scope.currentUser = UserService.getCurrentUser();*/
         $scope.logout = logout;
-
+        $scope.navbarCollapsed = true;
         function logout(){
             UserService.setCurrentUser(null);
             $location.url("/home");

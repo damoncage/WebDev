@@ -29,9 +29,14 @@ module.exports = function(app,userModel){
         console.log("register server invoked");
         var user = req.body;
         console.log(req.body);
-        user = userModel.createUser(user);
-        req.session.currentUser = user;
-        res.json(user);
+        userModel.createUser(user)
+            .then(function(doc){
+                req.session.currentUser = doc;
+                res.json(doc);
+            },
+            function(err){
+               res.status(400).send(err);
+            });
     }
 
 

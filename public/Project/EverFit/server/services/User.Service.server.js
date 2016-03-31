@@ -31,11 +31,19 @@ module.exports = function(app, planModel, userModel){
     }
 
     function register(req,res){
+        console.log("register server service");
         var user = req.body;
-        console.log("user \n",user);
-        user = userModel.createUser(user);
-        req.session.currentUser = user;
-        res.json(user);
+        userModel.createUser(user)
+            .then(function(response){
+            req.session.currentUser = response;
+                    console.log("user \n",response);
+                res.json(user);
+        },
+            function(err){
+                res.status(400).send(err);
+            });
+  /*      req.session.currentUser = user;
+        res.json(user);*/
     }
 
     function getUserProfile(req,res){

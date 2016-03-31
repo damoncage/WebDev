@@ -2,8 +2,13 @@
  * Created by cage on 3/17/16.
  */
 var mock = require("./user.mock.json");
+var q = require("q");
+module.exports = function(db,mongoose){
 
-module.exports = function(app){
+    var UserSchema = require("./user.schema.server.js")(mongoose);
+    var UserModel = mongoose.model('FormUser',UserSchema);
+
+
     var api = {
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
@@ -36,9 +41,18 @@ module.exports = function(app){
     }
 
     function createUser(user){
-        user._id = "ID_" + (new Date()).getTime();
+        var deferred = q.defer();
+        UserModel.create(user,function(err,doc){
+            if(err){
+                deferred.reject(err);
+            }else{
+                deferred.resolve(doc);
+            }
+        });
+        return deferred.promise;
+       /* user._id = "ID_" + (new Date()).getTime();
         mock.push(user);
-        return user;
+        return user;*/
     }
 
     function findAllUser(){
