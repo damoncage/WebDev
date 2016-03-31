@@ -3,7 +3,11 @@
  */
 var mock = require("./form.mock.json");
 var uuid = require("node-uuid");
+var q = require('q');
 module.exports = function(db,mongoose){
+    var formSchema = require("./form.schema.server.js")(mongoose);
+    var FormModel = mongoose.model('Form',formSchema);
+
     var api = {
         findFormByTitle: findFormByTitle,
         findFormByUserId: findFormByUserId,
@@ -16,29 +20,15 @@ module.exports = function(db,mongoose){
     return api;
 
     function findFormByTitle(title){
-        for(var i in mock){
-            if(mock[i].title == title){
-                return mock[i];
-            }
-        }
-        return null;
+        return FormModel.find({title:title});
     }
 
     function findFormByUserId(userId){
-        var form = [];
-        for(var i in mock){
-            if(mock[i].userId == userId){
-                form.push(mock[i]);
-            }
-        }
-        console.log(form);
-        return form;
+        return FormModel.find({userId:userId});
     }
 
     function createForm(form){
-        form._id = uuid.v4();
-        mock.push(form);
-        return form;
+        return FormModel.create(form);
     }
 
     function findAllForms(){

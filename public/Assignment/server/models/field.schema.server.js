@@ -1,13 +1,14 @@
 /**
- * Created by cage on 3/30/16.
+ * Created by cage on 3/31/16.
  */
-
+var mongoose = require('mongoose');
 module.exports = function(mongoose){
-    var FieldSchema = mongoose.schema({
-       label: String,
-        type: String,
+    var FieldSchema = mongoose.Schema({
+        label: String,
+        type: {type:String,enum:["TEXT","TEXTAREA","EMAIL","PASSWORD","OPTIONS","DATE","RADIOS","CHECKBOXES"]},
         placeholder: String,
         options: [{label:String,value:String}]
-    },{collection:"Assignment.field"});
-return FieldSchema;
-};
+        },{collection:"Assignment.field"}
+    );
+    return FieldSchema;
+}

@@ -11,7 +11,12 @@ module.exports = function(app, userModel, formModel){
     function findFormByUserId(req,res){
         var userId = req.params.userId;
         console.log(userId);
-        res.send(formModel.findFormByUserId(userId));
+        formModel.findFormByUserId(userId)
+            .then(function(err){
+                res.status(400).send(err);
+            },function(doc){
+               res.send(doc);
+            });
     }
 
     function findFormById(req,res){

@@ -12,6 +12,8 @@
         var tempform = [
             {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"},
             {"_id": null, "label": "New Text Field", "type": "TEXTAREA", "placeholder": "New Field"},
+            {"_id": null, "label": "New Email Field","type": "EMAIL", "placeholder":"emails"},
+            {"_id": null, "label": "New Password Field","type": "PASSWORD", "placeholder":"password"},
             {"_id": null, "label": "New Date Field", "type": "DATE"},
             {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [
                 {"label": "Option 1", "value": "OPTION_1"},

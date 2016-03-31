@@ -2,7 +2,6 @@
  * Created by cage on 3/17/16.
  */
 var uuid = require("node-uuid");
-
 module.exports = function(app,formModel){
     app.get("/api/assignment/form/:formId/field", findFormFields);
     app.get("/api/assignment/form/:formId/field/:fieldId", findOneFormFields);

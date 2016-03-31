@@ -6,14 +6,22 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($location, $scope, UserService){
-        console.log("headeruser \n" + $scope.currentUser);
-        /*$scope.currentUser = UserService.getCurrentUser();*/
+    function HeaderController($location,$scope, $rootScope, UserService){
+        UserService
+            .getCurrentUser()
+            .then(function(response){
+                var currentUser = response.data;
+                UserService.setCurrentUser(currentUser);
+            });
+        console.log("headeruser \n" + $rootScope.currentUser);
         $scope.logout = logout;
-        $scope.navbarCollapsed = true;
         function logout(){
-            UserService.setCurrentUser(null);
-            $location.url("/home");
+            UserService.logout()
+                .then(function(response){
+                    if(response.data){
+                    UserService.setCurrentUser(null);
+                    $location.url("/home");}
+                })
         }
     }
 })();

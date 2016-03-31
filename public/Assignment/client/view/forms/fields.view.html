@@ -15,12 +15,17 @@
         <div ng-switch-when="EMAIL" class="col-sm-6">
             <input type="text" id="{{field._id}}" placeholder="{{field.placeholder}}" class="form-control">
         </div>
+
         <div class="col-sm-6" ng-switch-when="OPTIONS" id="{{field._id}}">
             <div class="dropdown">
                 <select class="form-control">
                     <option class="col-sm-6" ng-repeat="option in field.options" value="{{option.value}}">{{option.label}}</option>
                 </select>
                 </div>
+        </div>
+
+        <div ng-switch-when="PASSWORD" class="col-sm-6">
+            <input type="password" id="{{field._id}}" placeholder="{{field.placeholder}}" class="form-control">
         </div>
 
         <div class="col-sm-6" ng-switch-when="TEXTAREA" id="{{field._id}}">
@@ -34,6 +39,7 @@
                 <input type="date" class="form-control"/>
             </div>
         </div>
+
         <div class="col-sm-6" ng-switch-when="CHECKBOXES">
             <div class="form-group" ng-repeat="option in field.options">
                 <div>
@@ -51,6 +57,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-sm-5 col-sm-push-1">
             <a herf="" ng-click="FM.modifyField(field)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
             <a herf="" ng-click="FM.removeField(field)" class="btn btn-danger glyphicon glyphicon-remove"></a>
@@ -69,6 +76,8 @@
             <select class="form-control" ng-model="FM.fieldType" name="Type" id="newField" type="text">
                 <option value="TEXT" >Single Line Text</option>
                 <option value="TEXTAREA">Multi Line Text</option>
+                <option value="EMAIL">Email</option>
+                <option value="PASSWORD">Password</option>
                 <option value="DATE">Date</option>
                 <option value="OPTIONS" >Dropdown</option>
                 <option value="CHECKBOXES" >CheckBoxes</option>

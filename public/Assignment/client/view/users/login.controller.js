@@ -9,6 +9,7 @@
     function LoginController(UserService,$scope,$location){
         $scope.message = null;
         $scope.login = login;
+
         function login(user){
             $scope.message = null;
             if(!user || !user.username|| !user.password){
@@ -20,7 +21,6 @@
                 .then(function(response){
                     if(response.data){
                         UserService.setCurrentUser(response.data);
-                        console.log(response);
                         $location.url("/home");}
                     $scope.message = "Invalid Username or Password!";
                 });

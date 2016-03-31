@@ -2,6 +2,7 @@
  * Created by cage on 3/8/16.
  */
 var FitPlans = require("./fitplan.mock.json")
+var q = require('q');
 module.exports = function(){
     var api = {
         findPlanByID: findPlanByID,
@@ -12,14 +13,9 @@ module.exports = function(){
     };
     return api;
 
+
         function findPlanByID(planID){
-            for (var p in FitPlans){
-                if(FitPlans[p]._id == planID){
-                    console.log(FitPlans[p]);
-                    return FitPlans[p];
-                }
-            }
-        return null;
+            return
         }
 
         function findPlanByIds(planIds){

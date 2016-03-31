@@ -17,7 +17,8 @@
             deleteUserById: deleteUserById,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+            logout:logout
         };
         return model;
 
@@ -28,8 +29,7 @@
         }
 
         function getCurrentUser(){
-            return $rootScope.currentUser;
-        //    return $http.get("/api/assignment/loggedin");
+            return $http.get("/api/assignment/loggedin");
         }
 
         function findUserByCredentials(user) {
@@ -70,5 +70,9 @@
                 }
                 return null;*/
             }
+
+        function logout(){
+            return $http.post("/api/assignment/logout");
+        }
         }
 })();
