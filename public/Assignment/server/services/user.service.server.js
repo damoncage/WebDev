@@ -85,26 +85,25 @@ module.exports = function(app,userModel){
 
     }
 
-    function findUserByCredential(req,res){
-        console.log("invoked");
-        var credentials = req.body;
-        console.log(credentials);
-        var user = userModel.findUserByCredentials(credentials);
-        res.json(user);
-    }
-
     function updateUser(req,res){
         var userid = req.params.id;
         var user = req.body;
+        console.log("New user received!",user);
         userModel.updateUser(userid,user)
             .then(function(doc){
-                user = doc;
-                console.log("server send",user);
-                res.json(user);
+                console.log("server send",doc);
+                return userModel.findUserById(userid);
             },function(err){
                 res.status(400).send(err);
+            })
+            .then(function(user,error){
+                if(user){
+                    console.log("updated"+user);
+                    req.session.currentUser = user;
+                    res.json(user);}
+                else
+                    res.status(400).send(error);
             });
-
     }
 
     function deleteUser(req,res){

@@ -24,43 +24,28 @@ module.exports = function(db,mongoose){
     }
 
     function findFormByUserId(userId){
+        console.log("findByUserId",userId);
         return FormModel.find({userId:userId});
     }
 
     function createForm(form){
+        console.log("createform",form);
         return FormModel.create(form);
     }
 
     function findAllForms(){
-        return mock;
+        return FormModel.find();
     }
 
     function findFormById(formId){
-        console.log("findFormById",formId);
-        for(var i in mock){
-            if(mock[i]._id == formId){
-                return mock[i];
-            }
-        }
-        return null;
+       return FormModel.findById(formId);
     }
 
     function updateForm(form,formId){
-        var oForm = findFormById(formId);
-        console.log("updateForm",form);
-        if (oForm){
-            oForm.title = form.title;
-            return oForm;
-        }
-        return null;
+        return FormModel.update({_id:formId},{$set:form});
     }
 
     function deleteForm(formId){
-        var form = findFormById(formId);
-        console.log("deleteform \n",form);
-        if(!form){return null;}
-        console.log("deleteform",form);
-        var index = mock.indexOf(form);
-        mock.splice(index, 1);
+        return FormModel.remove({_id:formId});
     }
 }

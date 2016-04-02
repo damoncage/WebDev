@@ -8,30 +8,34 @@
 
     function FormController(FormService,UserService,$scope,$location)
     {
-        var user = UserService.getCurrentUser();
-        console.log("form",user);
-
+        var user;
+        //controller initialization
         function init(){
-            //controller initialization
-            if(!user){
-                $location.url("/login");
-                return;
-            }
-            FormService
-                .findAllFormsForUser(user._id)
-                .then(function(response){
-                    if(response.data != null)
-                    {$scope.Forms = response.data;}
-                    else {$scope.Forms = [];}
-                    console.log($scope.Forms);
-                });
-            //event handler declaration
-            $scope.addForm = addForm;
-            $scope.updateForm = updateForm;
-            $scope.deleteForm = deleteForm;
-            $scope.selectForm = selectForm;
-        }
-        init();
+        UserService.getCurrentUser()
+            .then(function(response){
+                    user = response.data;
+                    console.log("form",user);
+                    if(!user){
+                        $location.url("/login");
+                        return;
+                    }
+                    FormService
+                        .findAllFormsForUser(user._id)
+                        .then(function(response){
+                            if(response.data != null)
+                            {$scope.Forms = response.data;}
+                            else {$scope.Forms = [];}
+                            console.log($scope.Forms);
+                        });
+                    //event handler declaration
+                    $scope.addForm = addForm;
+                    $scope.updateForm = updateForm;
+                    $scope.deleteForm = deleteForm;
+                    $scope.selectForm = selectForm;
+         },function(err){
+                console.log("Fail to retrive forms!");
+            });
+        }init();
 
         //event handler implementation
         function addForm(form) {

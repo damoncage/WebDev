@@ -22,7 +22,9 @@
                     if(response.data){
                         UserService.setCurrentUser(response.data);
                         $location.url("/home");}
+                    else{
                     $scope.message = "Invalid Username or Password!";
+                    }
                 });
         }
     }

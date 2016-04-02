@@ -6,14 +6,14 @@
         .module("FormBuilderApp")
         .controller("RegisterController",RegisterController);
 
-    function RegisterController($location,UserService, $rootScope){
+    function RegisterController($location,UserService, $rootScope) {
         var rm = this;
         rm.message = null;
         rm.register = register;
 
 
-        function register(user){
-            console.log(user,"register controller");
+        function register(user) {
+            console.log(user, "register controller");
             rm.message = null;
             if (user == null) {
                 rm.message = "Please fill in the required fields";
@@ -33,22 +33,21 @@
             }
             UserService
                 .findUserByCredentials(user)
-                .then(function(response){
+                .then(function (response) {
                     var checkuser = response.data;
                     if (checkuser) {
                         rm.message = "User already exists";
                         return;
-                    }else{
-                        UserService
-                            .createUser(user)
-                            .then(function(response){
-                                if(response.data != null){
-                                    UserService.setCurrentUser(response.data);
-                                    $location.url("/profile")
-                                }
-                            });
+                    } else {
+                        return UserService.createUser(user);
+                    }
+                })
+                .then(function (response) {
+                    if (response.data != null) {
+                        UserService.setCurrentUser(response.data);
+                        $location.url("/profile");
                     }
                 });
-             }
+        }
     }
 })();

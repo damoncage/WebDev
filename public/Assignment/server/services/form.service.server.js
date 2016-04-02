@@ -12,41 +12,57 @@ module.exports = function(app, userModel, formModel){
         var userId = req.params.userId;
         console.log(userId);
         formModel.findFormByUserId(userId)
-            .then(function(err){
-                res.status(400).send(err);
-            },function(doc){
+            .then(function(doc){
                res.send(doc);
-            });
+            },function(err){
+            res.status(400).send(err);
+        });
     }
 
     function findFormById(req,res){
         var id = req.params.formId;
-        res.json(formModel.findFormById(id));
+        formModel.findFormById(id)
+            .then(function(doc){
+                console.log(doc);
+                console.log(doc);
+                res.send(doc);
+            },function(err){
+                res.status(400).send(err);
+                });
     }
 
     function removeForm(req,res) {
-
         var id = req.params.formId;
         console.log("server form remover",id);
-        formModel.deleteForm(id);
-        res.send(200);
+        formModel.deleteForm(id)
+            .then(function(doc){
+                res.send(200);
+            },function(err){
+                res.status(400).send(err);
+            });
     }
 
     function createForm(req,res) {
         var id = req.params.userId;
         var form = req.body;
         form.userId = id;
-        formModel.createForm(form);
-        console.log("server",form);
-        res.json(form);
+        formModel.createForm(form)
+            .then(function(doc){
+            res.send(doc);
+        },function(err){
+            res.status(400).send(err);
+        });
     }
 
     function updateForm(req,res){
         var id = req.params.formId;
         var form = req.body;
-        var newform = formModel.updateForm(form,id);
-        console.log("server\n",id,form);
-        res.send(newform);
+        formModel.updateForm(form,id)
+            .then(function(doc){
+                res.send(doc);
+            },function(err){
+            res.status(400).send(err);
+        });
     }
 
 }

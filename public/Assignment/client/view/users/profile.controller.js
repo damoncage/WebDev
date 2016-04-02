@@ -14,11 +14,9 @@
         if(!$scope.currentUser) {
             $location.url("/login");
         }
-        else{
-           $scope.uSer = $scope.currentUser;
-        }
 
         function updateuser(user){
+            console.log(user);
             $scope.error = null;
             $scope.message = null;
             user._id = $scope.currentUser._id;
@@ -30,17 +28,21 @@
                 user.username = $scope.currentUser.username;
             if(!user.password)
                 user.password = $scope.currentUser.password;
-
-            console.log(user,$scope.currentUser);
+            if(!user.emails)
+                user.emails = $scope.currentUser.emails;
+            if(typeof user.emails == "string"){
+                user.emails = user.emails.split(",");
+            }
             UserService
                 .updateUser($scope.currentUser._id,user)
                 .then(function (response){
-                    if(response.data){$scope.message = "User updated successfully";
+                    $scope.message = "User updated successfully";
                         UserService.setCurrentUser(response.data);
-                        console.log($scope.currentUser);}
-                    else{
-                        $scope.error = "Unable to update the user";}
-                });
+                        console.log("return \n",$scope.currentUser);},
+                    function(err){
+                        $scope.error = "Unable to update the user \n"+err;
+                    }
+                );
         }
     }
 })();
