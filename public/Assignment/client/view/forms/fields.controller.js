@@ -59,8 +59,8 @@
             stop: function (e, ui) {
                 // this callback has the changed model
                 var logEntry = FM.fields.map(function (i) {
-                    //sortupdate(i);
- //                   console.log(i.value);
+                    FM.sortupdate(FM.fields);
+                    console.log(e);
                     return i.value;
                 }).join(', ');
             }
