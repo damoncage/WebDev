@@ -42,7 +42,11 @@ module.exports = function(db,mongoose){
     }
 
     function updateForm(form,formId){
-        return FormModel.update({_id:formId},{$set:form});
+        return FormModel.findById(formId)
+            .then(function(doc){
+                doc.title = form.title;
+                doc.save();
+            });
     }
 
     function deleteForm(formId){
