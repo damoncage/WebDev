@@ -40,22 +40,6 @@
             FM.modifyField = modifyField;
             FM.sortupdate = sortupdate;
 
-            FM.sortableOptions = {
-                update: function (e, ui) {
-                    var logEntry = FM.fields.map(function (i) {
-                        return i.value;
-                    }).join(', ');
-                },
-                axis:'y',
-                stop: function (e, ui) {
-    //                sortupdate(FM.field);
-                    // this callback has the changed model
-                    var logEntry = FM.fields.map(function (i) {
-                        return i.value;
-                    }).join(', ');
-                }
-            };
-
             FieldService
                 .getFieldsForForm(formId)
                 .then(function(response){
@@ -63,6 +47,24 @@
                 })
         }
         init();
+
+        FM.sortableOptions = {
+//                handle: '> .myHandle',
+            update: function (e, ui) {
+                var logEntry = FM.fields.map(function (i) {
+                    return i.value;
+                }).join(', ');
+            },
+            axis:'y',
+            stop: function (e, ui) {
+                // this callback has the changed model
+                var logEntry = FM.fields.map(function (i) {
+                    //sortupdate(i);
+ //                   console.log(i.value);
+                    return i.value;
+                }).join(', ');
+            }
+        };
 
         function removeField(field){
             console.log("remove");
@@ -98,7 +100,7 @@
         }
 
         function sortupdate(field){
-            console.log(FM.fields,"\n",field);
+            console.log(FM.fields,"\n now",field);
             FieldService
                 .sortField(formId,field)
                 .then(function(response){

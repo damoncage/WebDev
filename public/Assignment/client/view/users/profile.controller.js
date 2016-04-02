@@ -33,6 +33,9 @@
             if(typeof user.emails == "string"){
                 user.emails = user.emails.split(",");
             }
+            if(typeof user.phones == "string"){
+                user.emails = user.emails.split(",");
+            }
             UserService
                 .updateUser($scope.currentUser._id,user)
                 .then(function (response){

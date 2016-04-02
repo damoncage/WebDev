@@ -13,7 +13,7 @@
                 var currentUser = response.data;
                 UserService.setCurrentUser(currentUser);
             });
-        console.log("headeruser \n" + $rootScope.currentUser);
+ //       console.log("headeruser \n" + $rootScope.currentUser);
         $scope.logout = logout;
         function logout(){
             UserService.logout()

@@ -81,8 +81,6 @@ module.exports = function(app,userModel){
             },function(err){
                 res.status(400).send(err);
             });
-
-
     }
 
     function updateUser(req,res){

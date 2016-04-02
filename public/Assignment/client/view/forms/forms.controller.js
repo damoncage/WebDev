@@ -41,6 +41,10 @@
         function addForm(form) {
             if(!form)
             return;
+            form = {
+                title:form.title,
+                userId: form.userId
+            };
             FormService
                 .createFormForUser(user._id,form)
                 .then(function(response){
@@ -79,13 +83,12 @@
                 })
         }
 
-        function selectForm(index){
+        function selectForm(form){
             $scope.form = {
-                _id:$scope.Forms[index]._id,
-                title: $scope.Forms[index].title,
-                userId: $scope.Forms[index].userId
+                _id:form._id,
+                title: form.title,
+                userId: form.userId
             };
-            console.log(index);
         }
     }
 })();

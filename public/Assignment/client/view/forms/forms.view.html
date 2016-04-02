@@ -2,7 +2,7 @@
     <h2 class="sub-header">Forms</h2>
     <ul class="nav nav-tabs">
         <li role="presentation" class="active"><a href="">Forms</a></li>
-        <li role="presentation"><a href="#/form/000/fields">Fields</a></li>
+        <li role="presentation"><a href="#/form/{{form._id}}/fields">Fields</a></li>
     </ul>
         <div class="table-responsive">
             <table class="table table-striped table-hover">
@@ -28,7 +28,7 @@
                     <td>{{form.title}}</td>
                     <td>
                         <a herf="" ng-click="deleteForm($index)" class="btn btn-danger glyphicon glyphicon-remove"></a>
-                        <a herf="" ng-click="selectForm($index)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
+                        <a herf="" ng-click="selectForm(form)" class="btn btn-warning glyphicon glyphicon-pencil"></a>
                     </td>
                 </tr>
                 </tbody>
