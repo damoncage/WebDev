@@ -19,7 +19,6 @@ module.exports = function(app,formModel,fieldModel){
             },function(err){
                 res.status(400).send(err);
             });
-
     }
 
     function findOneFormFields(req,res){
@@ -70,8 +69,11 @@ module.exports = function(app,formModel,fieldModel){
         fieldModel.updateFormFieldById(formId,field,fieldId)
             .then(function(doc){
                 res.send(doc);
+            },function(err){
+                res.status(400).send(err);
             });
     }
+
 
  /*   function sortFormFields(req,res){
         var formId = req.params.formId;

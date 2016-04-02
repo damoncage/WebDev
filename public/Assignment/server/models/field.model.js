@@ -50,34 +50,42 @@ module.exports = function(db,mongoose){
         return deferred.promise;
     }
 
-    function updateFormFieldById(formId,field,fieldId){
+   function updateFormFieldById(formId,field,fieldId){
         var deferred = q.defer();
-
         var ObjectId = mongoose.Types.ObjectId;
-        FormModel.findOneAndUpdate(
+        /*FormModel.findOneAndUpdate(
             {_id: formId, 'fields._id': new ObjectId(fieldId)},
-            {$set: {'fields.$': field}},
+            {$set: {'fields.options': field.options,
+                    'fields.label':field.label,
+                    'fields.placeholder':field.placeholder},
+                    'fields.type':field.type},
             function(err, doc) {
                 if (!err) {
                     deferred.resolve(doc);
+                    console.log(doc);
                 }
                 else {
                     deferred.reject(err);
+                    console.log("err",err);
                 }
             }
-        );
+        );*/
         return deferred.promise;
     }
 
-    /*function updateFormFieldById(formId,field,fieldId){
+   /* function updateFormFieldById(formId,field,fieldId){
         delete field._id;
         return FormModel.findById(formId)
             .then(function(doc,err){
             if(doc){
                 var tmp = doc.fields.id(fieldId);
-                tmp._doc = field;
+                tmp.label = field.label;
+                tmp.placeholder = field.placeholder;
+                for(var i in field.options){
+                    tmp.options[i] = field.options[i];
+                }
                 tmp._id = fieldId;
-                console.log("TTTTTTTT",tmp);
+                console.log(tmp.options,field.options);
                 doc.save();
                 console.log("final---------------",doc.fields);
             }else{
