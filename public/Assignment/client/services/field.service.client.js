@@ -32,7 +32,7 @@ function FieldService($http){
         return $http.delete("/api/assignment/form/"+formId+"/field/"+fieldId);
     }
 
-    function updateField(formId, fieldId, field){
+    function updateField(formId,field,fieldId){
         return $http.put("/api/assignment/form/"+formId+"/field/"+fieldId,field)
     }
 

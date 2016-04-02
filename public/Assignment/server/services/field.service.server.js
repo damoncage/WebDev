@@ -66,12 +66,11 @@ module.exports = function(app,formModel,fieldModel){
     function updateFormFieldById(req,res){
         var formId = req.params.formId;
         var fieldId = req.params.fieldId;
-        var form = formModel.findFormById(formId);
         var field = req.body;
-            if(form.fields[i]._id == fieldId){
-                form.field[i] = field;
-            }
-        res.json(form);
+        fieldModel.updateFormFieldById(formId,field,fieldId)
+            .then(function(doc){
+                res.send(doc);
+            });
     }
 
  /*   function sortFormFields(req,res){

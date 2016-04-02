@@ -106,7 +106,7 @@
         </div>
     </div>
     <div class="container-fluid">
-    <button class="btn btn-default pull-right">Cancel</button>
+    <button class="btn btn-default pull-right" ng-click= "closeThisDialog()">Cancel</button>
     <button class="btn btn-primary pull-right" type="submit">OK</button>
     </div>
 </script>
@@ -122,7 +122,47 @@
     <label for="FreeText">Placeholder:</label>
     <textarea  type="text" id="FreeText" cols="50" rows="2" placeholder=""></textarea>
     <div class="container-fluid">
-        <button class="btn btn-default pull-right">Cancel</button>
+        <button class="btn btn-default pull-right" ng-click= "closeThisDialog()">Cancel</button>
+        <button class="btn btn-primary pull-right" type="submit">OK</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="PASSWORD">
+    <p>Password Field</p>
+    <label for="Label">Label:</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+        </div>
+    </div>
+    <label for="PlaceHolder">PlaceHolder</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.placeholder" class="form-control" id="PlaceHolder" placeholder="">
+        </div>
+    </div>
+    <div class="container-fluid">
+        <button class="btn btn-default pull-right" ng-click= "closeThisDialog()">Cancel</button>
+        <button class="btn btn-primary pull-right" type="submit">OK</button>
+    </div>
+</script>
+
+<script type="text/ng-template" id="EMAIL">
+    <p>Password Field</p>
+    <label for="Label">Label:</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
+        </div>
+    </div>
+    <label for="PlaceHolder">PlaceHolder</label>
+    <div class="row">
+        <div class="col-md-10">
+            <input type="text" ng-model="area.placeholder" class="form-control" id="PlaceHolder" placeholder="">
+        </div>
+    </div>
+    <div class="container-fluid">
+        <button class="btn btn-default pull-right" ng-click= "closeThisDialog()">Cancel</button>
         <button class="btn btn-primary pull-right" type="submit">OK</button>
     </div>
 </script>
@@ -134,6 +174,10 @@
         <div class="col-md-10">
             <input type="text" ng-model="area.label" class="form-control" id="Label" placeholder="">
         </div>
+        </div>
+        <div class="container-fluid">
+        <button class="btn btn-default pull-right" ng-click= "closeThisDialog()">Cancel</button>
+        <button class="btn btn-primary pull-right" type="submit" ng-click="updateField(area,ngDialogData.target._id)" ng-dialog-scope="this" >OK</button>
     </div>
 </script>
 
@@ -148,7 +192,7 @@
         <label for="Options">Options</label>
         <textarea id="Options" type="text" class="form-control" rows="2" placeholder=""></textarea>
         <div class="container-fluid">
-        <button class="btn btn-default pull-right">Cancel</button>
+        <button class="btn btn-default pull-right" ng-click= "closeThisDialog()">Cancel</button>
         <button class="btn btn-primary pull-right" type="submit">OK</button>
             </div>
 </script>

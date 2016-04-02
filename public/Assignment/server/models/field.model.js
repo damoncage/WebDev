@@ -9,7 +9,7 @@ module.exports = function(db,mongoose){
     var api = {
         deleteField:deleteField,
         createField:createField,
-    //    updateFormFieldById:updateFormFieldById,
+        updateFormFieldById:updateFormFieldById,
         sortFormFields:sortFormFields
     }
     return api;
@@ -50,18 +50,40 @@ module.exports = function(db,mongoose){
         return deferred.promise;
     }
 
- /*   function updateFormFieldById(formId,field){
+    function updateFormFieldById(formId,field,fieldId){
         var deferred = q.defer();
+
+        var ObjectId = mongoose.Types.ObjectId;
+        FormModel.findOneAndUpdate(
+            {_id: formId, 'fields._id': new ObjectId(fieldId)},
+            {$set: {'fields.$': field}},
+            function(err, doc) {
+                if (!err) {
+                    deferred.resolve(doc);
+                }
+                else {
+                    deferred.reject(err);
+                }
+            }
+        );
+        return deferred.promise;
+    }
+
+    /*function updateFormFieldById(formId,field,fieldId){
         delete field._id;
-  FormModel.findById(formId,function(err,doc){
-            if(err){
-                deferred.reject(err);
+        return FormModel.findById(formId)
+            .then(function(doc,err){
+            if(doc){
+                var tmp = doc.fields.id(fieldId);
+                tmp._doc = field;
+                tmp._id = fieldId;
+                console.log("TTTTTTTT",tmp);
+                doc.save();
+                console.log("final---------------",doc.fields);
             }else{
-                doc.fields.id(field._id).;
-                deferred.resolve(doc);
+                return err;
             }
         });
-        return deferred.promise;
     }*/
 
 /*    function sortFormFields(formId,startIndex,endIndex){

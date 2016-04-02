@@ -6,8 +6,9 @@
         .module("FormBuilderApp")
         .controller("FieldController",FieldController)
 
-    function FieldController(FieldService,$routeParams,ngDialog){
+    function FieldController(FieldService,$routeParams,ngDialog,$scope,$location){
         var FM = this;
+        console.log($scope);
         var formId = $routeParams.formId;
         var tempform = [
             {"_id": null, "label": "New Text Field", "type": "TEXT", "placeholder": "New Field"},
@@ -95,8 +96,35 @@
 
         function modifyField(field){
             console.log("template");
-            ngDialog.open({ template: field.type, className: 'ngdialog-theme-default' });
+            ngDialog.open({
+                template: field.type,
+                controller: ['$scope','FieldService',function($scope,FieldService,$location){
+                    $scope.area = {
+                        label:$scope.ngDialogData.target.label
+                    };
+                    $scope.updateField = function(field,id){
+                        if(!field){
+                            console("return");
+                            return -1;
+                        }else{
+                            FieldService.updateField($scope.ngDialogData.formId,$scope.area,id)
+                                .then(function(response){
+                                    $scope.closeThisDialog(1);
+                                });
+                        }
+                        };
+                }],
+                data:{target:field,
+                    formId:formId},
+                scope:$scope,
+                className: 'ngdialog-theme-default'})
+                .closePromise.then(function(data){
+                if(data){
+                    init();
+                }
+            });
         }
+
 
         function sortupdate(field){
             console.log(FM.fields,"\n now",field);
