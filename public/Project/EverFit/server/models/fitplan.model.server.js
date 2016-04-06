@@ -3,7 +3,7 @@
  */
 var FitPlans = require("./fitplan.mock.json")
 var q = require('q');
-module.exports = function(){
+module.exports = function(db,mongoose){
     var api = {
         findPlanByID: findPlanByID,
         findPlanByIds: findPlanByIds,
@@ -15,7 +15,14 @@ module.exports = function(){
 
 
         function findPlanByID(planID){
-            return
+            for (var p in FitPlans){
+            if(FitPlans[p]._id == planID){
+               console.log(FitPlans[p]);
+               return FitPlans[p];
+            }
+        }
+         return null;
+
         }
 
         function findPlanByIds(planIds){

@@ -5,7 +5,7 @@ var mock = require("./user.mock.json");
 //var mongoose = require("mongoose");
 var q = require("q");
 
-module.exports = function(app,db,mongoose){
+module.exports = function(db,mongoose){
     var UserSchema = require("./user.schema.server.js")(mongoose);
     // create user model from schema
     var UserModel = mongoose.model('User',UserSchema);
