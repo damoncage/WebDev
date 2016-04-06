@@ -37,62 +37,81 @@ module.exports = function(db,mongoose){
     function createField(formId,field){
         var deferred = q.defer();
         delete field._id;
-        FormModel.findById(formId,function(err,doc){
-            if(err){
+        fieldModel.create(field)
+            .then(function(doc){
+                console.log(doc);
+                field = doc;
+                FormModel.findById(formId,function(err,doc){
+                    if(err){
+                        deferred.reject(err);
+                    }else{
+                        doc.fields.push(field);
+                        doc.save();
+                        console.log("model",doc.fields,field);
+                        deferred.resolve(doc);
+                    }
+                });
+            },function(err){
                 deferred.reject(err);
-            }else{
-                console.log("model",doc.title,field);
-                doc.fields.push(field);
-                doc.save();
-                deferred.resolve(doc);
-            }
-        });
+            });
         return deferred.promise;
     }
 
-   function updateFormFieldById(formId,field,fieldId){
+   /*function updateFormFieldById(formId,field,fieldId){
         var deferred = q.defer();
         var ObjectId = mongoose.Types.ObjectId;
-        /*FormModel.findOneAndUpdate(
-            {_id: formId, 'fields._id': new ObjectId(fieldId)},
-            {$set: {'fields.options': field.options,
-                    'fields.label':field.label,
-                    'fields.placeholder':field.placeholder},
-                    'fields.type':field.type},
-            function(err, doc) {
-                if (!err) {
-                    deferred.resolve(doc);
+       console.log(field);
+        fieldModel.update({_id:fieldId},{$set:field}
+            ,function(err,doc){
+                if(err){
+                    deferred.reject(err)
+                    console.log(err);
+                }else{
                     console.log(doc);
-                }
-                else {
-                    deferred.reject(err);
-                    console.log("err",err);
-                }
-            }
-        );*/
+                    fieldModel.findById(fieldId)
+                        .then(function(doc){
+                            FormModel.findOneAndUpdate(
+                                {_id: formId, 'fields._id': new ObjectId(doc._id)},
+                                {$set: {'fields.$': doc}},
+                                function(err, doc) {
+                                    if (!err) {
+                                        deferred.resolve(doc);
+                                        console.log(doc);
+                                    }
+                                    else {
+                                        deferred.reject(err);
+                                        console.log("err",err);
+                                    }
+                                }
+                            );
+                            console.log(doc.label);
+                        deferred.resolve(doc);}
+                        )}
+            });
         return deferred.promise;
-    }
+    }*/
 
-   /* function updateFormFieldById(formId,field,fieldId){
+    function updateFormFieldById(formId,field,fieldId){
         delete field._id;
+        console.log(field);
         return FormModel.findById(formId)
             .then(function(doc,err){
             if(doc){
                 var tmp = doc.fields.id(fieldId);
                 tmp.label = field.label;
                 tmp.placeholder = field.placeholder;
-                for(var i in field.options){
-                    tmp.options[i] = field.options[i];
-                }
-                tmp._id = fieldId;
+                tmp.options = field.options;
                 console.log(tmp.options,field.options);
-                doc.save();
+                doc.save(function(err,doc){
+                    if(err)
+                    console.log(err);
+                });
                 console.log("final---------------",doc.fields);
             }else{
                 return err;
             }
         });
-    }*/
+    }
 
 /*    function sortFormFields(formId,startIndex,endIndex){
         return FormModel

@@ -15,7 +15,7 @@
             {"_id": null, "label": "New Email Field","type": "EMAIL", "placeholder":"emails"},
             {"_id": null, "label": "New Password Field","type": "PASSWORD", "placeholder":"password"},
             {"_id": null, "label": "New Date Field", "type": "DATE"},
-            {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": []},
+            {"_id": null, "label": "New Dropdown", "type": "OPTIONS", "options": [{"label":"option1","value":"option1"}]},
             {"_id": null, "label": "New Checkboxes", "type": "CHECKBOXES", "options": []},
             {"_id": null, "label": "New Radio Buttons", "type": "RADIOS", "options": []
             }
@@ -89,16 +89,22 @@
                 template: field.type,
                 controller: ['$scope','FieldService',function($scope,FieldService){
                     $scope.area = {
-                        label:$scope.ngDialogData.target.label
+                        _id : $scope.ngDialogData.target.id,
+                        label:$scope.ngDialogData.target.label,
+                        placeholder:$scope.ngDialogData.target.placeholder,
+                        options:$scope.ngDialogData.target.options,
+                        type:$scope.ngDialogData.target.type
                     };
+                    console.log($scope.area);
                     $scope.updateField = function(field,id){
-                        console.log("123321");
                         if(!field){
                             console("return");
                             return -1;
-                        }else{ if(field.options && typeof field.options == "string")
-                                field.options = field.options.split(" ");
-                            FieldService.updateField($scope.ngDialogData.formId,$scope.area,id)
+                        }else{ field.options = '{ "options" : ' + field.options + '}';
+                            console.log(field.options);
+                            var options = JSON.parse(field.options);
+                            field.options = options.options;
+                            FieldService.updateField($scope.ngDialogData.formId,field,id)
                                 .then(function(response){
                                     $scope.closeThisDialog(1);
                                 });
