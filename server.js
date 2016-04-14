@@ -9,6 +9,7 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose')
 var connectionString = 'mongodb://localhost/cs5610';
+var passport = require('passport');
 //if(process.env.)
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
@@ -20,15 +21,18 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 
 var db = mongoose.connect(connectionString);
 
-console.log(mongoose);
-
-console.log("secret", process.env.OPENSHIFT_NODEJS_IP);
-
+//console.log(mongoose);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(multer());
-app.use(session({ secret: "process.env.PASSPORT_SECRET"}));
+app.use(session({ secret: process.env.PASSPORT_SECRET,
+        resave:true,
+        saveUninitialized:true
+        }));
+console.log("secret", process.env.PASSPORT_SECRET);
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
 
 

@@ -21,7 +21,7 @@ module.exports = function(db,mongoose) {
     return api;
 
     function findUserByUsername(username) {
-        return UserModel.find({username: username});
+        return UserModel.findOne({username: username});
         /* var deferred = q.defer();
          UserModel.find({username: 'cage'},function(err,doc){
          if(err){

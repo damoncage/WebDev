@@ -32,21 +32,12 @@
                 return;
             }
             UserService
-                .findUserByCredentials(user)
-                .then(function (response) {
-                    var checkuser = response.data;
-                    if (checkuser) {
-                        rm.message = "User already exists";
-                        return;
-                    } else {
-                        return UserService.createUser(user);
-                    }
-                })
+                .createUser(user)
                 .then(function (response) {
                     if (response.data != null) {
                         UserService.setCurrentUser(response.data);
                         $location.url("/profile");
-                    }
+                    }else{rm.message="User already exists!";}
                 });
         }
     }

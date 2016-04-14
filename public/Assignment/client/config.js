@@ -16,6 +16,8 @@
                 })
                 .when("/admin",{
                     templateUrl:"view/admin/admin.view.html",
+                    controller:"AdminController",
+                    controllerAs:"model",
                     resolve:{
                         checkLoggedIn:checkLoggedIn
                     }
@@ -80,7 +82,7 @@
             .getCurrentUser()
             .then(function(response){
                 var currentUser = response.data;
-                if(currentUser){
+                if(currentUser !== '0'){
                     UserService.setCurrentUser(currentUser);
                     deferred.resolve();
                 }else{

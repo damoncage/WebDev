@@ -32,7 +32,9 @@
     "node-uuid": "~1.4.7",
     "angular-ui-sortable": "~0.13.4",
     "ng-dialog": "~0.5.9",
-    "mongoose": "~4.4.10"
+    "mongoose": "~4.4.10",
+    "passport": "~0.3.2",
+    "passport-local": "~1.0.0"
   },
   "devDependencies": {},
   "bundleDependencies": [],

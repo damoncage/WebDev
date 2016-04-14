@@ -10,6 +10,9 @@
         UserService
             .getCurrentUser()
             .then(function(response){
+                if(response.data == '0'){
+                    return UserService.setCurrentUser(null);
+                }
                 var currentUser = response.data;
                 UserService.setCurrentUser(currentUser);
             });
