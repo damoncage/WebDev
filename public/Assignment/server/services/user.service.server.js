@@ -223,7 +223,7 @@ module.exports = function(app,userModel){
     }
 
     function isAdmin(user){
-        if(user.roles.indexOf(admin) > 0){
+        if(user.roles.indexOf('admin') >= 0){
             return true;
         }
         return false;
