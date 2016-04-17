@@ -8,8 +8,11 @@
 
     function AdminController(UserService,$rootScope,$location){
         var adm = this;
-        adm.add = add;
+        adm.message = null;
+        adm.addUser = addUser;
         adm.update = update;
+        adm.deleteUser = deleteUser;
+        adm.editUser = editUser;
         function init(){
             if($rootScope.currentUser.roles.indexOf("admin") == -1 )
             $location.url("/home");
@@ -20,12 +23,42 @@
                 })
         }init();
 
-        function add(user){
-
+        function addUser(user){
+            if(user.username==null){
+                adm.message = "Invalid username/password!";
+                console.log(adm.message);
+                return;
+            }
+            UserService.createUser(user)
+                .then(function(response){
+                    init();
+                });
         }
 
         function update(user){
-
+            console.log(user);
+            UserService.adminUpdate(user)
+                .then(function(response){
+                    init();
+                });
         }
+
+        function deleteUser(userId){
+            UserService.deleteUserById(userId)
+                .then(function(response) {
+                    init();
+                });
+        }
+
+        function editUser(user){
+            adm.NewUser = {
+                _id:user._id,
+                username:user.username,
+                firstName:user.firstName,
+                lastName:user.lastName,
+                roles:user.roles,
+            };
+        }
+
     }
 })();

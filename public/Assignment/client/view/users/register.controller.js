@@ -32,7 +32,7 @@
                 return;
             }
             UserService
-                .createUser(user)
+                .register(user)
                 .then(function (response) {
                     if (response.data != null) {
                         UserService.setCurrentUser(response.data);

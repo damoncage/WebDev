@@ -17,6 +17,7 @@ module.exports = function(db,mongoose) {
         findUserById: findUserById,
         updateUser: updateUser,
         deleteUser: deleteUser,
+        adminUpdate: adminUpdate
     }
     return api;
 
@@ -63,7 +64,7 @@ module.exports = function(db,mongoose) {
 
     function updateUser(userId, update) {
         var deferred = q.defer();
-        delete update._id;
+        delete update._id,  update.roles;
         UserModel.update({_id: userId}, {$set: update},
             function (err, update) {
                 if (!err) {
@@ -78,4 +79,9 @@ module.exports = function(db,mongoose) {
     function deleteUser(userId) {
         return UserModel.remove({_id: userId});
     }
+
+    function adminUpdate(user){
+        return UserModel.update({_id:user._id},{$set:user});
+    }
+
 }

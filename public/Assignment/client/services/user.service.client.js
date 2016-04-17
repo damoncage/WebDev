@@ -14,8 +14,10 @@
             findUserByUsername: findUserByUsername,
             findAllUsers: findAllUsers,
             createUser: createUser,
+            register:register,
             deleteUserById: deleteUserById,
             updateUser: updateUser,
+            adminUpdate: adminUpdate,
             setCurrentUser: setCurrentUser,
             getCurrentUser: getCurrentUser,
             logout:logout
@@ -45,13 +47,17 @@
             return $http.get("/api/assignment/user");
         }
 
-        function createUser(user){
+       function createUser(user){
+           return $http.post("/api/assignment/admin/createUser",user);
+       }
+
+        function register(user){
             console.log("user.service.client", user);
             return $http.post("/api/assignment/user", user);
         }
 
         function deleteUserById(id){
-           return $http.delete("/api/assignment/user/"+id);
+           return $http.delete("/api/assignment/admin/user/"+id);
         }
 
         function updateUser(userId,user){
@@ -70,6 +76,9 @@
                 }
                 return null;*/
             }
+        function adminUpdate(user){
+            return $http.put("/api/assignment/admin/user/"+user._id,user);
+        }
 
         function logout(){
             return $http.post("/api/assignment/logout");
