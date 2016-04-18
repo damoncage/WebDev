@@ -69,8 +69,10 @@
         UserService
             .getCurrentUser()
             .then(function(response){
-                var currentUser = response.data;
-                UserService.setCurrentUser(currentUser);
+                if(response.data!=='0'){
+                    var currentUser = response.data;
+                    UserService.setCurrentUser(currentUser);
+                }
                 deferred.resolve();
             });
         return deferred.promise;

@@ -83,12 +83,13 @@ module.exports = function(db,mongoose) {
     function adminUpdate(user){
         var deferred = q.defer();
         UserModel.update({_id:user._id},{$set:user},function(err,update){
-            if(err)
-            deferred.reject(err);
-            else
-            deferred.resolve(update);
+            if(!err){
+                deferred.resolve(update);
+            }
+            else{
+                deferred.reject(err);
+            }
         });
         return deferred.promise;
     }
-
 }

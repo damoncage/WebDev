@@ -206,6 +206,9 @@ module.exports = function(app,userModel){
     }
 
     function adminUpdate(req,res){
+        if(typeof req.body.roles == "string"){
+            req.body.roles = req.body.roles.split(",");
+        }
         userModel.adminUpdate(req.body)
             .then(function(doc){
                 res.send(200);

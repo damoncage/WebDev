@@ -29,7 +29,7 @@
         }init();
 
         function addUser(user){
-            if(user.username==null){
+            if(!user.username){
                 adm.message = "Invalid username/password!";
                 console.log(adm.message);
                 return;
