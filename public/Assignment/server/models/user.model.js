@@ -82,11 +82,12 @@ module.exports = function(db,mongoose) {
 
     function adminUpdate(user){
         var deferred = q.defer();
-        UserModel.update({_id:user._id},{$set:user},function(err,update){
+        var id = user._id;
+        delete user._id;
+        UserModel.update({_id:id},{$set:user},function(err,update){
             if(!err){
                 deferred.resolve(update);
-            }
-            else{
+            }else{
                 deferred.reject(err);
             }
         });
