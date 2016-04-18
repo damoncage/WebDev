@@ -13,6 +13,11 @@
         adm.update = update;
         adm.deleteUser = deleteUser;
         adm.editUser = editUser;
+        adm.order = order;
+        adm.predicate = null;
+        adm.reverse = false;
+        adm.sortIcon = null;
+
         function init(){
             if($rootScope.currentUser.roles.indexOf("admin") == -1 )
             $location.url("/home");
@@ -58,6 +63,15 @@
                 lastName:user.lastName,
                 roles:user.roles,
             };
+        }
+
+        function order(part){
+            adm.reverse = (adm.predicate === part)? !adm.reverse : false;
+            if(adm.reverse)
+                adm.sortIcon = "glyphicon glyphicon-triangle-bottom";
+            else
+                adm.sortIcon = "glyphicon glyphicon-triangle-top";
+            adm.predicate = part;
         }
 
     }
