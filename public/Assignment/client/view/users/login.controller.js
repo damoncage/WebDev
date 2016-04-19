@@ -25,7 +25,9 @@
                     else{
                     $scope.message = "Invalid Username or Password!";
                     }
-                });
+                },function (err){
+                    $scope.message = "Invalid Username or Password!";
+            });
         }
     }
 })();
