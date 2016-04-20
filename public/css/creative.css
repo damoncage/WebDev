@@ -178,7 +178,7 @@ header {
     min-height: auto;
     text-align: center;
     color: #fff;
-    background-image: url(../img/Harbor.png);
+    background-image: url(../img/Harbor.jpg);
     background-position: center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -263,6 +263,7 @@ header .header-content .header-content-inner p {
     position: relative;
     margin: 0 auto;
     max-width: 650px;
+    margin-bottom: 10px;
 }
 
 .portfolio-box .portfolio-box-caption {
