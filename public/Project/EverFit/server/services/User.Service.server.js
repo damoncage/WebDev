@@ -1,19 +1,68 @@
 /**
  * Created by cage on 3/8/16.
  */
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+
 module.exports = function(app, planModel, userModel) {
-    app.post("/api/project/EverFit/login", login);
+
+    passport.use('fit', new LocalStrategy (fitLocalStrategy));
+    passport.serializeUser(serializeFitUser);
+    passport.deserializeUser(deserializeFitUser);
+
+    var fitAuth = fitAuth;
+    var isTrainer = isTrainer;
+
+    app.post("/api/project/EverFit/login", passport.authenticate('fit'), login);
     app.get("/api/project/EverFit/loggedin", loggedin);
     app.post("/api/project/EverFit/logout", logout);
     app.post("/api/project/EverFit/register", register);
     app.get("/api/project/EverFit/user/:userName", findUserByUsername);
     app.get("/api/project/EverFit/userId/:userId", findUserById);
     app.post("/admin/project/EverFit/Users", findUsers);
-    app.put("/api/project/EverFit/profile/:userId", updateUser);
-    app.delete("/api/project/EverFit/profile/:userId", deleteUser);
+    app.put("/api/project/EverFit/profile/:userId",     fitAuth, updateUser);
+    app.delete("/api/project/EverFit/profile/:userId",  fitAuth, deleteUser);
+
+    function fitLocalStrategy(username, password,done){
+        userModel.findUserByCredentials({username:username,password:password})
+            .then(function(user){
+                if(user){
+                    return done(null,user);
+                }else
+                    return done(null,false,{message:'Incorrect username / password!'});
+            },function(err){
+                return done(err);
+            });
+    }
+
+    function serializeFitUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeFitUser(user, done) {
+        userModel
+            .findUserById(user._id)
+            .then(
+                function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function fitAuth(req,res,next){
+        if(!req.isAuthenticated()){
+            res.send(401);
+        }else{
+            next();
+        }
+    }
 
     function login(req, res) {
-        console.log("login server service " + req.body);
+        res.json(req.user);
+        /*console.log("login server service " + req.body);
         var credentials = req.body;
         userModel.findUserByCredentials(credentials)
             .then(function(user){
@@ -24,28 +73,44 @@ module.exports = function(app, planModel, userModel) {
                     res.send(400);
                 }},function (err){
                     res.status(400).send(err);
-                });
+                });*/
 //        console.log("server side"+user.username);
     }
 
     function loggedin(req, res) {
-        res.json(req.session.currentUser);
+        res.send(req.isAuthenticated()  ? req.user: null);
     }
 
 
     function logout(req, res) {
-        req.session.destroy();
+        req.logout();
         res.send(200);
     }
 
     function register(req, res) {
         console.log("register server service");
         var user = req.body;
-        userModel.createUser(user)
-            .then(function (response) {
-                    req.session.currentUser = response;
-                    console.log("user \n", response);
-                    res.json(user);
+        userModel.findUserByUsername(user.username)
+            .then(function(user){
+                if(user){
+                    res.send(400);
+                }else{
+                    return userModel.createUser(user);
+                }
+            },function(err){
+                res.status(401).send(err);
+            })
+            .then(function (user) {
+                if(user){
+                    req.login(user, function(err){
+                        if(err){
+                            res.status(400).send(err);
+                        }else{
+                            res.json(user);
+                        }
+                    });
+                    console.log("user \n", user);
+                }
                 },
                 function (err) {
                     res.status(400).send(err);
@@ -112,7 +177,6 @@ module.exports = function(app, planModel, userModel) {
             })
             .then(function(doc){
                 if(doc){
-                    req.session.currentUser = doc;
                     res.json(doc);
                 }else{
                     res.send(400);

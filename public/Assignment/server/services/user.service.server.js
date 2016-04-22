@@ -7,13 +7,13 @@ var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function(app,userModel){
 
-    passport.use('ass', new LocalStrategy(asslocalStrategy));
+    passport.use('as', new LocalStrategy(aslocalStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
     var auth = authorized;
     var isAdmin = isAdmin;
-    app.post("/api/assignment/login", passport.authenticate('ass'), login);
+    app.post("/api/assignment/login", passport.authenticate('as'), login);
     app.get("/api/assignment/loggedin",             loggedin);
     app.post("/api/assignment/user",                register);
     app.post("/api/assignment/admin/createUser",  auth, isAdmin,   createUser);
@@ -29,7 +29,7 @@ module.exports = function(app,userModel){
 
 
 
-    function asslocalStrategy(username, password, done){
+    function aslocalStrategy(username, password, done){
         console.log(username,password);
         userModel
             .findUserByUsername(username)
@@ -38,7 +38,7 @@ module.exports = function(app,userModel){
                     if (user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
                     } else {
-                        return (null,false);
+                        return done(null,false);
                     }
                 },
                 function(err){
