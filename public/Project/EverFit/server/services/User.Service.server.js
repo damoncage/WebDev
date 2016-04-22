@@ -91,8 +91,8 @@ module.exports = function(app, planModel, userModel) {
         console.log("register server service");
         var user = req.body;
         userModel.findUserByUsername(user.username)
-            .then(function(user){
-                if(user){
+            .then(function(doc){
+                if(doc){
                     res.send(400);
                 }else{
                     return userModel.createUser(user);
@@ -124,7 +124,7 @@ module.exports = function(app, planModel, userModel) {
         userModel.findUserByUsername(userName)
             .then(function (user) {
                 if (user) {
-                    res.json(result);
+                    res.json(user);
                 } else
                     res.json(null);
             }, function (err) {
