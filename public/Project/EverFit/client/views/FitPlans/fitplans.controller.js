@@ -14,6 +14,9 @@
         fm.predicate = 'planName';
         fm.reverse = null;
         fm.planCheck = planCheck;
+        fm.type = 'Plan';
+        fm.choose = choose;
+        fm.search = search;
 
         function init(){
             UserService
@@ -31,6 +34,16 @@
                     fm.plans = response.data;
                 });
         } init();
+
+        function choose(type){
+            fm.type = type;
+        }
+
+        function search(key){
+            if(fm.type == 'Plan'){
+                return $location.url("/fitplans/"+key);
+            }
+        }
 
      function userLikesPlan(planId){
   //       console.log("plan",fm.user,planId);

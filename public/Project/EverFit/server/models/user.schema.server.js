@@ -12,7 +12,7 @@ module.exports = function(mongoose) {
         emails: [String],
         "follow":[{_id:String,username:String}],
         "follower":[{_id:String,username:String}],
-        "blogs":[String],
+        "posts":[String],
         "plans":[{_id:String,planName:String}]
     }, {collection: 'Everfit.user'});
     return UserSchema;
