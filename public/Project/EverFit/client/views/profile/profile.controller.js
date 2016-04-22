@@ -6,48 +6,43 @@
         .module("EverFitApp")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($scope,UserService,$location){
-        $scope.updateUser = updateuser;
-        $scope.error = null;
-        $scope.message = null;
-        console.log("currentUsercheck",$scope.currentUser);
-        if(!$scope.currentUser) {
-            $location.url("/login");
-        }
-        else{
-            $scope.user = {
-                id:$scope.currentUser._id,
-                firstName: $scope.currentUser.firstName,
-                lastName: $scope.currentUser.lastName,
-                username:$scope.currentUser.username,
-                password:$scope.currentUser.password,
-                email:$scope.currentUser.email
+    function ProfileController(UserService,$location,$rootScope){
+        var pm = this;
+        pm.updateUser = updateuser;
+        pm.error = null;
+        pm.message = null;
+        console.log("currentUsercheck",$rootScope.currentUser);
+
+        function init(){
+            if(!$rootScope.currentUser) {
+                $location.url("/login");
             }
-        }
+            else{
+                pm.user = {
+                    firstName: $rootScope.currentUser.firstName,
+                    lastName: $rootScope.currentUser.lastName,
+                    username:$rootScope.currentUser.username,
+                    password:$rootScope.currentUser.password,
+                    emails:$rootScope.currentUser.emails
+                }
+            }
+        }init();
+
 
         function updateuser(user){
-            $scope.error = null;
-            $scope.message = null;
-            user._id = $scope.currentUser._id;
-            if(!user.firstName)
-                user.firstName = $scope.currentUser.firstName;
-            if(!user.lastName)
-                user.lastName = $scope.currentUser.lastName;
-            if(!user.username)
-                user.username = $scope.currentUser.username;
-            if(!user.password)
-                user.password = $scope.currentUser.password;
-
-    //        console.log(user,$scope.currentUser);
-            console.log("controller,update"+user);
+            pm.error = null;
+            pm.message = null;
+            var id = $rootScope.currentUser._id;
+            console.log("controller,update",user.emails,id);
             UserService
-                .updateUser(user._id,user)
+                .updateUser(id,user)
                 .then(function (response){
-                    if(response.data){$scope.message = "User updated successfully";
+                    if(response.data){pm.message = "User updated successfully";
                         UserService.setCurrentUser(response.data);
-                        console.log($scope.currentUser);}
+                        console.log($rootScope.currentUser);
+                    }
                     else{
-                        $scope.error = "Unable to update the user";}
+                        pm.error = "Unable to update the user";}
                 });
         }
     }

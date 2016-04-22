@@ -31,13 +31,12 @@
                 return;
             }
             UserService
-                .getUserProfile(user)
+                .findUserByUsername(user.username)
                 .then(function(response){
                     if(!response.data){
                         return UserService.register(user);
-                    }
-                    vm.message = "User already exists!";
-                    return;
+                    }else{vm.message = "User already exists!";
+                        return;}
                 })
                 .then(function (response){
                         var currentUser = response.data;

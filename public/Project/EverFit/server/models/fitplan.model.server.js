@@ -3,109 +3,85 @@
  */
 var FitPlans = require("./fitplan.mock.json")
 var q = require('q');
+
 module.exports = function(db,mongoose){
+
+    var planSchema = require("./plan.schema.js")(mongoose);
+    var planModel = mongoose.model('plan',planSchema);
+
     var api = {
         findPlanByID: findPlanByID,
         findPlanByIds: findPlanByIds,
         findPlanByName:findPlanByName,
         createPlan: createPlan,
-        userLikesPlan:userLikesPlan
+        userLikesPlan:userLikesPlan,
+        updatePlan:updatePlan,
+        removePlan:removePlan
     };
     return api;
 
 
-        function findPlanByID(planID){
-            for (var p in FitPlans){
-            if(FitPlans[p]._id == planID){
-               console.log(FitPlans[p]);
-               return FitPlans[p];
-            }
-        }
-         return null;
+    function findPlanByID(planID){
+        return planModel.findById(planID);
+    }
 
+    function findPlanByIds(planIds){
+        for(var i in planIds)
+        {
+            planIds[i] = new ObjectId(planIds[i]);
         }
-
-        function findPlanByIds(planIds){
-            var plans = [];
-            if (!planIds){
-                return FitPlans;
-            }
-            for(var p in planIds)
-            {
-                var plan = findPlanByID(planIds[p]);
-                if(plan){
-                    plans.push(plan);
-                        /*{
-                            _id: plans._id,
-                            planName: plans.planName,
-                            Trainer: plans.Trainer,
-                            Description: plans.Description
-                        }*/
-                }
-            }
-            return plans;
-        }
-
-            function createPlan(plan){
-                plan = {
-                  _id: "ID_" + (new Date()).getTime(),
-                    planName:plan.planName,
-                    Trainer: plan.Trainer,
-                    Description:plan.Description
-                };
-                FitPlans.push(plan);
-                return plan;
-            }
+        return planModel.find({_id:{$in:planIds}});
+    }
 
     function findPlanByName(planName){
-        console.log("findname",planName);
-        var plans = [];
-        if(planName == -1){
-//            console.log("return all")
-            return FitPlans;}
-        for(var u in FitPlans){
-            if(FitPlans[u].planName.indexOf(planName) > -1){
-                plans.push(FitPlans[u]);
-            }
+        if(planName=='-1'){
+            return planModel.find();
         }
-        return plans;
+        return planModel.find({planName:{$regex:planName,$options:'i'}});
+    }
+
+    function createPlan(plan){
+       return planModel.create(plan);
     }
 
     function userLikesPlan(user,planId){
-        var tmp = null;
-        var FitPlan = findPlanByID(planId);
-        if(!FitPlan || !user)
-           return error;
-        if(!FitPlan.like){
-            FitPlan.like = [];
-        }
-        for(var u in FitPlan.like){
-            if (FitPlan.like[u] == user._id){
-            console.log("delete ",u,user._id);
-                 tmp = u;}
-        }
-        if(!tmp){
-            FitPlan.like.push(user._id);
-        }else{
-            FitPlan.like.splice(tmp,1);
-        }
-        tmp = null;
-        if(!user.like){
-            user.like = [];
-        }
-        for(var u in user.like){
-            if (user.like[u] == planId){
-                tmp = u;
+        var deferred = q.defer();
+        planModel.findById(planId,function(err,doc){
+            if(err){
+                deferred.reject(err);
+            }else if(doc){
+                var plan = {
+                    _id:doc._id.toString(),
+                    planName:doc.planName
+                }
+                var Tplan = doc.follower.id(user._id);
+               if(Tplan){
+                   Tplan.remove();
+               }else{
+                   doc.follower.push(user);
+               }
+                doc.save();
+                deferred.resolve(plan);
             }
-        }
-        if(tmp){
-            user.like.splice(tmp,1);
-        }else {
-            user.like.push(planId);
-        }
-        console.log("Returns: ",user);
-        console.log(FitPlan,"\n plan");
-        return user;
+        });
+        return deferred.promise;
     }
 
+    function updatePlan(planId,plan){
+        var deferred = q.defer();
+        delete plan._id;
+        planModel.update({_id:planId},{$set:plan},
+            function(err,doc){
+                if(err){
+                    deferred.reject(err);
+                }else{
+                    deferred.resolve(doc)
+                }
+        });
+        return deferred.promise;
+    }
+
+    function removePlan(planId){
+        return planModel.remove({_id:planId});
+    }
 }

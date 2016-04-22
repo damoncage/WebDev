@@ -54,8 +54,18 @@
             .when("/profile",{
                 templateUrl:"views/profile/profile.view.html",
                 controller:"ProfileController",
+                controllerAs:"model",
                 resolve:{
                     checkLoggedIn: checkLoggedIn
+                }
+            })
+
+            .when("/profile/:userId",{
+                templateUrl:"views/users/users.view.html",
+                controller:"usersController",
+                controllerAs:"model",
+                resolve:{
+                    getLoggedIn:getLoggedIn
                 }
             })
             .otherwise({

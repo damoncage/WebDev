@@ -12,14 +12,23 @@
             getCurrentUser: getCurrentUser,
             register: register,
             logout: logout,
-            getUserProfile: getUserProfile,
+            findUserByUsername:findUserByUsername,
+            getUserById: getUserById,
             updateUser:updateUser,
             deleteUserById: deleteUserById
         };
         return api;
 
-        function getUserProfile(user){
-            return $http.post("/api/project/EverFit/profile",user);
+        function setCurrentUser(user){
+            $rootScope.currentUser = user;
+        }
+
+        function getCurrentUser(){
+            return $http.get("/api/project/EverFit/loggedin");
+        }
+
+        function findUserByUsername(username){
+            return $http.get("/api/project/EverFit/user/"+username);
         }
 
         function register(user){
@@ -31,14 +40,10 @@
             return $http.post("/api/project/EverFit/logout");
         }
 
-        function getCurrentUser(){
-            return $http.get("/api/project/EverFit/loggedin");
+        function getUserById(userId){
+            return $http.get("/api/project/EverFit/")
         }
 
-        function setCurrentUser(user){
-            $rootScope.currentUser = user;
-
-        }
 
         function login(user){
         //    console.log("login client service " + user.username + user.password);

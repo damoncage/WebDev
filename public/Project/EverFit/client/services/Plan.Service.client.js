@@ -11,7 +11,10 @@
             findPlanByIds:findPlanByIds,
             findPlanById:findPlanById,
             findPlanByName:findPlanByName,
-            userLikesPlan:userLikesPlan
+            userLikesPlan:userLikesPlan,
+            createPlan:createPlan,
+            updatePlan:updatePlan,
+            removePlan:removePlan
         }
         return api;
 
@@ -30,6 +33,18 @@
         function userLikesPlan(user,planId){
     //        console.log("service",user,planId);
             return $http.post("/api/project/user/plan/"+planId, user);
+        }
+
+        function createPlan(plan){
+            return $http.post("/api/project/plan",plan);
+        }
+
+        function updatePlan(plan){
+            return $http.put("/api/project/plan/"+plan._id,plan);
+        }
+
+        function removePlan(planId){
+            return $http.delete("api/project/plan/"+planId);
         }
     }
 })();

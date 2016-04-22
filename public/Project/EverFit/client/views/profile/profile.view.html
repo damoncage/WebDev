@@ -1,41 +1,69 @@
 <h1 class="page-header">Profile</h1>
-<form class="form-horizontal">
-    <div class="form-group">
-        <label for="inputusername" class="col-sm-4 col-md-2 control-label">Username</label>
-        <div class="col-sm-8 col-md-10">
-            <input ng-model="user.username" type="text" class="form-control" id="inputusername" placeholder="{{currentUser.username}}">
+<div class="container">
+<div class="row">
+    <div class="col-md-8">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputusername" class="col-sm-4 col-md-2 control-label">Username</label>
+            <div class="col-sm-8 col-md-10">
+                <input ng-model="model.user.username" type="text" class="form-control" id="inputusername" placeholder="{{currentUser.username}}">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="inputPassword" class="col-sm-4 col-md-2 control-label">Password</label>
-        <div class="col-sm-8 col-md-10">
-            <input ng-model="user.password" type="password" class="form-control" id="inputPassword" placeholder="{{currentUser.password}}">
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-4 col-md-2 control-label">Password</label>
+            <div class="col-sm-8 col-md-10">
+                <input ng-model="model.user.password" type="password" class="form-control" id="inputPassword" placeholder="{{currentUser.password}}">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Fname" class="col-sm-4 col-md-2 control-label">First Name</label>
-        <div class="col-sm-8 col-md-10">
-            <input ng-model="user.firstName" type="text" class="form-control" id="Fname" placeholder="{{uSer.firstName}}">
+        <div class="form-group">
+            <label for="Fname" class="col-sm-4 col-md-2 control-label">First Name</label>
+            <div class="col-sm-8 col-md-10">
+                <input ng-model="model.user.firstName" type="text" class="form-control" id="Fname" placeholder="{{model.uSer.firstName}}">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="Lname" class="col-sm-4 col-md-2 control-label">Last Name</label>
-        <div class="col-sm-8 col-md-10">
-            <input ng-model="user.lastName" type="text" class="form-control" id="Lname" placeholder="{{uSer.lastName}}">
+        <div class="form-group">
+            <label for="Lname" class="col-sm-4 col-md-2 control-label">Last Name</label>
+            <div class="col-sm-8 col-md-10">
+                <input ng-model="model.user.lastName" type="text" class="form-control" id="Lname" placeholder="{{model.uSer.lastName}}">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label for="inputemail" class="col-sm-4 col-md-2 control-label">Email</label>
-        <div class="col-sm-8 col-md-10">
-            <input ng-model="user.email" type="email" class="form-control" id="inputemail" placeholder="Email">
+        <div class="form-group">
+            <label for="inputemail" class="col-sm-4 col-md-2 control-label">Email</label>
+            <div class="col-sm-8 col-md-10">
+                <input ng-model="model.user.emails" type="text" class="form-control" id="inputemail" placeholder="Emails">
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-4 col-md-offset-2 col-md-10">
-            <button ng-click="updateUser(user)" type="submit" class="btn btn-success btn-block">Update</button>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-md-offset-2 col-md-10">
+                <button ng-click="model.updateUser(model.user)" type="submit" class="btn btn-success btn-block">Update</button>
+            </div>
         </div>
-    </div>
 
-    <div ng-show="message" class="col-sm-offset-4 alert alert-success" role="alert">{{message}}</div>
-    <div ng-show="error"  class="col-sm-offset-4 alert alert-danger"  role="alert">{{error}}</div>
-</form>
+        <div ng-show="model.message" class="col-sm-offset-2 alert alert-success" role="alert">{{model.message}}</div>
+        <div ng-show="model.error"  class="col-sm-offset-2 alert alert-danger"  role="alert">{{model.error}}</div>
+    </form>
+    </div>
+    <div class="col-md-4">
+        <div class="sidebar sidebar-user">
+            <h4>Following</h4>
+            <ul ng-repeat = "fl in model.user.follow">
+                <li href="">Alice</li>
+                <li>{{fl}}</li>
+            </ul>
+
+            </div>
+            <div class="sidebar sidebar-user">
+            <div>
+                <h4>Follower</h4>
+            </div></div>
+            <div class="sidebar sidebar-user">
+            <div>
+                <h4>My favorite</h4>
+            </div></div>
+    </div>
+</div>
+    <div class="row">
+        <h4 class="sub-header">My Blogs</h4>
+
+    </div>
+</div>

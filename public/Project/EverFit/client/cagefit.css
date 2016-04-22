@@ -24,3 +24,12 @@ body{
     border:0;
     background:transparent;
 }
+
+.sidebar-user{
+    background: rgba(150,255,255,.1);
+    border: 1px ridge;
+    padding: 1%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+

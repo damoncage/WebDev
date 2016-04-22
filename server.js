@@ -7,10 +7,10 @@ var session       = require('express-session');
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 var connectionString = 'mongodb://localhost/cs5610';
 var passport = require('passport');
-//if(process.env.)
+
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
