@@ -11,8 +11,9 @@
         var fm = this;
         fm.order = order;
         fm.userLikesPlan = userLikesPlan;
-        fm.predicate = 'follower.length';
-        fm.reverse = true;
+        fm.predicate = null;
+        fm.reverse = null;
+        fm.planCheck = planCheck;
 
         function init(){
             UserService
@@ -57,5 +58,13 @@
                 fm.sortIcon = "glyphicon glyphicon-triangle-top";
             fm.predicate = part;
         }
+
+        function planCheck(planId){
+            if(fm.user.plans.map(function(e){return e._id;}).indexOf(planId) > -1 ) {
+                return true;
+            }  else
+            return false;
+        }
+
     }
 })();

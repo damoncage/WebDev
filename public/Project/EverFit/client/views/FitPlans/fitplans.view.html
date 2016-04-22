@@ -19,7 +19,7 @@
                         <td><a href="#/fitplans/details/{{plan._id}}">{{plan.planName}}</a></td>
                         <td><a href="#/profile/{{plan.trainer}}">{{plan.trainer}}</a></td>
                         <td>{{plan.follower.length}}</td>
-                        <td><a href="" ng-click="model.userLikesPlan(plan._id)" class="btn btn-sm btn-warning" ng-class= "{'active': model.user.plans.indexOf(plan._id) > -1}">
+                        <td><a href="" ng-click="model.userLikesPlan(plan._id)" class="btn btn-sm btn-warning" ng-class= "{'active': model.planCheck(plan._id)}">
                             <span class="glyphicon glyphicon-star"></span> Favorite</a></a> </td>
                     </tr>
                 </tbody>
