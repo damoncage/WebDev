@@ -11,7 +11,7 @@
         var fm = this;
         fm.order = order;
         fm.userLikesPlan = userLikesPlan;
-        fm.predicate = null;
+        fm.predicate = 'planName';
         fm.reverse = null;
         fm.planCheck = planCheck;
 
@@ -60,6 +60,8 @@
         }
 
         function planCheck(planId){
+            if(!fm.user)
+            return;
             if(fm.user.plans.map(function(e){return e._id;}).indexOf(planId) > -1 ) {
                 return true;
             }  else

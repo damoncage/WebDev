@@ -10,15 +10,15 @@
                 <thead>
                     <tr>
                         <th><a href="" ng-click="model.order('planName')">Plan Name<span ng-class="model.sortIcon" ng-show="model.predicate === 'planName'" ></span></a></th>
-                        <th><a href="" ng-click="model.order('trainer')">Trainer<span ng-class="model.sortIcon" ng-show="model.predicate === 'trainer'" ></span></a></th>
-                        <th><a href="" ng-click="model.order('follower.length')">Follower<span ng-class="model.sortIcon" ng-show="model.predicate === 'follower.length'" ></span></a></th>
+                        <th class="dyn"><a href="" ng-click="model.order('trainer')">Trainer<span ng-class="model.sortIcon" ng-show="model.predicate === 'trainer'" ></span></a></th>
+                        <th class="dyn"><a href="" ng-click="model.order('follower.length')">Follower<span ng-class="model.sortIcon" ng-show="model.predicate === 'follower.length'" ></span></a></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat = "plan in model.plans | orderBy: model.predicate:model.reverse">
                         <td><a href="#/fitplans/details/{{plan._id}}">{{plan.planName}}</a></td>
-                        <td><a href="#/profile/{{plan.trainer}}">{{plan.trainer}}</a></td>
-                        <td>{{plan.follower.length}}</td>
+                        <td class="dyn"><a href="#/profile/{{plan.trainer}}">{{plan.trainer}}</a></td>
+                        <td class="dyn">{{plan.follower.length}}</td>
                         <td><a href="" ng-click="model.userLikesPlan(plan._id)" class="btn btn-sm btn-warning" ng-class= "{'active': model.planCheck(plan._id)}">
                             <span class="glyphicon glyphicon-star"></span> Favorite</a></a> </td>
                     </tr>

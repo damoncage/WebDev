@@ -33,3 +33,13 @@ body{
     margin-bottom: 10px;
 }
 
+@media (max-width:560px) {
+    .dyn{
+        display:none;
+        width:0;
+        height:0;
+        opacity:0;
+        visibility: collapse;
+    }
+}
+
