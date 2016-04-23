@@ -48,3 +48,19 @@ body{
     height: 64px;
 }
 
+.body-main{
+    padding-bottom: 200px;
+}
+
+.media-bottom .trash{
+    color: #999;
+}
+
+.responsive-div a{
+    visibility: hidden;
+}
+
+.responsive-div:hover a{
+    visibility:visible;
+}
+

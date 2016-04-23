@@ -56,7 +56,7 @@
             <!-- Comment -->
             <div class="media" ng-repeat="review in model.plan.reviews">
                 <a class="pull-left" href="#">
-                    <img class="media-object" src="https://www.agileana.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                    <img class="media-object img-responsive" src="https://www.agileana.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">{{review.username}}
@@ -64,13 +64,25 @@
                     </h4>
                     {{review.content}}
                     <div class="media-bottom">
-                        <p class="text-right"><a href="" ng-if="currentUser._id == review.userId" ng-click="model.deleteReview(review)"><span class="glyphicon glyphicon-trash"></span></a>
-                            <a class="col-sm-offset-1" href="" ng-click="model.reply(review)"><i class="fa fa-reply"></i>Reply</a></p>
-
+                        <p class="text-right"><a href="" class="trash" ng-if="currentUser._id == review.userId" ng-click="model.deleteReview(review)"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="col-sm-offset-1" href="" data-toggle="collapse" data-target="#box{{review._id}}"><i class="fa fa-reply"></i>Reply</a></p>
                     </div>
+
+                    <!--Review Reply Box-->
+
+                    <div id="box{{review._id}}"  class="collapse">
+                        <form role="form">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" ng-model="model.reply.content"></textarea>
+                            </div>
+                            <button type="submit" ng-click="model.addReply(model.reply)" class="btn btn-primary col-md-offset-9">Submit</button>
+                            <button type="reset" class="btn btn-default">Cancel</button>
+                        </form>
+                    </div>
+
                     <!-- Nested Comment -->
-                    <div class="media" ng-repeat="rep in review.reply">
-                        <a class="pull-left" href="#">
+                    <div class="media responsive-div" ng-repeat="rep in review.reply">
+                        <a class="pull-left" href="">
                             <img class="media-object" src="https://www.agileana.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
                         </a>
                         <div class="media-body">
@@ -82,13 +94,15 @@
                         <div class="media-bottom">
                             <p class="text-right"><a href="" ng-click="model.deleteReply(review,rep)"><span class="glyphicon glyphicon-trash"></span></a>
                                 <a class="col-sm-offset-1" href="" ng-click="model.reply(review)"><i class="fa fa-reply"></i>Reply</a></p>
-
                         </div>
                     </div>
                     <!-- End Nested Comment -->
                 </div>
             </div>
         </div>
+
+        <br>
+        <br>
 
         <!-- SideBar -->
         <div class="col-md-4">

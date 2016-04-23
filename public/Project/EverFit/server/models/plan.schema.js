@@ -6,6 +6,7 @@ module.exports = function(mongoose){
             trainer:String,
             follower:[{_id:String, username:String}],
             description:String,
+            content:String,
             reviews:[reviewSchema]
         },{collection:"Everfit.plan"});
     return planSchema;

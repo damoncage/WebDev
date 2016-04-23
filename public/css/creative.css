@@ -306,7 +306,7 @@ header .header-content .header-content-inner p {
 }
 
 .portfolio-box:hover .portfolio-box-caption {
-    opacity: 1;
+    opacity: 0.8;
 }
 
 @media(min-width:768px) {
