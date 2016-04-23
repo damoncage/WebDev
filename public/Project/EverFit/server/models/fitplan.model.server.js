@@ -18,7 +18,8 @@ module.exports = function(db,mongoose){
         updatePlan:updatePlan,
         removePlan:removePlan,
         addPlanReview:addPlanReview,
-        deleteReview:deleteReview
+        deleteReview:deleteReview,
+        reviewReply:reviewReply
     };
     return api;
 
@@ -94,7 +95,7 @@ module.exports = function(db,mongoose){
                 if(doc){
                     doc.reviews.push(review);
                     doc.save();
-                    deferred.resolve(200);
+                    deferred.resolve(doc);
                 }else{
                     deferred.reject(400);
                 }
@@ -113,7 +114,7 @@ module.exports = function(db,mongoose){
                     if(tmpReview.userId == userId){
                         tmpReview.remove();
                         doc.save();
-                        deferred.resolve(200);
+                        deferred.resolve(doc);
                     }else{
                         deferred.reject(400);
                     }
@@ -126,4 +127,21 @@ module.exports = function(db,mongoose){
         return deferred.promise;
     }
 
+    function reviewReply(planId,reviewId,reply){
+        var deferred = q.defer();
+        planModel.findById(planId)
+            .then(function(doc){
+                if(doc){
+                    var tmp = doc.reviews.id(reviewId);
+                    tmp.reply.push(reply);
+                    doc.save();
+                    deferred.resolve(doc);
+                }else{
+                    deferred.reject(null);
+                }
+            },function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    }
 }

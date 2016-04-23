@@ -14,6 +14,7 @@ module.exports = function(app, planModel, userModel){
     app.delete("/api/project/plan/:planId",     fitAu, isTrainer, removePlan);
     app.post("/api/project/plan/:planId/review", fitAu,           addReview);
     app.delete("/api/project/plan/:planId/review/:reviewId",fitAu,          deleteReview);
+    app.post("/api/project/plan/:planId/review/:reviewId", fitAu ,reviewReply);
 
     var fitAut = fitAu;
     var isTrainer = isTrainer;
@@ -105,8 +106,8 @@ module.exports = function(app, planModel, userModel){
     function removePlan(req,res){
         var planId = req.params.planId;
         planModel.removePlan(planId)
-            .then(function(plan){
-                res.send(plan);
+            .then(function(doc){
+                res.send(doc);
             },function(err){
                 res.status(400).send(err);
             });
@@ -118,16 +119,7 @@ module.exports = function(app, planModel, userModel){
         planModel.addPlanReview(planId, review)
             .then(function (doc) {
                 if (doc) {
-                    return planModel.findPlanByID(planId);
-                } else {
-                    res.send(400);
-                }
-            }, function (err) {
-                res.status(402).send(err);
-            })
-            .then(function (plan) {
-                if (plan) {
-                    res.json(plan.reviews);
+                    res.json(doc.reviews);
                 } else {
                     res.send(400);
                 }
@@ -143,16 +135,23 @@ module.exports = function(app, planModel, userModel){
         planModel.deleteReview(planId,reviewId,req.user._id)
             .then(function(doc){
                 if(doc){
-                    return planModel.findPlanByID(planId);
+                    res.json(doc.reviews);
                 } else {
                     res.send(400);
                 }
             }, function (err) {
                 res.status(402).send(err);
-            })
-            .then(function (plan) {
-                if (plan) {
-                    res.json(plan.reviews);
+            });
+    }
+
+    function reviewReply(req,res){
+        var planId = req.params.planId;
+        var reviewId = req.params.reviewId;
+        var reply = req.body;
+        planModel.reviewReply(planId,reviewId,reply)
+            .then(function (doc) {
+                if (doc) {
+                    res.json(doc.reviews);
                 } else {
                     res.send(400);
                 }

@@ -4,7 +4,7 @@ module.exports = function(mongoose){
         username:String,
         date:{type:Date, default: Date.now},
         content:String,
-        reply:[{username:String, date:{type:Date, default: Date.now},content:String}]
+        reply:[{username:String, to: String, date:{type:Date, default: Date.now},content:String}]
     },{collection:"Everfit.review"});
     return reviewSchema;
 }

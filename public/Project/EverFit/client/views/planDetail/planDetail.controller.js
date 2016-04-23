@@ -12,6 +12,7 @@
         dm.search = search;
         dm.addReview = addReview;
         dm.deleteReview = deleteReview;
+        dm.reviewReply = reviewReply;
         dm.message = null;
 
 
@@ -38,7 +39,7 @@
               if($rootScope.currentUser){
                review.userId = $rootScope.currentUser._id;
                review.username = $rootScope.currentUser.username;
-               review.date = new Date().toLocaleString();
+               review.date = new Date();
                PlanService.addReview(planId,review)
                    .then(function(response){
                    if(response.data){
@@ -59,6 +60,7 @@
                     .then(function(response){
                         if(response.data){
                             dm.plan.reviews = response.data;
+                            console.log(response.data);
                         }else{
                             dm.message = 'Fail to delete comment, try again later.'
                         }
@@ -66,6 +68,29 @@
             } else
                 $location.url("/login");
         }
+
+        function reviewReply(reply,review){
+            console.log("reply");
+            var planId = $routeParams.planId;
+            if($rootScope.currentUser){
+                reply.username = $rootScope.currentUser.username;
+                reply.date = new Date();
+                reply.to = review.username;
+                PlanService.reviewReply(reply,review._id,planId)
+                    .then(function(response){
+                        if(response.data){
+                            dm.plan.reviews = response.data;
+                            dm.subReply = null;
+                            dm.reply=null;
+                        }else{
+                            dm.message = 'Fail to reply comment, try again later.'
+                        }
+                    });
+            }else
+                $location.url("/login");
+        }
+
+
     }
 })();
 

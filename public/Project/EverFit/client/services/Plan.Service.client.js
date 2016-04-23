@@ -16,7 +16,8 @@
             updatePlan:updatePlan,
             removePlan:removePlan,
             addReview:addReview,
-            deleteReview:deleteReview
+            deleteReview:deleteReview,
+            reviewReply:reviewReply
         }
         return api;
 
@@ -56,6 +57,10 @@
         function deleteReview(planId,reviewId){
             console.log(planId,reviewId);
             return $http.delete("/api/project/plan/"+planId+"/review/"+reviewId);
+        }
+
+        function reviewReply(reply,reviewId,planId){
+            return $http.post("/api/project/plan/"+planId+"/review/"+reviewId,reply);
         }
     }
 })();

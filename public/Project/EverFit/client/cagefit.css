@@ -52,15 +52,28 @@ body{
     padding-bottom: 200px;
 }
 
+.review{
+    padding: 1%;
+    background-color: rgba(78, 144, 199, 0.2);
+    margin: 2px;
+}
+
+
+
 .media-bottom .trash{
     color: #999;
 }
 
-.responsive-div a{
+.responsive-div{
+    margin-bottom:20px;
+    background-color: white;
+}
+
+.responsive-div .hover{
     visibility: hidden;
 }
 
-.responsive-div:hover a{
+.responsive-div:hover .hover{
     visibility:visible;
 }
 
