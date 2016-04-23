@@ -1,29 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1689076538009226";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
 <div class="container">
-    <div class="blog-header">
-        <h1 class="blog-title">Beginner's Bodybuilding</h1>
-        <p class="lead blog-description">The official guide for beginners.</p>
-        <div class="fb-like" data-href="http://webdev2016-yuanfangzheng.rhcloud.com/Project/EverFit/client/#/fitplans" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
-    </div>
     <div class="row">
-
-        <div class="col-sm-8 blog-main">
-
+    <div class="blog-header">
+        <h1 class="blog-title">{{model.plan.planName}}</h1>
+        <h5>by  <a href="#/profile/{{model.plan.trainer}}">{{model.plan.trainer}}</a></h5>
+        <p class="lead blog-description col-md-8">{{model.plan.description}}</p>
+    </div>
+    <div id="fb-root"> <div class="fb-like col-md-2" data-href="http://webdev2016-yuanfangzheng.rhcloud.com/Project/EverFit/client/#/fitplans" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></div>
+      </div>
+    <div class="row">
+        <div class="col-md-8 blog-main">
             <div class="blog-post">
                 <h2 class="blog-post-title">Exercise Day 1</h2>
                 <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
@@ -53,8 +38,100 @@
                     <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
                 </ol>
                 <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
-            </div><!-- /.blog-post --></div>
+            </div><!-- /.blog-post -->
+            <div class="well">
+                <h4>Leave a Comment:</h4>
+                <form role="form">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="3" ng-model="model.review.content"></textarea>
+                    </div>
+                    <button type="submit" ng-click="model.addReview(model.review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                </form>
+            </div>
+            <div ng-show="model.message" class="alert alert-danger text-center" role="alert">{{model.message}}</div>
+
+            <hr>
+
+            <!-- Comment -->
+            <div class="media" ng-repeat="review in model.plan.reviews">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="https://www.agileana.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading">{{review.username}}
+                        <small class="col-sm-offset-1"><i class="fa fa-clock-o"></i>{{review.date}}</small>
+                    </h4>
+                    {{review.content}}
+                    <div class="media-bottom">
+                        <p class="text-right"><a href="" ng-if="currentUser._id == review.userId" ng-click="model.deleteReview(review)"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a class="col-sm-offset-1" href="" ng-click="model.reply(review)"><i class="fa fa-reply"></i>Reply</a></p>
+
+                    </div>
+                    <!-- Nested Comment -->
+                    <div class="media" ng-repeat="rep in review.reply">
+                        <a class="pull-left" href="#">
+                            <img class="media-object" src="https://www.agileana.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading">{{rep.username}}
+                                <small><i class="fa fa-clock-o"></i>{{rep.date}}</small>
+                            </h4>
+                            {{rep.content}}
+                        </div>
+                        <div class="media-bottom">
+                            <p class="text-right"><a href="" ng-click="model.deleteReply(review,rep)"><span class="glyphicon glyphicon-trash"></span></a>
+                                <a class="col-sm-offset-1" href="" ng-click="model.reply(review)"><i class="fa fa-reply"></i>Reply</a></p>
+
+                        </div>
+                    </div>
+                    <!-- End Nested Comment -->
+                </div>
+            </div>
+        </div>
+
+        <!-- SideBar -->
+        <div class="col-md-4">
+            <!-- Blog Search Well -->
+            <div class="well">
+                <h4>Plan Search</h4>
+                <form class="form">
+                    <div class="input-group">
+                        <input type="text" ng-model="model.key" class="form-control">
+                            <span class="input-group-btn">
+                                <button href="#/fitplans/{{model.key}}" ng-click="model.search(model.key)" class="btn btn-default"  type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                    </div>
+                </form>
+                <!-- /.input-group -->
+            </div>
+
+            <!-- Blog Categories Well -->
+            <div class="well">
+                <h4>People who also like this plan:</h4>
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="list-inline">
+                            <li ng-repeat="follow in model.plan.follower">
+                                <a href="#/profile/follow.username">{{follow.username}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+        </div>
     </div>
+    <hr>
 </div>
-</body>
-</html>
+</div>
+
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=1689076538009226";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

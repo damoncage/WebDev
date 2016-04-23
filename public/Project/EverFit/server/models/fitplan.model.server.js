@@ -16,7 +16,9 @@ module.exports = function(db,mongoose){
         createPlan: createPlan,
         userLikesPlan:userLikesPlan,
         updatePlan:updatePlan,
-        removePlan:removePlan
+        removePlan:removePlan,
+        addPlanReview:addPlanReview,
+        deleteReview:deleteReview
     };
     return api;
 
@@ -84,4 +86,44 @@ module.exports = function(db,mongoose){
     function removePlan(planId){
         return planModel.remove({_id:planId});
     }
+
+    function addPlanReview(planId,review){
+        var deferred = q.defer();
+        planModel.findById(planId)
+            .then(function(doc){
+                if(doc){
+                    doc.reviews.push(review);
+                    doc.save();
+                    deferred.resolve(200);
+                }else{
+                    deferred.reject(400);
+                }
+            },function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    }
+
+    function deleteReview(planId,reviewId,userId){
+        var deferred = q.defer();
+        planModel.findById(planId)
+            .then(function(doc){
+                if(doc){
+                    var tmpReview = doc.reviews.id(reviewId);
+                    if(tmpReview.userId == userId){
+                        tmpReview.remove();
+                        doc.save();
+                        deferred.resolve(200);
+                    }else{
+                        deferred.reject(400);
+                    }
+                }else{
+                    deferred.reject(400);
+                }
+            },function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    }
+
 }

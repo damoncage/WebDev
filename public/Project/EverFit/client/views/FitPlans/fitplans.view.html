@@ -4,24 +4,22 @@
         <p class="lead blog-description">Find the plan that fits you best.</p>
         </div>
     <div class="row">
-        <form class="form-inline">
-            <div class="form-group">
-                <div class="input-group">
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{model.type}} <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="" ng-click="model.choose('Plan')">Plan</a></li>
-                            <li><a href="" ng-click="model.choose('Trainer')">Trainer</a></li>
-                        </ul>
-                    </div>
-                    <input type="text" class="form-control"  ng-model="model.key" ng-submit="model.search(model.key)" placeholder="Search your plan">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" ng-click="model.search(model.key)" type="submit">
-                        <scan class="glyphicon glyphicon-search"></scan></button>
-                    </span>
+        <form class="form">
+            <div class="input-group">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{model.type}} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="" ng-click="model.choose('Plan')">Plan</a></li>
+                        <li><a href="" ng-click="model.choose('Trainer')">Trainer</a></li>
+                    </ul>
                 </div>
+                <input type="text" class="form-control col-sm-8"  ng-model="model.key" ng-submit="model.search(model.key)" placeholder="Search your plan">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" ng-click="model.search(model.key)" type="submit">
+                    <scan class="glyphicon glyphicon-search"></scan></button>
+                </span>
             </div>
         </form>
     </div>
@@ -38,7 +36,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat = "plan in model.plans | orderBy: model.predicate:model.reverse">
-                        <td><a href="#/fitplans/details/{{plan._id}}">{{plan.planName}}</a></td>
+                        <td><a href="#/fitplans/detail/{{plan._id}}">{{plan.planName}}</a></td>
                         <td class="dyn"><a href="#/profile/{{plan.trainer}}">{{plan.trainer}}</a></td>
                         <td class="dyn">{{plan.follower.length}}</td>
                         <td><a href="" ng-click="model.userLikesPlan(plan._id)" class="btn btn-sm btn-warning" ng-class= "{'active': model.planCheck(plan._id)}">

@@ -1,14 +1,38 @@
 /**
  * Created by cage on 3/8/16.
  */
+var passportFit = require('passport');
+var FitLocalStrategy = require('passport-local').Strategy;
+
 module.exports = function(app, planModel, userModel){
     app.post("/api/project/plans",findPlanByIds);
     app.get("/api/project/plan/detail/:planId",findPlanById);
     app.get("/api/project/plan/:planName",findPlanByName);
-    app.post("/api/project/user/plan/:planId",userLikesPlan);
-    app.post("/api/api/project/plan",createPlan);
-    app.put("/api/project/plan/:planId",updatePlan);
-    app.delete("/api/project/plan/:planId",removePlan);
+    app.post("/api/project/user/plan/:planId",  fitAu,    userLikesPlan);
+    app.post("/api/api/project/plan",           fitAu, isTrainer, createPlan);
+    app.put("/api/project/plan/:planId",        fitAu, isTrainer, updatePlan);
+    app.delete("/api/project/plan/:planId",     fitAu, isTrainer, removePlan);
+    app.post("/api/project/plan/:planId/review", fitAu,           addReview);
+    app.delete("/api/project/plan/:planId/review/:reviewId",fitAu,          deleteReview);
+
+    var fitAut = fitAu;
+    var isTrainer = isTrainer;
+
+    function fitAu(req,res,next){
+        if(!req.isAuthenticated()){
+            res.send(401);
+        }else{
+            next();
+        }
+    }
+
+    function isTrainer(req,res,next){
+        if(req.user.roles.indexOf('trainer') >= 0){
+            next();
+        }else{
+            res.send(401);
+        }
+    }
 
     function findPlanByIds(req,res){
         var planIds = req.body;
@@ -22,7 +46,6 @@ module.exports = function(app, planModel, userModel){
 
     function findPlanById(req,res){
         var planId = req.params.planId;
-        console.log(planId);
         planModel.findPlanByID(planId)
             .then(function(plan){
             res.json(plan);
@@ -86,6 +109,55 @@ module.exports = function(app, planModel, userModel){
                 res.send(plan);
             },function(err){
                 res.status(400).send(err);
+            });
+    }
+
+    function addReview(req,res) {
+        var review = req.body;
+        var planId = req.params.planId;
+        planModel.addPlanReview(planId, review)
+            .then(function (doc) {
+                if (doc) {
+                    return planModel.findPlanByID(planId);
+                } else {
+                    res.send(400);
+                }
+            }, function (err) {
+                res.status(402).send(err);
+            })
+            .then(function (plan) {
+                if (plan) {
+                    res.json(plan.reviews);
+                } else {
+                    res.send(400);
+                }
+            }, function (err) {
+                res.status(402).send(err);
+            });
+    }
+
+    function deleteReview(req,res){
+        var reviewId = req.params.reviewId;
+        var planId = req.params.planId;
+        console.log("delete Review===========",reviewId,"===========",planId);
+        planModel.deleteReview(planId,reviewId,req.user._id)
+            .then(function(doc){
+                if(doc){
+                    return planModel.findPlanByID(planId);
+                } else {
+                    res.send(400);
+                }
+            }, function (err) {
+                res.status(402).send(err);
+            })
+            .then(function (plan) {
+                if (plan) {
+                    res.json(plan.reviews);
+                } else {
+                    res.send(400);
+                }
+            }, function (err) {
+                res.status(402).send(err);
             });
     }
 

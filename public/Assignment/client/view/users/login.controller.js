@@ -21,6 +21,7 @@
                 .then(function(response){
                     if(response.data){
                         UserService.setCurrentUser(response.data);
+                        console.log(response.data);
                         $location.url("/home");}
                     else{
                     $scope.message = "Invalid Username or Password!";

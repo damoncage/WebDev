@@ -42,6 +42,15 @@
                     getLoggedIn:getLoggedIn
                 }
             })
+            .when("/fitplans/detail/:planId",{
+                templateUrl:"views/planDetail/planDetail.view.html",
+                controller:"planDetailController",
+                controllerAs:"model",
+                resoleve:{
+                    getLoggedIn:getLoggedIn
+                }
+            })
+
             .when("/friends",{
                 templateUrl:"views/location/location.view.html",
                 controller:"locationController",
@@ -60,7 +69,7 @@
                 }
             })
 
-            .when("/profile/:userId",{
+            .when("/profile/:username",{
                 templateUrl:"views/users/users.view.html",
                 controller:"usersController",
                 controllerAs:"model",

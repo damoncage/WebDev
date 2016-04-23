@@ -7,7 +7,7 @@
         .controller("fitPlanController",fitPlanController);
 
     function fitPlanController($location,$routeParams,PlanService,UserService){
-        var planName = $routeParams.PlanName;
+
         var fm = this;
         fm.order = order;
         fm.userLikesPlan = userLikesPlan;
@@ -19,6 +19,7 @@
         fm.search = search;
 
         function init(){
+            var planName = $routeParams.PlanName;
             UserService
                 .getCurrentUser()
                 .then(function(response){

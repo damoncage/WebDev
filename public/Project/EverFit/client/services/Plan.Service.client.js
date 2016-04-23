@@ -14,7 +14,9 @@
             userLikesPlan:userLikesPlan,
             createPlan:createPlan,
             updatePlan:updatePlan,
-            removePlan:removePlan
+            removePlan:removePlan,
+            addReview:addReview,
+            deleteReview:deleteReview
         }
         return api;
 
@@ -45,6 +47,15 @@
 
         function removePlan(planId){
             return $http.delete("api/project/plan/"+planId);
+        }
+
+        function addReview(planId,review){
+            return $http.post("/api/project/plan/"+planId+"/review",review);
+        }
+
+        function deleteReview(planId,reviewId){
+            console.log(planId,reviewId);
+            return $http.delete("/api/project/plan/"+planId+"/review/"+reviewId);
         }
     }
 })();

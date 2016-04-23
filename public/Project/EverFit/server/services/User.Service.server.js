@@ -1,19 +1,18 @@
 /**
  * Created by cage on 3/8/16.
  */
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+var passportFit = require('passport');
+var FitLocalStrategy = require('passport-local').Strategy;
 
 module.exports = function(app, planModel, userModel) {
 
-    passport.use('fit', new LocalStrategy (fitLocalStrategy));
-    passport.serializeUser(serializeFitUser);
-    passport.deserializeUser(deserializeFitUser);
+    passportFit.use('fit', new FitLocalStrategy (fitLocalStrategy));
+    passportFit.serializeUser(serializeFitUser);
+    passportFit.deserializeUser(deserializeFitUser);
 
     var fitAuth = fitAuth;
-    var isTrainer = isTrainer;
 
-    app.post("/api/project/EverFit/login", passport.authenticate('fit'), login);
+    app.post("/api/project/EverFit/login", passportFit.authenticate('fit'), login);
     app.get("/api/project/EverFit/loggedin", loggedin);
     app.post("/api/project/EverFit/logout", logout);
     app.post("/api/project/EverFit/register", register);
@@ -36,12 +35,12 @@ module.exports = function(app, planModel, userModel) {
     }
 
     function serializeFitUser(user, done) {
-        done(null, user);
+        done(null, user._id);
     }
 
-    function deserializeFitUser(user, done) {
+    function deserializeFitUser(userId, done) {
         userModel
-            .findUserById(user._id)
+            .findUserById(userId)
             .then(
                 function(user){
                     done(null, user);
