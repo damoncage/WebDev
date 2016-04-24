@@ -13,8 +13,11 @@
         dm.addReview = addReview;
         dm.deleteReview = deleteReview;
         dm.reviewReply = reviewReply;
+        dm.deleteReply = deleteReply;
         dm.message = null;
-
+        dm.change = null;
+        dm.modify = modify;
+        dm.editReply = editReply;
 
         function init(){
             var planId = $routeParams.planId;
@@ -90,7 +93,64 @@
                 $location.url("/login");
         }
 
+        function deleteReply(review,reply) {
+            var planId = $routeParams.planId;
+            if ($rootScope.currentUser.username == reply.username) {
+                PlanService.deleteReply(planId,review._id,reply._id)
+                    .then(function(response){
+                        if(response.data){
+                            dm.plan.reviews = response.data;
+                            console.log(response.data);
+                        }else{
+                            dm.message = 'Fail to delete comment, try again later.'
+                        }
+                    });
+            }else{
+                $location.url("/login");
+            }
+        }
 
+        function modify(review){
+            dm.change = {
+                _id : review._id,
+                username:review.username,
+                content : review.content
+            };
+            console.log("modify",dm.change,review);
+            return;
+        }
+
+        function editReply(change,review){
+            var planId = $routeParams.planId;
+            if(change._id==review._id){
+                if ($rootScope.currentUser.username == review.username) {
+                        PlanService.editReply(planId,0,change)
+                            .then(function(response){
+                                if(response.data){
+                                    dm.plan.reviews = response.data;
+                                }else{
+                                    dm.message = 'Fail to edit comment, try again later.'
+                                }
+                            });
+                }else{
+                    $location.url("/login");
+                }
+        }else{
+            if($rootScope.currentUser.username == change.username){
+                PlanService.editReply(planId,review._id,change)
+                    .then(function(response){
+                        if(response.data){
+                            dm.plan.reviews = response.data;
+                        }else{
+                            dm.message = 'Fail to edit reply, try again later.'
+                        }
+                    });
+            }else{
+                $location.url("/login");
+            }
+
+        }
+    }
     }
 })();
 

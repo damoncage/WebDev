@@ -64,7 +64,8 @@
                 </a>
                     <div class="media-body">
                         <div class="responsive-div">
-                            <a class="pull-right" href="" ng-click="model.edit = review._id" data-toggle="collapse" data-target="#box{{review._id}}"><span class="glyphicon glyphicon-edit"></span> </a>
+                            <a class="pull-right hover" ng-if="currentUser._id == review.userId" href="" ng-click="model.modify(review)" data-toggle="collapse" data-target="#modify{{review._id}}">
+                                <span class="glyphicon glyphicon-edit"></span> </a>
                         <h4 class="media-heading"><a href="#profile/{{review.username}}"> {{review.username}}</a>
                             <small class="col-sm-offset-1"><i class="fa fa-clock-o"></i>{{review.date| date:"MM/dd/yyyy 'at' h:mma"}}</small>
                         </h4>
@@ -87,19 +88,35 @@
                         </form>
                     </div>
 
+                        <!--Review Modify Box-->
+
+                        <div id="modify{{review._id}}" ng-if="model.change._id == review._id"  class="collapse">
+                            <form role="form">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" ng-model="model.change.content"></textarea>
+                                </div>
+                                <button type="submit" ng-click="model.editReply(model.change,review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                            </form>
+                        </div>
+
+
                     <!-- Nested Comment -->
                     <div class="media responsive-div" ng-repeat="rep in review.reply">
                         <a class="pull-left" href="">
                             <img class="media-object" src="https://www.agileana.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
                         </a>
                         <div class="media-body">
+                            <a class="pull-right hover" ng-if="currentUser.username == rep.username" href="" ng-click="model.modify(rep)" data-toggle="collapse" data-target="#modifyReply{{rep._id}}">
+                                <span class="glyphicon glyphicon-edit"></span> </a>
                             <h4 class="media-heading"><a href="#profile/{{review.username}}">{{rep.username}}</a>
                                 <small><i class="fa fa-clock-o"></i> {{rep.date | date:"MM/dd/yyyy 'at' h:mma"}}</small>
                             </h4>
-                            <p>Reply to {{rep.to}}:{{rep.content}}</p>
+                            <p>Reply to {{rep.to}}:</p>
+                            <p>{{rep.content}}</p>
                         </div>
                         <div class="media-bottom ">
-                            <p class="text-right"><a class="trash hover" href="" ng-click="model.deleteReply(review,rep)"><span class="glyphicon glyphicon-trash"></span></a>
+                            <p class="text-right"><a class="trash hover" href="" ng-click="model.deleteReply(review,rep)" ng-if="currentUser.username == rep.username"><span class="glyphicon glyphicon-trash"></span></a>
                                 <a class="col-sm-offset-1" href="" ng-click="model.edit = rep._id"  data-toggle="collapse" data-target="#replybox{{rep._id}}"><i class="fa fa-reply"></i>Reply</a></p>
                         </div>
 
@@ -112,6 +129,17 @@
                                 <button type="reset" class="btn btn-default">Cancel</button>
                             </form>
                         </div>
+
+                        <div id="modifyReply{{rep._id}}" ng-if="model.change._id == rep._id"  class="collapse">
+                            <form role="form">
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" ng-model="model.change.content"></textarea>
+                                </div>
+                                <button type="submit" ng-click="model.editReply(model.change,review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                            </form>
+                        </div>
+
                     </div>
                     <!-- End Nested Comment -->
                 </div>

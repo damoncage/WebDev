@@ -15,6 +15,8 @@ module.exports = function(app, planModel, userModel){
     app.post("/api/project/plan/:planId/review", fitAu,           addReview);
     app.delete("/api/project/plan/:planId/review/:reviewId",fitAu,          deleteReview);
     app.post("/api/project/plan/:planId/review/:reviewId", fitAu ,reviewReply);
+    app.delete("/api/project/plan/:planId/review/:reviewId/reply/:replyId", fitAu, deleteReply);
+    app.put("/api/project/plan/:planId/review/:reviewId", fitAu, editReply);
 
     var fitAut = fitAu;
     var isTrainer = isTrainer;
@@ -149,6 +151,39 @@ module.exports = function(app, planModel, userModel){
         var reviewId = req.params.reviewId;
         var reply = req.body;
         planModel.reviewReply(planId,reviewId,reply)
+            .then(function (doc) {
+                if (doc) {
+                    res.json(doc.reviews);
+                } else {
+                    res.send(400);
+                }
+            }, function (err) {
+                res.status(402).send(err);
+            });
+    }
+
+    function deleteReply(req,res){
+        var planId = req.params.planId;
+        var reviewId = req.params.reviewId;
+        var replyId = req.params.replyId;
+        console.log("deleteReply");
+        planModel.deleteReply(planId,reviewId,replyId)
+            .then(function (doc) {
+                if (doc) {
+                    res.json(doc.reviews);
+                } else {
+                    res.send(400);
+                }
+            }, function (err) {
+                res.status(402).send(err);
+            });
+    }
+
+    function editReply(req,res){
+        var planId = req.params.planId;
+        var reviewId = req.params.reviewId;
+        var change = req.body;
+        planModel.editReply(planId,reviewId,change)
             .then(function (doc) {
                 if (doc) {
                     res.json(doc.reviews);

@@ -19,7 +19,9 @@ module.exports = function(db,mongoose){
         removePlan:removePlan,
         addPlanReview:addPlanReview,
         deleteReview:deleteReview,
-        reviewReply:reviewReply
+        reviewReply:reviewReply,
+        deleteReply:deleteReply,
+        editReply:editReply
     };
     return api;
 
@@ -144,4 +146,50 @@ module.exports = function(db,mongoose){
             });
         return deferred.promise;
     }
+
+    function deleteReply(planId,reviewId,replyId){
+        var deferred = q.defer();
+        planModel.findById(planId)
+            .then(function(doc){
+                if(doc){
+                    var tmp = doc.reviews.id(reviewId);
+                    var tmpR = tmp.reply.id(replyId);
+                    tmpR.remove();
+                    doc.save();
+                    deferred.resolve(doc);
+                }else{
+                    deferred.reject(null);
+                }
+            },function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    }
+
+    function editReply(planId,reviewId,change){
+        var deferred = q.defer();
+        planModel.findById(planId)
+            .then(function(doc){
+                if(doc){
+                    if(reviewId == 0){
+                        var tmp = doc.reviews.id(change._id);
+                        tmp.content = change.content;
+                        doc.save();
+                        deferred.resolve(doc);
+                    }else{
+                        var tmp = doc.reviews.id(reviewId);
+                        var tmpR = tmp.reply.id(change._id);
+                        tmpR.content = change.content;
+                        doc.save();
+                        deferred.resolve(doc);
+                    }
+                }else{
+                    deferred.reject(null);
+                }
+            },function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    }
+
 }

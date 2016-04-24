@@ -17,7 +17,9 @@
             removePlan:removePlan,
             addReview:addReview,
             deleteReview:deleteReview,
-            reviewReply:reviewReply
+            reviewReply:reviewReply,
+            deleteReply:deleteReply,
+            editReply:editReply
         }
         return api;
 
@@ -61,6 +63,14 @@
 
         function reviewReply(reply,reviewId,planId){
             return $http.post("/api/project/plan/"+planId+"/review/"+reviewId,reply);
+        }
+
+        function deleteReply(planId,reviewId,replyId){
+            return $http.delete("/api/project/plan/"+planId+"/review/"+reviewId+"/reply/"+replyId);
+        }
+
+        function editReply(planId,reviewId,change){
+            return $http.put("/api/project/plan/"+planId+"/review/"+reviewId,change);
         }
     }
 })();

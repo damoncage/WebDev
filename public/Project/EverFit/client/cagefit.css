@@ -65,8 +65,9 @@ body{
 }
 
 .responsive-div{
-    margin-bottom:20px;
+    margin-bottom:0px;
     background-color: white;
+    padding: 5px;
 }
 
 .responsive-div .hover{
