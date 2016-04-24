@@ -18,6 +18,8 @@
         dm.change = null;
         dm.modify = modify;
         dm.editReply = editReply;
+        dm.userLikesPlan = userLikesPlan;
+        dm.favorite = favorite;
 
         function init(){
             var planId = $routeParams.planId;
@@ -151,6 +153,35 @@
 
         }
     }
+
+        function userLikesPlan(planId){
+            if(!$rootScope.currentUser){
+                $location.url("/login");
+                return;
+            }
+            var user = {
+                _id:$rootScope.currentUser._id,
+                username:$rootScope.currentUser.username
+            }
+            PlanService
+                .userLikesPlan(user,planId)
+                .then(function(response){
+                    if(response.data)
+                    return UserService.getCurrentUser();
+                })
+                .then(function(response){
+                    if(response.data){
+                        init();
+                    }
+                });
+        }
+
+        function favorite(){
+            if(dm.plan.follower.map(function(e){return e._id;}).indexOf($rootScope.currentUser._id)!= -1)
+                return true;
+            else
+                return false;
+        }
     }
 })();
 

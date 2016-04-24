@@ -77,8 +77,13 @@ module.exports = function(app, planModel, userModel){
                 res.status(400).send(err);
             })
             .then(function(user){
-                req.session.currentUser = user;
-                res.json(user);
+                req.login(user, function(err){
+                    if(err){
+                        res.status(400).send(err);
+                    }else{
+                        res.json(user);
+                    }
+                });
             },function(err){
                 res.status(400).send(err);
             });

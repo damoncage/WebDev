@@ -7,6 +7,12 @@
     </div>
     <div id="fb-root"> <div class="fb-like col-md-2" data-href="http://webdev2016-yuanfangzheng.rhcloud.com/Project/EverFit/client/#/fitplans" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></div>
       </div>
+
+    <div>
+        <button ng-if="model.plan" ng-click="model.userLikesPlan(model.plan._id)" class="btn btn-warning" ng-class="{'active': model.favorite()}" >
+            <span class="glyphicon glyphicon-star"></span> Favorite</button>
+    </div>
+
     <div class="row">
         <div class="col-md-8 blog-main">
             <div class="blog-post">
@@ -57,7 +63,7 @@
             <hr>
 
             <!-- Comment -->
-            <div class="review">
+            <div ng-if="model.plan.reviews[0]" class="review">
             <div class="media" ng-repeat="review in model.plan.reviews">
                 <a class="pull-left" href="">
                     <img class="media-object img-responsive" src="https://www.agileana.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
