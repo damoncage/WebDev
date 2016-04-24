@@ -1,6 +1,10 @@
 
 body{
     padding-top: 50px;
+    background-image: url("http://www.ta65experts.com/blog/wp-content/uploads/2014/06/Exercise.jpg");
+    background-position: center;
+    background-color: #cccccc;
+
 }
 
 #map{
@@ -50,6 +54,9 @@ body{
 
 .body-main{
     padding-bottom: 200px;
+    background: white;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 .review{
@@ -58,7 +65,10 @@ body{
     margin: 2px;
 }
 
-
+.userImg{
+    width: 180px;
+    height: 180px;
+}
 
 .media-bottom .trash{
     color: #999;
