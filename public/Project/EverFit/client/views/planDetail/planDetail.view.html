@@ -52,9 +52,9 @@
                 <h4>Leave a Comment:</h4>
                 <form role="form">
                     <div class="form-group">
-                        <textarea name="comment" class="form-control" rows="3" ng-model="model.review.content">NOOOO</textarea>
+                        <textarea name="comment" class="form-control" rows="3" ng-model="model.review.content"></textarea>
                     </div>
-                    <button type="submit" ng-click="model.addReview(model.review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                    <button type="submit" ng-click="model.addReview(model.review)" class="btn btn-primary col-md-offset-8">Submit</button>
                     <button type="reset" class="btn btn-default">Cancel</button>
                 </form>
             </div>
@@ -89,7 +89,7 @@
                             <div class="form-group">
                                 <textarea class="form-control" rows="3" ng-model="model.reply.content" placeholder="Reply to {{review.username}}"></textarea>
                             </div>
-                            <button type="submit" ng-click="model.reviewReply(model.reply, review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                            <button type="submit" ng-click="model.reviewReply(model.reply, review)" class="btn btn-primary col-md-offset-8">Submit</button>
                             <button type="reset" class="btn btn-default">Cancel</button>
                         </form>
                     </div>
@@ -101,7 +101,7 @@
                                 <div class="form-group">
                                     <textarea class="form-control" rows="3" ng-model="model.change.content"></textarea>
                                 </div>
-                                <button type="submit" ng-click="model.editReply(model.change,review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                                <button type="submit" ng-click="model.editReply(model.change,review)" class="btn btn-primary col-md-offset-8">Submit</button>
                                 <button type="reset" class="btn btn-default">Cancel</button>
                             </form>
                         </div>
@@ -131,7 +131,7 @@
                                 <div class="form-group">
                                     <textarea ng-if="model.edit == rep._id" class="form-control" rows="3" ng-model="model.subReply.content" placeholder="Reply to {{rep.username}}"></textarea>
                                 </div>
-                                <button type="submit" ng-click="model.reviewReply(model.subReply, review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                                <button type="submit" ng-click="model.reviewReply(model.subReply, review)" class="btn btn-primary col-md-offset-8">Submit</button>
                                 <button type="reset" class="btn btn-default">Cancel</button>
                             </form>
                         </div>
@@ -141,7 +141,7 @@
                                 <div class="form-group">
                                     <textarea class="form-control" rows="3" ng-model="model.change.content"></textarea>
                                 </div>
-                                <button type="submit" ng-click="model.editReply(model.change,review)" class="btn btn-primary col-md-offset-9">Submit</button>
+                                <button type="submit" ng-click="model.editReply(model.change,review)" class="btn btn-primary col-md-offset-8">Submit</button>
                                 <button type="reset" class="btn btn-default">Cancel</button>
                             </form>
                         </div>
