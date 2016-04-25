@@ -15,7 +15,8 @@
             findUserByUsername:findUserByUsername,
             getUserById: getUserById,
             updateUser:updateUser,
-            deleteUserById: deleteUserById
+            deleteUserById: deleteUserById,
+            followUser:followUser
         };
         return api;
 
@@ -57,6 +58,10 @@
 
         function deleteUserById(id){
             return $http.delete("/api/assignment/user/"+id);
+        }
+
+        function followUser(userId,target){
+            return $http.post("/api/project/EverFit/profile/"+userId,target);
         }
     }
 })();

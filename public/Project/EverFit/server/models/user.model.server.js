@@ -18,7 +18,8 @@ module.exports = function(db,mongoose){
         findAllUsers: findAllUsers,
         updateUser: updateUser,
         deleteUser: deleteUser,
-        userLikesPlan:userLikesPlan
+        userLikesPlan:userLikesPlan,
+        followUser:followUser
     };
     return api;
 
@@ -93,6 +94,44 @@ module.exports = function(db,mongoose){
                 }
                 user.save();
                 deferred.resolve(user);
+            },function(err){
+                deferred.reject(err);
+            });
+        return deferred.promise;
+    }
+
+    function followUser(userId,target){
+        var deferred = q.defer();
+        var username = null;
+        var index = null;
+        UserModel.findById(userId)
+            .then(function(user){
+                if(user){
+                    username = user.username;
+                    index = user.follow.map(function(e){return e._id}).indexOf(target._id);
+                    if(index == -1){
+                        user.follow.push(target);
+                        user.save();
+                        return UserModel.findById(target._id);
+                    }else{
+                        user.follow[index].remove();
+                        user.save();
+                        return UserModel.findById(target._id);
+                    }
+                }else
+                    deferred.reject(400);
+            },function(err){
+                deferred.reject(err);
+            })
+            .then(function(target){
+                if(index==-1){
+                    target.follower.push({_id:userId,username:username});
+                    target.save();
+                }else{
+                    target.follower.id(userId).remove();
+                    target.save();
+                }
+                deferred.resolve(target);
             },function(err){
                 deferred.reject(err);
             });

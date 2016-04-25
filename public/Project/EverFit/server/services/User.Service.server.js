@@ -18,9 +18,10 @@ module.exports = function(app, planModel, userModel) {
     app.post("/api/project/EverFit/register", register);
     app.get("/api/project/EverFit/user/:userName", findUserByUsername);
     app.get("/api/project/EverFit/userId/:userId", findUserById);
-    app.post("/admin/project/EverFit/Users", findUsers);
+   // app.post("/admin/project/EverFit/Users", findUsers);
     app.put("/api/project/EverFit/profile/:userId",     fitAuth, updateUser);
     app.delete("/api/project/EverFit/profile/:userId",  fitAuth, deleteUser);
+    app.post("/api/project/EverFit/profile/:userId", fitAuth,   followUser);
 
     function fitLocalStrategy(username, password,done){
         userModel.findUserByCredentials({username:username,password:password})
@@ -193,6 +194,21 @@ module.exports = function(app, planModel, userModel) {
                     res.send(400);
                 }
             }, function (err) {
+                res.status(400).send(err);
+            });
+    }
+
+    function followUser(req,res){
+        var userId = req.params.userId;
+        var target = req.body;
+        userModel.followUser(userId,target)
+            .then(function(target){
+                if(target){
+                    res.json(target);
+                }else{
+                    res.send(400);
+                }
+            },function(err){
                 res.status(400).send(err);
             });
     }
