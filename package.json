@@ -35,7 +35,8 @@
     "mongoose": "~4.4.10",
     "passport": "~0.3.2",
     "passport-local": "~1.0.0",
-    "bcrypt-nodejs": "0.0.3"
+    "bcrypt-nodejs": "0.0.3",
+    "textangular": "~1.5.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],

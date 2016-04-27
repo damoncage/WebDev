@@ -77,6 +77,15 @@
                     getLoggedIn:getLoggedIn
                 }
             })
+
+            .when("/createPlan",{
+                templateUrl:"views/createPlan/createPlan.view.html",
+                controller:"createPlanController",
+                controllerAs:"model",
+                resolve:{
+                    checkTrainer:checkTrainer
+                }
+            })
             .otherwise({
                 redirectTo: "/home"
             });
@@ -101,6 +110,23 @@
             .then(function(response){
                 var currentUser = response.data;
                 if(currentUser){
+                    UserService.setCurrentUser(currentUser);
+                    deferred.resolve();
+                }else{
+                    $location.url("/login");
+                    deferred.reject();
+                }
+            });
+        return deferred.promise;
+    }
+
+    function checkTrainer(UserService,$q, $location){
+        var deferred = $q.defer();
+        UserService
+            .getCurrentUser()
+            .then(function(response){
+                var currentUser = response.data;
+                if(currentUser && currentUser.roles.indexOf('trainer')!= -1){
                     UserService.setCurrentUser(currentUser);
                     deferred.resolve();
                 }else{

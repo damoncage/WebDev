@@ -23,7 +23,10 @@
                     lastName: $rootScope.currentUser.lastName,
                     username:$rootScope.currentUser.username,
                     password:$rootScope.currentUser.password,
-                    emails:$rootScope.currentUser.emails
+                    emails:$rootScope.currentUser.emails,
+                    follower:$rootScope.currentUser.follower,
+                    follow:$rootScope.currentUser.follow,
+                    plans:$rootScope.currentUser.plans
                 }
             }
         }init();

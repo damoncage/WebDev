@@ -49,7 +49,7 @@
             <div class="sidebar sidebar-user">
                 <h4>Following</h4>
                 <ul>
-                    <li ng-repeat = "follow in model.target.follow" href="#/profile/follow.username">{{follow.username}}</li>
+                    <li ng-repeat = "follow in model.target.follow"><a href="#/profile/{{follow.username}}">{{follow.username}}</a></li>
                 </ul>
             </div>
             <div class="sidebar sidebar-user">

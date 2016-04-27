@@ -3,7 +3,9 @@
     <div class="blog-header">
         <h1 class="blog-title">{{model.plan.planName}}</h1>
         <h5>by  <a href="#/profile/{{model.plan.trainer}}">{{model.plan.trainer}}</a></h5>
-        <p class="lead blog-description col-md-8">{{model.plan.description}}</p>
+        <div ng-bind-html="model.description">
+        </div>
+        <br>
     </div>
     <div id="fb-root"> <div class="fb-like col-md-2" data-href="http://webdev2016-yuanfangzheng.rhcloud.com/Project/EverFit/client/#/fitplans" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div></div>
       </div>

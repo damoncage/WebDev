@@ -6,7 +6,7 @@
         .module("EverFitApp")
         .controller("planDetailController",planDetailController);
 
-    function planDetailController($routeParams,PlanService,UserService,$location,$rootScope){
+    function planDetailController($routeParams,PlanService,UserService,$location,$rootScope,$sce){
         var dm = this;
         dm.plan = null;
         dm.search = search;
@@ -27,6 +27,7 @@
                 .then(function(response){
                     if(response.data){
                         dm.plan = response.data;
+                        dm.description = $sce.trustAsHtml(dm.plan.description);
                         console.log(dm.plan)
                     }else
                     $location.url("/fitplans");

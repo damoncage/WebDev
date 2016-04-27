@@ -46,20 +46,24 @@
     <div class="col-md-4">
         <div class="sidebar sidebar-user">
             <h4>Following</h4>
-            <ul ng-repeat = "fl in model.user.follow">
-                <li href="">Alice</li>
-                <li>{{fl}}</li>
-            </ul>
-
+                <ul>
+                    <li ng-repeat = "follow in model.user.follow"><a href="#/profile/{{follow.username}}">{{follow.username}}</a></li>
+                </ul>
             </div>
             <div class="sidebar sidebar-user">
-            <div>
                 <h4>Follower</h4>
-            </div></div>
+                <ul>
+                    <li ng-repeat = "follower in model.user.follower"><a href="#/profile/{{follower.username}}">{{follower.username}}</a></li>
+                </ul>
+            </div>
             <div class="sidebar sidebar-user">
-            <div>
                 <h4>My favorite</h4>
-            </div></div>
+                <ul>
+                    <li ng-repeat="plan in model.user.plans">
+                        <a href="#/fitplans/detail/{{plan._id}}">{{plan.planName}}</a>
+                    </li>
+                </ul>
+            </div>
     </div>
 </div>
     <div class="row">
