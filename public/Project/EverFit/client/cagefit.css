@@ -4,7 +4,6 @@ body{
     background-image: url("http://www.ta65experts.com/blog/wp-content/uploads/2014/06/Exercise.jpg");
     background-position: center;
     background-color: #cccccc;
-
 }
 
 #map{
@@ -88,3 +87,11 @@ body{
     visibility:visible;
 }
 
+.save-bar{
+    position: fixed;
+    top:50px;
+    width: 60%;
+    left:20%;
+    right:20%;
+    box-shadow: 5px 5px 25px #888888;
+}
