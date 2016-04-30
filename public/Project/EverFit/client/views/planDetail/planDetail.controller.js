@@ -6,7 +6,7 @@
         .module("EverFitApp")
         .controller("planDetailController",planDetailController);
 
-    function planDetailController($routeParams,PlanService,UserService,$location,$rootScope,$sce){
+    function planDetailController(ngDialog,$routeParams,PlanService,UserService,$location,$rootScope,$sce){
         var dm = this;
         dm.plan = null;
         dm.search = search;
@@ -20,6 +20,7 @@
         dm.editReply = editReply;
         dm.userLikesPlan = userLikesPlan;
         dm.favorite = favorite;
+        dm.deletePlan = deletePlan;
 
         function init(){
             var planId = $routeParams.planId;
@@ -27,7 +28,8 @@
                 .then(function(response){
                     if(response.data){
                         dm.plan = response.data;
-                        dm.description = $sce.trustAsHtml(dm.plan.description);
+                        dm.plan.description = $sce.trustAsHtml(dm.plan.description);
+                        dm.plan.content = $sce.trustAsHtml(dm.plan.content);
                         console.log(dm.plan)
                     }else
                     $location.url("/fitplans");
@@ -183,6 +185,31 @@
             else
                 return false;
         }
+
+        function deletePlan(plan){
+            ngDialog.open({
+                template:'delete',
+                controller:['$scope','PlanService',function($scope,PlanService){
+                    $scope.plaName = $scope.ngDialogData.planName;
+                    $scope.delete = function (){
+                        if( $scope.ngDialogData.trainer  == $rootScope.currentUser.username){
+                            PlanService.removePlan( $scope.ngDialogData._id)
+                                .then(function(response){
+                                    if(response.data){
+                                        $scope.closeThisDialog();
+                                        $location.url("/fitplans");
+                                    }else{
+                                        cm.message = 'Fail to delete plan, try again later.';
+                                        $scope.closeThisDialog();
+                                    }
+                                });
+                        }
+                    };
+                }],
+                data:plan
+            })
+        }
+
     }
 })();
 

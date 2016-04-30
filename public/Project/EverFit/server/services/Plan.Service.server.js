@@ -9,7 +9,7 @@ module.exports = function(app, planModel, userModel){
     app.get("/api/project/plan/detail/:planId",findPlanById);
     app.get("/api/project/plan/:planName",findPlanByName);
     app.post("/api/project/user/plan/:planId",  fitAu,    userLikesPlan);
-    app.post("/api/api/project/plan",           fitAu, isTrainer, createPlan);
+    app.post("/api/project/plan",           fitAu, isTrainer, createPlan);
     app.put("/api/project/plan/:planId",        fitAu, isTrainer, updatePlan);
     app.delete("/api/project/plan/:planId",     fitAu, isTrainer, removePlan);
     app.post("/api/project/plan/:planId/review", fitAu,           addReview);

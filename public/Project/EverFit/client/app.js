@@ -3,5 +3,5 @@
  */
 (function(){
     angular
-        .module("EverFitApp",["ngRoute","textAngular"]);
+        .module("EverFitApp",["ngRoute","textAngular",'ngDialog']);
 })();

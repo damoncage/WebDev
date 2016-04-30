@@ -86,6 +86,16 @@
                     checkTrainer:checkTrainer
                 }
             })
+
+            .when("/createPlan/:planId",{
+                templateUrl:"views/createPlan/createPlan.view.html",
+                controller:"createPlanController",
+                controllerAs:"model",
+                resolve:{
+                    checkTrainer:checkTrainer
+                }
+            })
+
             .otherwise({
                 redirectTo: "/home"
             });

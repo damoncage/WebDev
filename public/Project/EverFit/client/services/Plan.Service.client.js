@@ -49,7 +49,7 @@
         }
 
         function removePlan(planId){
-            return $http.delete("api/project/plan/"+planId);
+            return $http.delete("/api/project/plan/"+planId);
         }
 
         function addReview(planId,review){

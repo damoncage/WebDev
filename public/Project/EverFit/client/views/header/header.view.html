@@ -22,6 +22,7 @@
                 <scan class="glyphicon glyphicon-home"></scan> Home</a> </li>
                 <li ng-class="{'active': $location.url() == '/friends'}"><a href="#friends">Friends</a></li>
                 <li ng-class="{'active': $location.url().indexOf('fitplans') != -1}"><a href="#fitplans">FitPlans</a></li>
+                <li ng-if="currentUser.roles.indexOf('trainer')>-1" ng-class="{'active': $location.url().indexOf('createPlan')!= -1}"><a href="#createPlan">CreatePlan</a> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-hide="currentUser" ng-class="{'active': $location.url() == '/login'}"><a href="#login">Login</a></li>

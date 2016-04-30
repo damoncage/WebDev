@@ -87,6 +87,10 @@ body{
     visibility:visible;
 }
 
+.create-div{
+    margin-bottom: 20px;
+}
+
 .save-bar{
     position: fixed;
     top:50px;

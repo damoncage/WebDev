@@ -1,24 +1,47 @@
 <div>
-    <h3 class="page-header">model.type}}</h3>
-<br>
+    <h1 class="page-header">{{model.type}}</h1>
+    <br>
     <div class="row">
-        <form>
+        <form name="newPlan" confirm-on-exit>
             <div class="form-group">
                 <label for="title">Plan Title</label>
-                <input ng-model="model.plan.title" class="form-control" type="text" id="title" placeholder="Plan title">
+                <input ng-model="model.plan.planName" class="form-control" type="text" id="title" placeholder="Plan title">
             </div>
             <div class="form-group">
                 <label for="description">Plan Description</label>
-                <input ng-model="model.plan.description" class="form-control" class="form-control" type="text" id="description" placeholder="Plan Description">
+                <textarea row="3" ng-model="model.plan.description" class="form-control" class="form-control" type="text" id="description" placeholder="Plan Description"></textarea>
             </div>
             <div class="form-group">
                 <label for="detail">Plan Detail</label>
             <div id="detail" text-angular
-                 ng-model="model.plan.detail">    </div>
+                 ng-model="model.plan.content">    </div>
             </div>
+            <div class="row">
+                <div class="col-md-3 create-div">
+                    <button class="btn btn-primary btn-block" ng-click="model.view()">Preview</button>
+                </div>
 
-            <a class="btn btn-success">Submit</a>
-            <a class="btn btn-default">Cancel</a></td>
+                <div class="col-md-3 col-md-offset-3 create-div">
+                    <button ng-click="model.discard()" class="btn btn-danger btn-block">Discard</button>
+                </div>
+                <div class="col-md-3 create-div">
+                    <button ng-click="model.submit(model.plan)" class="btn btn-success btn-block">Submit</button>
+                </div>
+            </div>
         </form>
+    </div>
+
+    <div ng-show="model.message" class="alert alert-danger text-center" role="alert">{{model.message}}</div>
+
+    <!--Preview-->
+    <div ng-if="model.preview">
+        <div class="sub-header">
+            <h3>Preview</h3>
+            <hr>
+        </div>
+        <h1 class="blog-title">{{model.preview.planName}}</h1>
+        <h5>by {{model.preview.trainer}}</a></h5>
+        <p>{{model.preview.description}}</p>
+        <div ng-bind-html="model.preview.content"></div>
     </div>
 </div>
