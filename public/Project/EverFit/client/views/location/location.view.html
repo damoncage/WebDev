@@ -10,9 +10,11 @@
     <textarea type="text" class="form-control" rows="5" placeholder="Hi! Come join me!"></textarea>
 </div>
 <div id="map"></div>
-<button class="btn pull-right btn-primary right-aligned col-sm-2" type="submit">Post</button>
+<h3>Total Distance: <span id="total"></span></h3>
+<button class="btn pull-right btn-primary right-aligned col-sm-2" ng-click="mm.show(dist)" type="submit">Post</button>
 <script>
-            function initMap() {
+    function initMap() {
+        var dist = null;
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 42.3601, lng: 289.8003},
                 zoom: 15
@@ -26,7 +28,7 @@
             });
 
             directionsDisplay.addListener('directions_changed', function() {
-                computeTotalDistance(directionsDisplay.getDirections());
+                computeTotalDistance(directionsDisplay.getDirections(),dist);
             });
 
             displayRoute('1 Faneuil Hall Sq, Boston, MA', '1 Faneuil Hall Sq, Boston, MA', directionsService,
@@ -49,14 +51,15 @@
             });
         }
 
-        function computeTotalDistance(result) {
+        function computeTotalDistance(result,dist) {
             var total = 0;
             var myroute = result.routes[0];
             for (var i = 0; i < myroute.legs.length; i++) {
                 total += myroute.legs[i].distance.value;
             }
             total = total / 1000;
-            //document.getElementById('total').innerHTML = total + ' km';
+            dist=total;
+            document.getElementById('total').innerHTML = total + ' km';
         }
 </script>
 

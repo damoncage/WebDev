@@ -7,5 +7,11 @@
         .controller("locationController",locationController)
     function locationController() {
         var map;
-        var cm = this;}
+        var cm = this;
+        cm.show = show;
+
+        function show(dist){
+            console.log(dist);
+        }
+    }
 })();
