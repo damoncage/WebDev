@@ -118,7 +118,7 @@
                                 <div class="form-group">
                                     <textarea ng-if="model.edit == rep._id" class="form-control" rows="3" ng-model="model.subReply.content" placeholder="Reply to {{rep.username}}"></textarea>
                                 </div>
-                                <button type="submit" ng-click="model.reviewReply(model.subReply, review)" class="btn btn-primary col-md-offset-8">Submit</button>
+                                <button type="submit" ng-click="model.reviewReply(model.subReply, review, rep.username)" class="btn btn-primary col-md-offset-8">Submit</button>
                                 <button type="reset" class="btn btn-default">Cancel</button>
                             </form>
                         </div>

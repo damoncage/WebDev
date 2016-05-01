@@ -77,13 +77,13 @@
                 $location.url("/login");
         }
 
-        function reviewReply(reply,review){
+        function reviewReply(reply,review,replyto){
             console.log("reply");
             var planId = $routeParams.planId;
             if($rootScope.currentUser){
                 reply.username = $rootScope.currentUser.username;
                 reply.date = new Date();
-                reply.to = review.username;
+                reply.to = (replyto) ? replyto : review.username;
                 PlanService.reviewReply(reply,review._id,planId)
                     .then(function(response){
                         if(response.data){
