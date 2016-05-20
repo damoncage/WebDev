@@ -13,6 +13,7 @@ module.exports = function(db,mongoose){
         findPlanByID: findPlanByID,
         findPlanByIds: findPlanByIds,
         findPlanByName:findPlanByName,
+        findPlanByTrainer:findPlanByTrainer,
         createPlan: createPlan,
         userLikesPlan:userLikesPlan,
         updatePlan:updatePlan,
@@ -43,6 +44,10 @@ module.exports = function(db,mongoose){
             return planModel.find();
         }
         return planModel.find({planName:{$regex:planName,$options:'i'}});
+    }
+
+    function findPlanByTrainer(trainer){
+        return planModel.find({trainer:{$regex:trainer, $options:'i'}});
     }
 
     function createPlan(plan){

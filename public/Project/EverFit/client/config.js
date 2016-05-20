@@ -34,6 +34,7 @@
                     getLoggedIn:getLoggedIn
                 }
             })
+
             .when("/fitplans/:PlanName",{
                 templateUrl:"views/FitPlans/fitplans.view.html",
                 controller:"fitPlanController",
@@ -42,6 +43,16 @@
                     getLoggedIn:getLoggedIn
                 }
             })
+
+            .when("/trainer/:trainer/fitplans",{
+                templateUrl:"views/FitPlans/fitplans.view.html",
+                controller:"fitPlanController",
+                controllerAs:"model",
+                resolve:{
+                    getLoggedIn:getLoggedIn
+                }
+            })
+
             .when("/fitplans/detail/:planId",{
                 templateUrl:"views/planDetail/planDetail.view.html",
                 controller:"planDetailController",

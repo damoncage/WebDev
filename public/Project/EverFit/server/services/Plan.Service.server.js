@@ -8,6 +8,7 @@ module.exports = function(app, planModel, userModel){
     app.post("/api/project/plans",findPlanByIds);
     app.get("/api/project/plan/detail/:planId",findPlanById);
     app.get("/api/project/plan/:planName",findPlanByName);
+    app.get("/api/project/trainer/:trainer/plan", findPlanByTrainer);
     app.post("/api/project/user/plan/:planId",  fitAu,    userLikesPlan);
     app.post("/api/project/plan",           fitAu, isTrainer, createPlan);
     app.put("/api/project/plan/:planId",        fitAu, isTrainer, updatePlan);
@@ -62,6 +63,16 @@ module.exports = function(app, planModel, userModel){
        planModel.findPlanByName(planName)
             .then(function(planName){
                 res.json(planName);
+            },function(err){
+                res.status(400).send(err);
+            });
+    }
+
+    function findPlanByTrainer(req,res){
+        var trainer = req.params.trainer;
+        planModel.findPlanByTrainer(trainer)
+            .then(function(plans){
+               res.json(plans);
             },function(err){
                 res.status(400).send(err);
             });

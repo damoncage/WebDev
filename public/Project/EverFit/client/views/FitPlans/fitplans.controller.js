@@ -20,20 +20,31 @@
 
         function init(){
             var planName = $routeParams.PlanName;
+            var trainer = $routeParams.trainer;
             UserService
                 .getCurrentUser()
                 .then(function(response){
                     fm.user = response.data;
                     console.log("plan"+planName+"\n user \n",fm.user);
                 });
-            if(!planName)
-                planName = -1;
-            PlanService
-                .findPlanByName(planName)
-                .then(function(response){
-                    console.log(response.data);
-                    fm.plans = response.data;
+            if(trainer){
+                fm.type = 'Trainer';
+                PlanService
+                    .findPlanByTrainer(trainer)
+                    .then(function(response){
+                       fm.plans = response.data;
+                    });
+            }else {
+                if(!planName)
+                    planName = -1;
+
+                PlanService
+                    .findPlanByName(planName)
+                    .then(function(response){
+                        console.log(response.data);
+                        fm.plans = response.data;
                 });
+            }
         } init();
 
         function choose(type){
@@ -43,6 +54,9 @@
         function search(key){
             if(fm.type == 'Plan'){
                 return $location.url("/fitplans/"+key);
+            }else if(fm.type == 'Trainer'){
+                console.log(key);
+                return $location.url("/trainer/"+key+"/fitplans");
             }
         }
 

@@ -11,6 +11,7 @@
             findPlanByIds:findPlanByIds,
             findPlanById:findPlanById,
             findPlanByName:findPlanByName,
+            findPlanByTrainer:findPlanByTrainer,
             userLikesPlan:userLikesPlan,
             createPlan:createPlan,
             updatePlan:updatePlan,
@@ -33,6 +34,10 @@
 
         function findPlanByName(planName){
             return $http.get("/api/project/plan/"+planName);
+        }
+
+        function findPlanByTrainer(trainer){
+            return $http.get("/api/project/trainer/"+trainer+"/plan");
         }
 
         function userLikesPlan(user,planId){
