@@ -38,5 +38,6 @@ app.use(express.static(__dirname + '/public'));
 
 require("./public/Project/EverFit/server/app.js")(app,db,mongoose);
 require("./public/Assignment/server/app.js")(app,db,mongoose);
+//require("./public/lab/uiRouter/app.js")(app,db,mongoose);
 
 app.listen(port, ipaddress);

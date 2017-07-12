@@ -3,6 +3,7 @@
   "_id": "123qwe",
   "username": "alice",
   "password": "alice",
+  "roles":"trainer",
   "firstName": "Alice",
   "lastName": "Wonderland",
   "email": "alice@alice.com"
