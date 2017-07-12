@@ -7,29 +7,31 @@
         .config(configuration);
 
     function configuration($stateProvider, $urlRouterProvider) {
-        var states = {
-            name: 'root',
+        var states = [
+            {
+            name: 'homePage',
             url: '/search',
-            views:{
-                window1:{
-                    templateUrl: "view/homePage.html"
-                }
-            }
-
-        };
-        var details = {
-                name:'root.detail',
+            templateUrl: "view/homePage.html",
+            controller:"homePageController",
+            controllerAs:"model"
+        },
+            {
+                name:'homePage.detail',
                 url:'/:name',
                 views:{
-                    window2:{
-                        template:"Second window starts here"
+                    detail:{
+                        templateUrl: "view/detail.html",
+                        controller: function ($scope,$stateParams) {
+                            $scope.name = $stateParams.name;
+                        }
                     }
                 }
 
-            };
+            }];
 
-        $stateProvider.state(states);
-        $stateProvider.state(details);
+        states.forEach(function (e) {
+            $stateProvider.state(e);
+        });
         $urlRouterProvider.otherwise('/search');
     }
 
