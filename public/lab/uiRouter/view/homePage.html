@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container-fluid">
+    <h2>Hello! UI-view is here!</h2>
+    <div class="col-sm-3">
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="item in model.list">
+                <a class="button" ui-sref="homePage.detail({name:item._id})">{{item.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-9" ui-view="detail"></div>
+</div>
+
+</body>
+</html>
