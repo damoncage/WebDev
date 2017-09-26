@@ -19,7 +19,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_APP_NAME;
 }
 
-var db = mongoose.connect(connectionString);
+var db = mongoose.connect(connectionString, {useMongoClient: true});
 
 //console.log(mongoose);
 app.use(bodyParser.json());

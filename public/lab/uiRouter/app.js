@@ -21,9 +21,7 @@
                 views:{
                     detail:{
                         templateUrl: "view/detail.html",
-                        controller: function ($scope,$stateParams) {
-                            $scope.name = $stateParams.name;
-                        }
+                        controller: "detailController"
                     }
                 }
 
